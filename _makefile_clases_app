@@ -1,0 +1,27 @@
+################################################################################
+#Definciones
+
+DIR_CLASES_APP=./class/app/
+
+################################################################################
+#Clases...
+
+################################################################################
+#Definiciones
+
+$(DIR_O)lista_kanas.o:\
+$(DIR_O)lector_kana.o\
+$(DIR_CLASES_APP)lista_kanas.h \
+$(DIR_CLASES_APP)lista_kanas.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)lista_kanas.cpp -o $(DIR_O)lista_kanas.o
+
+$(DIR_O)lector_kana.o:\
+$(DIR_O)kana.o\
+$(DIR_CLASES_APP)lector_kana.h \
+$(DIR_CLASES_APP)lector_kana.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)lector_kana.cpp -o $(DIR_O)lector_kana.o
+
+$(DIR_O)kana.o:\
+$(DIR_CLASES_APP)kana.h \
+$(DIR_CLASES_APP)kana.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)kana.cpp -o $(DIR_O)kana.o

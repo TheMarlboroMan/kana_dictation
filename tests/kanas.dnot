@@ -1,0 +1,32 @@
+grupos:[
+	{
+		nombre : "1 : Vowels",
+		kanas : [
+			{
+				silaba:"A",
+				hiragana:"あ",
+				katakana:"ア"
+			},
+			{
+				silaba:"I",
+				hiragana:"い",
+				katakana:"イ"
+			},
+			{
+				silaba:"u",
+				hiragana:"う",
+				katakana:"ウ"
+			}
+		]
+	},
+	{
+		nombre: "2 : K",
+		kanas : [
+			{
+				silaba:"KA",
+				hiragana:"か",
+				katakana:"カ"
+			}
+		]
+	}
+]

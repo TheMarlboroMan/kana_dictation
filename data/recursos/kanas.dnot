@@ -1,0 +1,94 @@
+grupos:[
+	{
+		nombre : "1 : Vowels",
+		kanas : [{silaba:"A", hiragana:"あ", katakana:"ア"},
+			{silaba:"I", hiragana:"い", katakana:"イ"},
+			{silaba:"U", hiragana:"う", katakana:"ウ"},
+			{silaba:"E", hiragana:"え", katakana:"エ"},
+			{silaba:"O", hiragana:"お", katakana:"オ"}
+		]
+	},
+	{
+		nombre: "2 : K",
+		kanas : [{silaba:"KA", hiragana:"か", katakana:"カ"},
+			{silaba:"KI", hiragana:"き", katakana:"キ"},
+			{silaba:"KU", hiragana:"く", katakana:"ク"},
+			{silaba:"KE", hiragana:"け", katakana:"ケ"},
+			{silaba:"KO", hiragana:"こ", katakana:"コ"}
+		]
+	},
+	{
+		nombre: "3 : S",
+		kanas : [{silaba:"SA", hiragana:"さ", katakana:"サ"},
+			{silaba:"SHI", hiragana:"し", katakana:"シ"},
+			{silaba:"SU", hiragana:"す", katakana:"ス"},
+			{silaba:"SE", hiragana:"せ", katakana:"セ"},
+			{silaba:"SO", hiragana:"そ", katakana:"ソ"}
+		]
+	},
+	{
+		nombre: "4 : T",
+		kanas : [{silaba:"TA", hiragana:"た", katakana:"タ"},
+			{silaba:"CHI", hiragana:"ち", katakana:"チ"},
+			{silaba:"TSU", hiragana:"つ", katakana:"ツ"},
+			{silaba:"TE", hiragana:"て", katakana:"テ"},
+			{silaba:"TO", hiragana:"と", katakana:"ト"}
+		]
+	},
+	{
+		nombre: "5 : N",
+		kanas : [{silaba:"NA", hiragana:"な", katakana:"ナ"},
+			{silaba:"NI", hiragana:"に", katakana:"ニ"},
+			{silaba:"NU", hiragana:"ぬ", katakana:"ヌ"},
+			{silaba:"NE", hiragana:"ね", katakana:"ネ"},
+			{silaba:"NO", hiragana:"の", katakana:"ノ"}
+		]
+	},
+	{
+		nombre: "6 : H",
+		kanas : [{silaba:"HA", hiragana:"は", katakana:"ハ"},
+			{silaba:"HI", hiragana:"ひ", katakana:"ヒ"},
+			{silaba:"FU", hiragana:"ふ", katakana:"フ"},
+			{silaba:"HE", hiragana:"へ", katakana:"ヘ"},
+			{silaba:"HO", hiragana:"ほ", katakana:"ホ"}
+		]
+	},
+	{
+		nombre: "7 : M",
+		kanas : [{silaba:"MA", hiragana:"ま", katakana:"マ"},
+			{silaba:"MI", hiragana:"み", katakana:"ミ"},
+			{silaba:"MU", hiragana:"む", katakana:"ム"},
+			{silaba:"ME", hiragana:"め", katakana:"メ"},
+			{silaba:"MO", hiragana:"も", katakana:"モ"}
+		]
+	},
+	{
+		nombre: "8 : Y",
+		kanas : [{silaba:"YA", hiragana:"や", katakana:"ヤ"},
+			{silaba:"YU", hiragana:"ゆ", katakana:"ユ"},
+			{silaba:"YO", hiragana:"よ", katakana:"ヨ"}
+		]
+	},
+	{
+		nombre: "9 : R",
+		kanas : [{silaba:"RA", hiragana:"ら", katakana:"ラ"},
+			{silaba:"RI", hiragana:"り", katakana:"リ"},
+			{silaba:"RU", hiragana:"る", katakana:"ル"},
+			{silaba:"RE", hiragana:"れ", katakana:"レ"},
+			{silaba:"RO", hiragana:"ろ", katakana:"ロ"}
+		]
+	},
+	{
+		nombre: "10 : W",
+		kanas : [{silaba:"WA", hiragana:"わ", katakana:"ワ"},
+			{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
+			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"},
+			{silaba:"WO", hiragana:"を", katakana:"ヲ"}
+		]
+	},
+	{
+		nombre: "11 : N",
+		kanas : [{silaba:"N", hiragana:"ん", katakana:"ン"}
+		]
+	}
+]

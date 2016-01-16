@@ -1,0 +1,23 @@
+#Definiciones.
+
+#OPTIMIZACION=-O3
+SIMBOLOS_DEBUG=-g
+FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
+
+CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
+CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
+CC=g++
+EJECUTABLE=a.out
+LIMPIAR=rm objects/*; rmdir objects; rm $(EJECUTABLE);
+
+DIR_HOME=/home/dani/programacion/c++/
+DIR_LIBDAN2=$(DIR_HOME)libdansdl2
+DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/
+DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto/objects/
+PREPARAR_DIR_OBJECTS=mkdir -p objects; touch objects/dummy
+
+LINKER=-L$(DIR_LIBDAN2) -lDanSDL2 -L. -lSDL2 -lSDL2_ttf -lSDL2_mixer -lSDL2_image
+INCLUDES=-I $(DIR_LIBDAN2) -I $(DIR_HERRAMIENTAS_PROYECTO)
+LIBRERIAS=
+
+include makefile_comun

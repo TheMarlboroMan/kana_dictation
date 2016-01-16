@@ -1,0 +1,6 @@
+#indice ruta
+
+#Sonidos motor... estos no debemos cambiarlos porque se usan en código!
+#1	data/sonidos/defecto.ogg
+
+#Sonidos de aplicacion...

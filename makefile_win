@@ -1,0 +1,17 @@
+#Definiciones.
+LINKARQUITECTURA=-lmingw32
+UNIDAD_DISCO=C
+MINGW32_INCLUDE=/mingw_dev/include
+MINGW32_LIB=/mingw_dev/lib
+
+CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+CC=g++
+EJECUTABLE=familiar_temple.exe
+LIMPIAR=del objects\*; del libdan2\objects\*; del libDanSDL2.a; del $(EJECUTABLE);
+COMANDO_MOVER=move libdan2\libDanSDL2.a libDanSDL2.a; 
+NOMBRE_MAKE_MOTOR=makefile_win
+LINKER=-L. -lDanSDL2 $(LINKARQUITECTURA) -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -static-libgcc -static-libstdc++
+#-mwindows
+
+include makefile_comun

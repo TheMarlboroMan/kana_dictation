@@ -1,0 +1,81 @@
+################################################################################
+# Definiciones
+
+DIR_CLASS_DERIVADA=./class/framework/derivada/
+DIR_CLASS_BASE=./class/framework/base/
+
+################################################################################
+#Clases derivadas...
+
+$(DIR_O)kernel.o:\
+$(DIR_O)kernel_base.o \
+$(DIR_O)input.o \
+$(DIR_O)configuracion.o \
+$(DIR_O)localizador.o \
+$(DIR_O)audio.o \
+$(DIR_O)cargador_recursos.o \
+$(DIR_CLASS)app/recursos.h\
+$(DIR_CLASS_DERIVADA)kernel.h\
+$(DIR_CLASS_DERIVADA)kernel.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)kernel.cpp -o $(DIR_O)kernel.o 
+
+$(DIR_O)input.o :\
+$(DIR_O)input_base.o \
+$(DIR_CLASS_DERIVADA)input.h \
+$(DIR_CLASS_DERIVADA)input.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)input.cpp -o $(DIR_O)input.o 
+
+$(DIR_O)configuracion.o :\
+$(DIR_O)configuracion_base.o \
+$(DIR_CLASS_DERIVADA)configuracion.h \
+$(DIR_CLASS_DERIVADA)configuracion.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)configuracion.cpp -o $(DIR_O)configuracion.o 
+
+$(DIR_O)localizador.o :\
+$(DIR_CLASS_DERIVADA)localizador.h \
+$(DIR_CLASS_DERIVADA)localizador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)localizador.cpp -o $(DIR_O)localizador.o 
+
+$(DIR_O)audio.o:\
+$(DIR_O)audio_base.o \
+$(DIR_CLASS_DERIVADA)audio.h\
+$(DIR_CLASS_DERIVADA)audio.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)audio.cpp -o $(DIR_O)audio.o 
+
+$(DIR_O)cargador_recursos.o:\
+$(DIR_O)cargador_recursos_base.o \
+$(DIR_CLASS_DERIVADA)cargador_recursos.h\
+$(DIR_CLASS_DERIVADA)cargador_recursos.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_DERIVADA)cargador_recursos.cpp -o $(DIR_O)cargador_recursos.o 
+
+################################################################################
+#Clases base
+
+$(DIR_O)kernel_base.o :\
+$(DIR_O)configuracion_base.o\
+$(DIR_O)input_base.o\
+$(DIR_O)audio_base.o\
+$(DIR_O)cargador_recursos_base.o\
+$(DIR_CLASS_BASE)kernel_base.h \
+$(DIR_CLASS_BASE)kernel_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_BASE)kernel_base.cpp -o $(DIR_O)kernel_base.o 
+
+$(DIR_O)configuracion_base.o :\
+$(DIR_CLASS_BASE)configuracion_base.h \
+$(DIR_CLASS_BASE)configuracion_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_BASE)configuracion_base.cpp -o $(DIR_O)configuracion_base.o 
+
+$(DIR_O)audio_base.o :\
+$(DIR_CLASS_BASE)audio_base.h \
+$(DIR_CLASS_BASE)audio_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_BASE)audio_base.cpp -o $(DIR_O)audio_base.o 
+
+$(DIR_O)cargador_recursos_base.o :\
+$(DIR_CLASS_BASE)cargador_recursos_base.h \
+$(DIR_CLASS_BASE)cargador_recursos_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_BASE)cargador_recursos_base.cpp -o $(DIR_O)cargador_recursos_base.o 
+
+$(DIR_O)input_base.o :\
+$(DIR_CLASS_BASE)input_base.h \
+$(DIR_CLASS_BASE)input_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASS_BASE)input_base.cpp -o $(DIR_O)input_base.o	

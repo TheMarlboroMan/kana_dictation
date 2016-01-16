@@ -1,0 +1,2 @@
+#indice	ruta	transparencia	rtrans	gtrans	btrans
+#1	data/graficos/fuente_defecto.png	1	0	0	0

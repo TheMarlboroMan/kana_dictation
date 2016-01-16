@@ -1,0 +1,31 @@
+DEP_HERRAMIENTAS_PROYECTO=$(DIR_O_HERRAMIENTAS_PROYECTO)generador_numeros.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)dnot_parser.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)dnot_token.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)compositor_vista.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)lector_txt.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)localizador_base.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)controlador_argumentos.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)string_utilidades.o \
+$(DIR_O_HERRAMIENTAS_PROYECTO)fichero_pares.o
+
+DEP_CLASES_APP=$(DIR_O)kana.o \
+$(DIR_O)lector_kana.o \
+$(DIR_O)lista_kanas.o \
+
+DEP_CONTROLADORES=$(DIR_O)controlador_base.o \
+$(DIR_O)controlador_principal.o \
+$(DIR_O)controlador_menu.o \
+
+DEP_FRAMEWORK_BASE=$(DIR_O)input_base.o \
+$(DIR_O)configuracion_base.o \
+$(DIR_O)audio_base.o \
+$(DIR_O)cargador_recursos_base.o \
+$(DIR_O)kernel_base.o \
+
+DEP_FRAMEWORK_DERIVADA=$(DIR_O)input.o \
+$(DIR_O)configuracion.o \
+$(DIR_O)localizador.o \
+$(DIR_O)audio.o \
+$(DIR_O)cargador_recursos.o \
+$(DIR_O)kernel.o \
+

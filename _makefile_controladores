@@ -1,0 +1,32 @@
+################################################################################
+#Definiciones...
+
+DIR_CONTROLADORES=./class/controladores/
+DIR_FRAMEWORK=./class/framework/
+
+################################################################################
+#Controladores...
+
+$(DIR_O)director_estados.o :\
+$(DIR_CONTROLADORES)director_estados.h \
+$(DIR_CONTROLADORES)director_estados.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)director_estados.cpp -o $(DIR_O)director_estados.o 
+
+$(DIR_O)controlador_menu.o :\
+$(DIR_O)controlador_base.o \
+$(DIR_CONTROLADORES)controlador_menu.h \
+$(DIR_CONTROLADORES)controlador_menu.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_menu.cpp -o $(DIR_O)controlador_menu.o
+
+$(DIR_O)controlador_principal.o :\
+$(DIR_O)controlador_base.o \
+$(DIR_CONTROLADORES)controlador_principal.h \
+$(DIR_CONTROLADORES)controlador_principal.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_principal.cpp -o $(DIR_O)controlador_principal.o
+
+$(DIR_O)controlador_base.o :\
+$(DIR_O)director_estados.o \
+$(DIR_FRAMEWORK)interface_controlador.h \
+$(DIR_CONTROLADORES)controlador_base.h \
+$(DIR_CONTROLADORES)controlador_base.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_base.cpp -o $(DIR_O)controlador_base.o  

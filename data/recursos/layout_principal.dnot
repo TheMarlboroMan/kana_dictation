@@ -1,0 +1,36 @@
+layout:
+[
+	{
+		tipo:"pantalla", 
+		rgba:[0, 0, 0, 255]
+	},
+	{
+		tipo:"bitmap",
+		pos:[0, 0, 800, 500], rec:[0, 0, 800, 500],
+		textura:"background"
+	},
+	{
+		tipo:"caja",
+		pos:[0, 160, 800, 140], rgb:[255, 255, 255]
+	},
+	{
+		tipo:"caja",
+		pos:[0, 164, 800, 132], rgb:[0, 0, 0]
+	},
+	{
+		tipo:"ttf",
+		pos:[16, 180],
+		fuente:"romaji",
+		texto:"",
+		rgba:[255, 255, 255, 255],
+		id:"txt_romaji"
+	},
+	{
+		tipo:"ttf",
+		pos:[16, 230],
+		fuente:"kana",
+		texto:"",
+		rgba:[255, 255, 255, 255],
+		id:"txt_kana"
+	}
+]
