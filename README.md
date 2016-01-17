@@ -1,6 +1,8 @@
 # kana_dictation
 Japanese Kana training application: generates random romaji sillables for you to translate into the japanese sillabaries. Then shows the hiragana or katakana for them. Written entirely in SDL2 and C++ so it can be ported to a variety of systems.
 
+You are supposed to write the kana with pen and paper. This is supposed to be an educative tool, not a game.
+
 Features:
 
 - Choose from hiragana or katakana sillabaries to practice.
@@ -11,6 +13,7 @@ Features:
 
 Planned features:
 
+- Invert translation direction: kana to romaji / romaji to kana.
 - A title logo somewhere :P.
 - Save user preferences to configuration files.
 - Multiple languages in the user interface.
