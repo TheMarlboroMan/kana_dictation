@@ -6,7 +6,7 @@ Features:
 - Choose from hiragana or katakana sillabaries to practice.
 - Choose from 1 or 20 sillables to practice at once.
 - Configurable kana database via json-like files, in case I forgot to put some in.
-- Quick and to the point.
+- Quick and to the point. Entirely controlled via keyboard (because mouse pointing is slooooow).
 
 Planned features:
 
