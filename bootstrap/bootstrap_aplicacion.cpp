@@ -2,6 +2,7 @@
 
 #include "../class/controladores/controlador_principal.h"
 #include "../class/controladores/controlador_menu.h"
+#include "../class/controladores/controlador_grupos.h"
 #include "../class/app/lector_kana.h"
 #include "../class/app/lista_kanas.h"
 
@@ -22,7 +23,6 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	pantalla.establecer_medidas_logicas(wl, hl);
 	pantalla.establecer_modo_ventana(config.acc_modo_pantalla());
 	
-
 	//Ojo con retirar esto porque si no cargamos recursos va a estallar :D.
 	kernel.mut_mostrar_fps(false);
 
@@ -43,51 +43,72 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	//Controladores e interfaces.
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
+	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos());
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
 
-	//TODO: Esto hay que sacarlo a otro lado.
-	std::vector<Kana> kanas_vocales=lista_kanas.acc_grupo("1 : Vowels"),
-		kanas_k=lista_kanas.acc_grupo("2 : K"),
-		kanas_s=lista_kanas.acc_grupo("3 : S"),
-		kanas_t=lista_kanas.acc_grupo("4 : T"),
-		kanas_n=lista_kanas.acc_grupo("5 : N");
-
-	std::vector<Kana> kanas_temporales;
-	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_vocales), std::end(kanas_vocales));
-	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_k), std::end(kanas_k));
-	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_s), std::end(kanas_s));
-	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_t), std::end(kanas_t));
-	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_n), std::end(kanas_n));
-
-	C_P.establecer_kanas(kanas_temporales);
-
+	//TODO: Asignar al controlador de grupos los grupos que están marcados según la configuración.
 
 	//Loop principal.
 	while(kernel.loop(*IC))
 	{
 		if(DI.es_cambio_estado())
 		{
+			bool confirmar=true;
+
 			switch(DI.acc_estado_actual())
 			{
 				case Director_estados::t_estados::MENU: break;
 				case Director_estados::t_estados::PRINCIPAL: break;
+				case Director_estados::t_estados::GRUPOS: 
+					//Comprobar que hay algún grupo seleccionado.
+					if(!C_G.cantidad_seleccionados()) confirmar=false;
+					//TODO: Guardar preferencias de grupos seleccionados en la configuración.
+				break;
 			}
 
 			switch(DI.acc_estado_deseado())
-			{
+			{	
 				case Director_estados::t_estados::MENU: 
 					IC=&C_M; 
 				break;
+				case Director_estados::t_estados::GRUPOS: 
+					IC=&C_G; 
+				break;
 				case Director_estados::t_estados::PRINCIPAL: 
-					IC=&C_P; 
-					C_P.establecer_longitud_cadena(C_M.acc_longitud_cadena());
-					C_P.establecer_tipo_kana(C_M.acc_tipo_kana());
-					C_P.generar_cadena_kanas();
+					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, C_M.acc_longitud_cadena(), C_M.acc_tipo_kana());
+					if(confirmar) IC=&C_P;
 				break;
 			}
 
-			DI.confirmar_cambio_estado();
+			if(confirmar) DI.confirmar_cambio_estado();
+			else DI.cancelar_cambio_estado();
 		}
 	};
+}
+
+bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador_grupos& C_G, const Lista_kanas& lista_kanas, int longitud, App::tipos_kana t)
+{
+	std::vector<Kana> kanas_temporales;
+	const auto grupos=C_G.obtener_grupos_seleccionados();
+		
+	for(const auto& nombre : grupos)
+	{
+		const auto& v=lista_kanas.acc_grupo(nombre);
+		kanas_temporales.insert(std::end(kanas_temporales), std::begin(v), std::end(v));
+	}
+
+	//TODO: Comprobar esto trasteando con el fichero de config.
+
+	if(!kanas_temporales.size())
+	{
+		return false;
+	}
+
+	C_P.establecer_kanas(kanas_temporales);
+	C_P.establecer_longitud_cadena(longitud);
+	C_P.establecer_tipo_kana(t);
+	C_P.generar_cadena_kanas();
+
+	return true;
 }

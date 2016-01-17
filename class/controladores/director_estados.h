@@ -4,7 +4,7 @@
 class Director_estados
 {
 	public:
-	enum class t_estados {MENU, PRINCIPAL};
+	enum class t_estados {MENU, PRINCIPAL, GRUPOS};
 
 	private:
 	t_estados actual;
@@ -19,6 +19,7 @@ class Director_estados
 	bool es_cambio_estado() const {return actual!=deseado;}
 	void solicitar_cambio_estado(t_estados v) {deseado=v;}
 	void confirmar_cambio_estado() {actual=deseado;}
+	void cancelar_cambio_estado() {deseado=actual;}
 	t_estados acc_estado_deseado() {return deseado;}
 	t_estados acc_estado_actual() {return actual;}
 };
