@@ -11,6 +11,7 @@ Features:
 
 Planned features:
 
+- A title logo somewhere :P.
 - Save user preferences to configuration files.
 - Multiple languages in the user interface.
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
