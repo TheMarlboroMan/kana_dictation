@@ -51,7 +51,7 @@ void Controlador_menu::loop(Input_base& input, float delta)
 				case iniciar: solicitar_cambio_estado(Director_estados::t_estados::PRINCIPAL); break;
 				case seleccion_grupo: solicitar_cambio_estado(Director_estados::t_estados::GRUPOS); break;
 				case cambiar_tipo: cambiar_tipo_kana(); break;
-				case opciones: /* Opciones */ ; break;
+				case opciones: solicitar_cambio_estado(Director_estados::t_estados::OPCIONES); break;
 			}
 		}
 	}

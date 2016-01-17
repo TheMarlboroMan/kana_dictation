@@ -3,6 +3,7 @@
 #include "../class/controladores/controlador_principal.h"
 #include "../class/controladores/controlador_menu.h"
 #include "../class/controladores/controlador_grupos.h"
+#include "../class/controladores/controlador_opciones.h"
 #include "../class/app/lector_kana.h"
 #include "../class/app/lista_kanas.h"
 
@@ -43,6 +44,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	//Controladores e interfaces.
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
+	Controlador_opciones 		C_O(DI, akashi, localizador);
 	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos());
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
@@ -60,6 +62,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			{
 				case Director_estados::t_estados::MENU: break;
 				case Director_estados::t_estados::PRINCIPAL: break;
+				case Director_estados::t_estados::OPCIONES: break;
 				case Director_estados::t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.
 					if(!C_G.cantidad_seleccionados()) confirmar=false;
@@ -74,6 +77,9 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				break;
 				case Director_estados::t_estados::GRUPOS: 
 					IC=&C_G; 
+				break;
+				case Director_estados::t_estados::OPCIONES: 
+					IC=&C_O; 
 				break;
 				case Director_estados::t_estados::PRINCIPAL: 
 					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, C_M.acc_longitud_cadena(), C_M.acc_tipo_kana());

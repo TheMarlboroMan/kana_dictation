@@ -12,6 +12,12 @@ $(DIR_CONTROLADORES)director_estados.h \
 $(DIR_CONTROLADORES)director_estados.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)director_estados.cpp -o $(DIR_O)director_estados.o 
 
+$(DIR_O)controlador_opciones.o :\
+$(DIR_O)controlador_base.o \
+$(DIR_CONTROLADORES)controlador_opciones.h \
+$(DIR_CONTROLADORES)controlador_opciones.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_opciones.cpp -o $(DIR_O)controlador_opciones.o
+
 $(DIR_O)controlador_grupos.o :\
 $(DIR_O)controlador_base.o \
 $(DIR_CONTROLADORES)controlador_grupos.h \

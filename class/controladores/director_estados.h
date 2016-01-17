@@ -4,7 +4,7 @@
 class Director_estados
 {
 	public:
-	enum class t_estados {MENU, PRINCIPAL, GRUPOS};
+	enum class t_estados {MENU, PRINCIPAL, GRUPOS, OPCIONES};
 
 	private:
 	t_estados actual;
