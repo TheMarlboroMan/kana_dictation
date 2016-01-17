@@ -3,6 +3,8 @@ Japanese Kana training application: generates random romaji sillables for you to
 
 You are supposed to write the kana with pen and paper. This is supposed to be an educative tool, not a game.
 
+In order to build it be sure to build libdansdl2 and herramientas_proyecto first.
+
 Features:
 
 - Choose from hiragana or katakana sillabaries to practice.
