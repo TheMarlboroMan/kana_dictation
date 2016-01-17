@@ -12,7 +12,8 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 160, 400, 32], rgb:[255, 255, 255], orden:10
+		pos:[0, 160, 400, 32], rgb:[255, 255, 255], orden:10,
+		id:"menu_1"
 	},
 	{
 		tipo:"caja",
@@ -58,10 +59,42 @@ layout:
 		id:"txt_menu_3"
 	},
 
+	{
+		tipo:"caja",
+		pos:[0, 340, 400, 32], rgb:[255, 255, 255], orden:10
+	},
+	{
+		tipo:"caja",
+		pos:[0, 342, 398, 28], rgb:[0, 0, 0], orden:20
+	},
+	{
+		tipo:"ttf",
+		pos:[16, 348],
+		texto:"MENU IV",
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		id:"txt_menu_4"
+	},
 
 	{
 		tipo:"caja",
-		pos:[0, 162, 398, 28], 
+		pos:[0, 400, 400, 32], rgb:[255, 255, 255], orden:10
+	},
+	{
+		tipo:"caja",
+		pos:[0, 402, 398, 28], rgb:[0, 0, 0], orden:20
+	},
+	{
+		tipo:"ttf",
+		pos:[16, 408],
+		texto:"MENU V",
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		id:"txt_menu_5"
+	},
+
+
+	{
+		tipo:"caja",
+		pos:[0, 160, 398, 32], 
 		rgb:[128, 128, 128], 
 		id:"seleccion_menu", 
 		orden:20

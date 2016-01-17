@@ -25,7 +25,7 @@ Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
 	}
 	else
 	{
-		Resultado_lookup resultado(Resultado_lookup::NADA, 0);	
+		Resultado_lookup resultado(Resultado_lookup::NADA, 0);
 
 		auto it=mapa_teclado.find(i);
 		if(it!=mapa_teclado.end())
@@ -40,7 +40,7 @@ Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
 			{
 				resultado.mapa=Resultado_lookup::RATON;	
 				resultado.val=it->second;
-			}					
+			}
 		}
 	
 		lookup.insert(std::make_pair(i,resultado));

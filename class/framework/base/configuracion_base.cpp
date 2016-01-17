@@ -21,7 +21,7 @@ catch(Herramientas_proyecto::Fichero_pares_exception& e)
 
 void Configuracion_base::asignar_valores_por_defecto()
 {
-	mut_pantalla_completa(valor_pantalla_completa_defecto());
+	mut_modo_pantalla(valor_modo_pantalla_defecto());
 	mut_modo_hardware(valor_modo_hardware_defecto());
 	mut_pantalla_doble_buffer(valor_pantalla_doble_buffer_defecto());
 	mut_pantalla_anyformat(valor_pantalla_anyformat_defecto());

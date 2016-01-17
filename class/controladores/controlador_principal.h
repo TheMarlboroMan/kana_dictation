@@ -5,6 +5,7 @@
 #include <vector>
 #include <class/compositor_vista.h>
 #include "../app/kana.h"
+#include "../app/definiciones.h"
 
 class Controlador_principal:public Controlador_base
 {
@@ -14,6 +15,7 @@ class Controlador_principal:public Controlador_base
 	void				establecer_kanas(const std::vector<App::Kana>& k) {kanas=k;}
 	void				generar_cadena_kanas();
 	void				establecer_longitud_cadena(size_t l) {longitud_cadena=l;}
+	void				establecer_tipo_kana(App::tipos_kana t) {tipo_kana=t;}
 
 	private:
 
@@ -30,6 +32,9 @@ class Controlador_principal:public Controlador_base
 
 	size_t						longitud_cadena;
 	bool 						resuelto;
+	App::tipos_kana					tipo_kana;
+
+	
 
 };
 

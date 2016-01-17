@@ -27,14 +27,11 @@ class Input:public Input_base
 
 	enum inputs{
 I_ESCAPE=0,
-I_ESPACIO,
-I_ENTER,
+I_ACEPTAR,
 I_IZQUIERDA,
 I_DERECHA,
 I_ARRIBA,
 I_ABAJO,
-I_CLICK_I,
-I_CLICK_D
 };
 
 	///////////////////

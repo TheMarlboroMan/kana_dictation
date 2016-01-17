@@ -7,8 +7,8 @@ h_fisica_ventana:500
 h_logica_ventana:500
 idioma:0
 modo_hardware:1
+modo_pantalla:0
 pantalla_anyformat:1
-pantalla_completa:0
 v:1
 volumen_audio:64
 volumen_musica:64

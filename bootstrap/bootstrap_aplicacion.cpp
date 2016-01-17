@@ -20,6 +20,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 	pantalla.inicializar(wf, hf);
 	pantalla.establecer_medidas_logicas(wl, hl);
+	pantalla.establecer_modo_ventana(config.acc_modo_pantalla());
+	
 
 	//Ojo con retirar esto porque si no cargamos recursos va a estallar :D.
 	kernel.mut_mostrar_fps(false);
@@ -44,7 +46,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
 
-	//TODO: 
+	//TODO: Esto hay que sacarlo a otro lado.
 	std::vector<Kana> kanas_vocales=lista_kanas.acc_grupo("1 : Vowels"),
 		kanas_k=lista_kanas.acc_grupo("2 : K"),
 		kanas_s=lista_kanas.acc_grupo("3 : S"),
@@ -59,7 +61,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	kanas_temporales.insert(std::end(kanas_temporales), std::begin(kanas_n), std::end(kanas_n));
 
 	C_P.establecer_kanas(kanas_temporales);
-	C_P.establecer_longitud_cadena(20);
+
 
 	//Loop principal.
 	while(kernel.loop(*IC))
@@ -79,6 +81,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				break;
 				case Director_estados::t_estados::PRINCIPAL: 
 					IC=&C_P; 
+					C_P.establecer_longitud_cadena(C_M.acc_longitud_cadena());
+					C_P.establecer_tipo_kana(C_M.acc_tipo_kana());
 					C_P.generar_cadena_kanas();
 				break;
 			}

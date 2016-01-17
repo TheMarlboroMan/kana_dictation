@@ -48,7 +48,7 @@ class Configuracion: public Configuracion_base
 
 	std::string obtener_clave_version_archivo() const {return "v";}
 	std::string obtener_version_archivo() const {return "1";}
-	std::string obtener_clave_pantalla_completa() const {return "pantalla_completa";}
+	std::string obtener_clave_modo_pantalla() const {return "modo_pantalla";}
 	std::string obtener_clave_modo_hardware() const {return "modo_hardware";}
 	std::string obtener_clave_pantalla_doble_buffer() const {return "doble_buffer";}
 	std::string obtener_clave_pantalla_anyformat() const {return "pantalla_anyformat";}
@@ -58,7 +58,7 @@ class Configuracion: public Configuracion_base
 	std::string obtener_clave_audio_buffers() const {return "audio_buffers";}
 	std::string obtener_clave_audio_salidas() const {return "audio_salidas";}
 	std::string obtener_clave_audio_canales() const {return "audio_canales";}
-	int valor_pantalla_completa_defecto() const {return 0;}
+	int valor_modo_pantalla_defecto() const {return 0;}
 	int valor_modo_hardware_defecto() const {return 1;}
 	int valor_pantalla_doble_buffer_defecto() const {return 1;}
 	int valor_pantalla_anyformat_defecto() const {return 1;}

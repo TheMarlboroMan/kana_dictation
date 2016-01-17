@@ -27,7 +27,7 @@ class Configuracion_base
 
 	public:
 
-	int acc_pantalla_completa() const 	{return std::atoi(pares[obtener_clave_pantalla_completa()].c_str());}
+	int acc_modo_pantalla() const 		{return std::atoi(pares[obtener_clave_modo_pantalla()].c_str());}
 	int acc_modo_hardware() const 		{return std::atoi(pares[obtener_clave_modo_hardware()].c_str());}
 	int acc_pantalla_doble_buffer() const 	{return std::atoi(pares[obtener_clave_pantalla_doble_buffer()].c_str());}
 	int acc_pantalla_anyformat() const 	{return std::atoi(pares[obtener_clave_pantalla_anyformat()].c_str());}
@@ -39,7 +39,7 @@ class Configuracion_base
 	int acc_audio_canales() const		{return std::atoi(pares[obtener_clave_audio_canales()].c_str());}
 	int acc_version_archivo() const		{return std::atoi(pares[obtener_clave_version_archivo()].c_str());}
 
-	void mut_pantalla_completa(int p_valor) 	{pares[obtener_clave_pantalla_completa()]=std::to_string(p_valor);}
+	void mut_modo_pantalla(int p_valor) 	{pares[obtener_clave_modo_pantalla()]=std::to_string(p_valor);}
 	void mut_modo_hardware(int p_valor)		{pares[obtener_clave_modo_hardware()]=std::to_string(p_valor);}
 	void mut_pantalla_doble_buffer(int p_valor)	{pares[obtener_clave_pantalla_doble_buffer()]=std::to_string(p_valor);}
 	void mut_pantalla_anyformat(int p_valor)	{pares[obtener_clave_pantalla_anyformat()]=std::to_string(p_valor);}
@@ -67,7 +67,7 @@ class Configuracion_base
 		//Estos simplemente devuelven claves de configuración.
 	virtual std::string obtener_clave_version_archivo() const=0;
 	virtual std::string obtener_version_archivo() const=0;
-	virtual std::string obtener_clave_pantalla_completa() const=0;
+	virtual std::string obtener_clave_modo_pantalla() const=0;
 	virtual std::string obtener_clave_modo_hardware() const=0;
 	virtual std::string obtener_clave_pantalla_doble_buffer() const=0;
 	virtual std::string obtener_clave_pantalla_anyformat() const=0;
@@ -79,7 +79,7 @@ class Configuracion_base
 	virtual std::string obtener_clave_audio_canales() const=0;
 
 		//Y estos valores de configuración por defecto que se castearán llamando al setter.
-	virtual int valor_pantalla_completa_defecto() const=0; //0 -> No / 1 -> Si
+	virtual int valor_modo_pantalla_defecto() const=0; //0 -> No / 1 -> Si
 	virtual int valor_modo_hardware_defecto() const=0; //0 -> No / 1 -> Si
 	virtual int valor_pantalla_doble_buffer_defecto() const=0;	//0 -> No / 1 -> Si
 	virtual int valor_pantalla_anyformat_defecto() const=0;	//0 -> No / 1 -> Si

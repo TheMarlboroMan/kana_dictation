@@ -3,7 +3,7 @@
 #include "../app/recursos.h"
 
 Controlador_principal::Controlador_principal(Director_estados &DI, const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk)
-	:Controlador_base(DI), ttf_romaji(fr), ttf_kanas(fk), longitud_cadena(6), resuelto(false)
+	:Controlador_base(DI), ttf_romaji(fr), ttf_kanas(fk), longitud_cadena(6), resuelto(false), tipo_kana(App::tipos_kana::hiragana)
 {
 	escena.mapear_fuente("kana", &ttf_kanas);
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -26,7 +26,7 @@ void Controlador_principal::generar_cadena_kanas()
 	while(i < longitud_cadena)
 	{
 		int pos=gen();
-		str_kana+=kanas[pos].acc_hiragana();
+		str_kana+=tipo_kana==App::tipos_kana::hiragana ? kanas[pos].acc_hiragana() : kanas[pos].acc_katakana();
 		str_romaji+=kanas[pos].acc_silaba()+"-";
 		++i;
 	}
@@ -59,7 +59,8 @@ void Controlador_principal::loop(Input_base& input, float delta)
 		{
 			solicitar_cambio_estado(Director_estados::t_estados::MENU);
 		}
-		else if(input.es_input_down(Input::I_ESPACIO))
+	//TODO: No funciona enter, sólo espacio.
+		else if(input.es_input_down(Input::I_ACEPTAR))
 		{
 			if(!resuelto)
 			{
@@ -76,8 +77,6 @@ void Controlador_principal::loop(Input_base& input, float delta)
 
 void Controlador_principal::dibujar(DLibV::Pantalla& pantalla)
 {
-	pantalla.limpiar(0, 0, 0, 255);
-
 	auto centrar=[](DLibV::Representacion * rep)
 	{
 		int w=rep->acc_posicion().w;
@@ -88,9 +87,6 @@ void Controlador_principal::dibujar(DLibV::Pantalla& pantalla)
 
 	centrar(escena.obtener_por_id("txt_romaji"));
 	centrar(escena.obtener_por_id("txt_kana"));
-
-//	rep_ttf_romaji.establecer_posicion(
-
 
 	escena.volcar(pantalla);
 }
