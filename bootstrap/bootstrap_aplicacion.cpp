@@ -23,6 +23,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	pantalla.inicializar(wf, hf);
 	pantalla.establecer_medidas_logicas(wl, hl);
 	pantalla.establecer_modo_ventana(config.acc_modo_pantalla());
+	pantalla.establecer_posicion(0, 0);
 	
 	//Ojo con retirar esto porque si no cargamos recursos va a estallar :D.
 	kernel.mut_mostrar_fps(false);

@@ -15,7 +15,13 @@ class Localizacion
 		hiragana=4,
 		katakana=5,
 		escoger_sets=6,
-		configuracion=7
+		configuracion=7,
+		opciones_pantalla=8,
+		opciones_pantalla_01=9,
+		opciones_pantalla_02=10,
+		opciones_idioma=11,
+		opciones_idioma_01=12,
+		opciones_idioma_02=13
 	};
 
 	private:

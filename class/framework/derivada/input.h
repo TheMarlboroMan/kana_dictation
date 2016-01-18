@@ -18,7 +18,8 @@ bool hay_eventos_teclado_down();
 
 #include "../base/input_base.h"
 
-class Input:public Input_base
+class Input:
+	public Input_base
 {
 	/////////////////
 	//Definiciones...
@@ -39,7 +40,7 @@ I_ABAJO,
 
 	public:
 
-	virtual void configurar();	
+	virtual void configurar();
 	Input():Input_base() {}
 };
 

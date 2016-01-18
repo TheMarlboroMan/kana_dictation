@@ -2,6 +2,7 @@
 #include <defDanSDL.h>
 #include "class/framework/derivada/kernel.h"
 #include "bootstrap/bootstrap_aplicacion.h"
+#include <class/menu_opciones.h>
 
 //Declaración del log del motor en espacio global.
 DLibH::Log_base LOG;
@@ -30,7 +31,7 @@ int main(int argc, char ** argv)
 		}
 		catch(std::exception &e)
 		{
-			std::cout<<"Exiting. An exception was caught : "<<e.what()<<std::endl;
+			std::cout<<"Saliendo: se atraṕo una excepción : "<<e.what()<<std::endl;
 		}
 	}
 	

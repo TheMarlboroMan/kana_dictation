@@ -16,7 +16,8 @@ Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente
 	std::sort(std::begin(v), std::end(v));
 	for(const auto& n : v) grupos.push_back({n, true});
 
-	rep_listado.no_imponer_alpha();	
+	listado.mut_margen_h(MARGEN_Y);
+	rep_listado.no_imponer_alpha();
 
 	componer_vista_listado();
 }
@@ -24,8 +25,6 @@ Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente
 void Controlador_grupos::componer_vista_listado()
 {
 	listado.clear();
-
-	listado.mut_margen_h(MARGEN_Y);
 	for(const auto& i : grupos) listado.insertar(i);
 
 	rep_listado.vaciar_grupo();
@@ -39,8 +38,8 @@ void Controlador_grupos::componer_vista_listado()
 		txt->establecer_posicion(X_LISTADO, itemp.y+Y_LISTADO);
 
 		auto * sel=itemp.item.seleccionado ? 
-			new Representacion_TTF(ttf_romaji, {0, 255, 0, 255}, "V"):
-			new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "X");
+			new Representacion_TTF(ttf_romaji, {0, 255, 0, 255}, "+"):
+			new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "-");
 
 		sel->establecer_posicion(X_SELECCION, itemp.y+Y_LISTADO);
 
@@ -69,7 +68,7 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 		else if(input.es_input_down(Input::I_ARRIBA) || input.es_input_down(Input::I_ABAJO))
 		{
 			listado.cambiar_item(input.es_input_down(Input::I_ARRIBA) ? -1 : 1);
-			componer_vista_listado();			
+			componer_vista_listado();
 		}
 		else if(input.es_input_down(Input::I_IZQUIERDA) || input.es_input_down(Input::I_DERECHA) || input.es_input_down(Input::I_ACEPTAR))
 		{

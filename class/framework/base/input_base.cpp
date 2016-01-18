@@ -5,18 +5,13 @@ void Input_base::turno()
 	controles_sdl.recoger();
 }
 
-/*Input_base::tipo_par Input_base::obtener(unsigned int i) const
-{
-	tipo_par resultado=mapa.equal_range(i);
-	return resultado;
-}*/
-
 Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
 {
 	//TODO: Esto puede dar problemas en el futuro si queremos usar el mismo
 	//input para dos cosas distintas.
 
-	//Vamos a cachear cada input en el dispositivo que le pertenece... Lookup es clave => tipo_input
+	//Vamos a cachear cada input en el dispositivo que le pertenece... 
+
 	auto it=lookup.find(i);
 
 	if(it!=lookup.end())
@@ -25,25 +20,27 @@ Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
 	}
 	else
 	{
-		Resultado_lookup resultado(Resultado_lookup::NADA, 0);
+		Resultado_lookup resultado(Resultado_lookup::NADA);
 
-		auto it=mapa_teclado.find(i);
-		if(it!=mapa_teclado.end())
+		auto f=[&resultado, this, i](const tipo_mapa& mapa, unsigned int tipo)
 		{
-			resultado.mapa=Resultado_lookup::TECLADO;
-			resultado.val=it->second;
-		}
-		else
+			resultado.mapa=tipo;
+			auto it=mapa.equal_range(i);
+			for(auto r=it.first; r!=it.second; ++r)
+				resultado.val.push_back(r->second);
+
+			lookup.insert(std::make_pair(i,resultado));
+		};
+
+		if(mapa_teclado.count(i))
 		{
-			it=mapa_raton.find(i);
-			if(it!=mapa_raton.end()) 
-			{
-				resultado.mapa=Resultado_lookup::RATON;	
-				resultado.val=it->second;
-			}
+			f(mapa_teclado, Resultado_lookup::TECLADO); 
 		}
-	
-		lookup.insert(std::make_pair(i,resultado));
+		else if(mapa_raton.count(i))
+		{
+			f(mapa_raton, Resultado_lookup::RATON); 
+		}
+
 		return resultado;
 	}
 }
@@ -59,10 +56,12 @@ bool Input_base::es_input_down(unsigned int i) const
 	switch(rl.mapa)
 	{
 		case Resultado_lookup::TECLADO:
-			if(controles_sdl.es_tecla_down(rl.val)) return true;
+			for(auto val : rl.val) 
+				if(controles_sdl.es_tecla_down(val)) return true;
 		break;
 		case Resultado_lookup::RATON:
-			if(controles_sdl.es_boton_down(rl.val)) return true;
+			for(auto val : rl.val) 
+				if(controles_sdl.es_boton_down(val)) return true;
 		break;
 		default: break;
 	}
@@ -76,10 +75,12 @@ bool Input_base::es_input_up(unsigned int i) const
 	switch(rl.mapa)
 	{
 		case Resultado_lookup::TECLADO:
-			if(controles_sdl.es_tecla_up(rl.val)) return true;
+			for(auto val : rl.val) 
+				if(controles_sdl.es_tecla_up(val)) return true;
 		break;
 		case Resultado_lookup::RATON:
-			if(controles_sdl.es_boton_up(rl.val)) return true;
+			for(auto val : rl.val) 
+				if(controles_sdl.es_boton_up(val)) return true;
 		break;
 		default: break;
 	}
@@ -93,13 +94,25 @@ bool Input_base::es_input_pulsado(unsigned int i) const
 	switch(rl.mapa)
 	{
 		case Resultado_lookup::TECLADO:
-			if(controles_sdl.es_tecla_pulsada(rl.val)) return true;
+			for(auto val : rl.val) 
+				if(controles_sdl.es_tecla_pulsada(val)) return true;
 		break;
 		case Resultado_lookup::RATON:
-			if(controles_sdl.es_boton_pulsado(rl.val)) return true;
+			for(auto val : rl.val)
+				if(controles_sdl.es_boton_pulsado(val)) return true;
 		break;
 		default: break;
 	}
 
 	return false;
+}
+
+void Input_base::configurar_teclado(int clave, int valor)
+{
+	mapa_teclado.insert(std::make_pair(clave, valor));
+}
+
+void Input_base::configurar_raton(int clave, int valor)
+{
+	mapa_raton.insert(std::make_pair(clave, valor));
 }

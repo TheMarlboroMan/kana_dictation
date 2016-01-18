@@ -2,6 +2,7 @@
 #define PROYECTO_SDL2_BASE_INPUT_H
 
 #include <map>
+#include <vector>
 #include <input/controles_sdl/controles_sdl.h>
 
 /*Abstrae los sistemas de input usando la clase Controles_SDL. Cada input del
@@ -25,15 +26,12 @@ class Input_base
 
 	private:
 
-	typedef std::pair <tipo_iterador, tipo_iterador> tipo_par;
-
 	struct Resultado_lookup
 	{
 		enum t_mapa {NADA=0, TECLADO=1, RATON=2};
 		unsigned int mapa;
-		unsigned int val;
-
-		Resultado_lookup(unsigned int tm, unsigned int tv):mapa(tm), val(tv){}
+		std::vector<unsigned int> val;
+		Resultado_lookup(unsigned int tm):mapa(tm) {}
 	};
 
 	////////////////////////
@@ -47,12 +45,14 @@ class Input_base
 	tipo_mapa mapa_teclado;
 	tipo_mapa mapa_raton;
 
+	void configurar_teclado(int, int);
+	void configurar_raton(int, int);
+
 	////////////////////////
 	//Métodos
 
 	private:
 
-//	tipo_par obtener(unsigned int) const;
 	Resultado_lookup obtener(unsigned int) const;
 
 	public:

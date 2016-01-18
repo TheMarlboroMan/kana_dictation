@@ -59,7 +59,6 @@ void Controlador_principal::loop(Input_base& input, float delta)
 		{
 			solicitar_cambio_estado(Director_estados::t_estados::MENU);
 		}
-	//TODO: No funciona enter, sólo espacio.
 		else if(input.es_input_down(Input::I_ACEPTAR))
 		{
 			if(!resuelto)
