@@ -45,7 +45,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	//Controladores e interfaces.
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
-	Controlador_opciones 		C_O(DI, akashi, localizador);
+	Controlador_opciones 		C_O(DI, akashi, localizador, pantalla);
 	C_O.generar_menu(config);
 	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
 	Controlador_principal 		C_P(DI, akashi, kanas);

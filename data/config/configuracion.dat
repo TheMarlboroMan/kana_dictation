@@ -6,7 +6,7 @@ doble_buffer:1
 h_fisica_ventana:500
 h_logica_ventana:500
 idioma:0
-kanas_activos:01 : A I U E O,02 : KA KI KU KE KO,03 : SA SHI SU SE SO,04 : TI CHI TSU TE TO,05 : NA NI NU NE NO,06 : HA HI FU HE HO
+kanas_activos:01 : A I U E O,02 : KA KI KU KE KO,03 : SA SHI SU SE SO,04 : TI CHI TSU TE TO,05 : NA NI NU NE NO,06 : HA HI FU HE HO,11 : N
 modo_hardware:1
 modo_pantalla:0
 pantalla_anyformat:1

@@ -2,20 +2,22 @@
 #include "../app/recursos.h"
 #include "../app/localizacion.h"
 #include <source/string_utilidades.h>
+#include <class/dnot_parser.h>
 
-const std::string Controlador_opciones::k_tam_pantalla="K_TAM_PANTALLA";
+const std::string Controlador_opciones::k_tam_pantalla="01K_TAM_PANTALLA";
 const std::string Controlador_opciones::k_tam_pantalla_o1="K_TAM_PANTALLA_VIDEO_01";
 const std::string Controlador_opciones::k_tam_pantalla_o2="K_TAM_PANTALLA_VIDEO_02";
 const std::string Controlador_opciones::k_tam_pantalla_o3="K_TAM_PANTALLA_VIDEO_03";
 const std::string Controlador_opciones::k_tam_pantalla_o4="K_TAM_PANTALLA_VIDEO_04";
 const std::string Controlador_opciones::k_tam_pantalla_o5="K_TAM_PANTALLA_VIDEO_05";
 const std::string Controlador_opciones::k_tam_pantalla_o6="K_TAM_PANTALLA_VIDEO_06";
-const std::string Controlador_opciones::k_idioma="K_IDIOMA";
+const std::string Controlador_opciones::k_idioma="02K_IDIOMA";
 const std::string Controlador_opciones::k_idioma_o1="K_IDIOMA_01_ES";
 const std::string Controlador_opciones::k_idioma_o2="K_IDIOMA_02_EN";
+const std::string Controlador_opciones::k_fondo="03K_FONDO";
 
-Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc)
-	:Controlador_base(DI), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), rep_listado(true), localizador(loc), ttf_romaji(fr)
+Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p)
+	:Controlador_base(DI), pantalla(p), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), rep_listado(true), localizador(loc), ttf_romaji(fr)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -48,7 +50,8 @@ void Controlador_opciones::traducir_interface()
 		{k_tam_pantalla_o6, localizador.obtener(Localizacion::opciones_pantalla_06)},
 		{k_idioma, localizador.obtener(Localizacion::opciones_idioma)},
 		{k_idioma_o1, localizador.obtener(Localizacion::opciones_idioma_01)},
-		{k_idioma_o2, localizador.obtener(Localizacion::opciones_idioma_02)}
+		{k_idioma_o2, localizador.obtener(Localizacion::opciones_idioma_02)},
+		{k_fondo, localizador.obtener(Localizacion::opciones_fondo)},
 	};
 
 	opciones_menu.traducir(trad);
@@ -59,6 +62,9 @@ void Controlador_opciones::generar_menu(const Configuracion& config)
 	if(opciones_menu.size()) return;
 
 	opciones_menu.insertar_opcion(k_tam_pantalla, "--");
+
+	//TODO: Quizás esto lo podamos meter todo en el DNOT y hacerlo "menu.dnot"...
+	//Nos quitaríamos todas las constantes de las claves para las opciones.
 	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o1, "--", "800x500");
 	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o2, "--", "960x600");
 	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o3, "--", "1120x700");
@@ -69,11 +75,27 @@ void Controlador_opciones::generar_menu(const Configuracion& config)
 	opciones_menu.insertar_opcion(k_idioma, "--");
 	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o1, "--", "0");
 	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o2, "--", "1");
+	
+	opciones_menu.insertar_opcion(k_fondo, "--");
+
+	/**
+	//TODO: Abrir el fichero con los fondos y crear las opciones. La clave y valor pueden ser el nombre del archivo.
+	using namespace Herramientas_proyecto;
+	auto parser=parsear_dnot("data/recursos/fondos.dnot");
+	*/
+	opciones_menu.insertar_seleccion_en_opcion(k_fondo, "TEST1", "Fondo 1", "data/graficos/background_01.jpg");
+	opciones_menu.insertar_seleccion_en_opcion(k_fondo, "TEST2", "Fondo 2", "data/graficos/background_02.jpg");
+	opciones_menu.insertar_seleccion_en_opcion(k_fondo, "TEST3", "Fondo 3", "data/graficos/background_03.jpg");
+	opciones_menu.insertar_seleccion_en_opcion(k_fondo, "TEST4", "Fondo 4", "data/graficos/background_04.jpg");
+	opciones_menu.insertar_seleccion_en_opcion(k_fondo, "TEST5", "Fondo 5", "data/graficos/background_05.jpg");
 
 	const std::string val_tam_pantalla=std::to_string(config.acc_w_fisica_pantalla())+"x"+std::to_string(config.acc_h_fisica_pantalla());
 
 	opciones_menu.seleccionar_opcion_por_valor(k_tam_pantalla, val_tam_pantalla);
 	opciones_menu.seleccionar_opcion_por_valor(k_idioma, std::to_string(config.acc_idioma()));
+
+	//TODO: Escoger la opción del fondo adecuada.
+	//opciones_menu.seleccionar_opcion_por_valor(k_fondo, std::to_string(config.acc_fondo()));
 
 	traducir_interface();
 	generar_representacion_menu();
@@ -132,13 +154,18 @@ void Controlador_opciones::loop(Input_base& input, float delta)
 			const auto clave=listado[indice].clave;
 			opciones_menu.rotar_opcion(clave, input.es_input_down(Input::I_IZQUIERDA) ? -1 : 1);
 
-			//TODO: Sólo si lo que ha cambiado es el idioma.
+			if(clave==k_idioma)
+			{
+				localizador.cambiar_idioma(std::atoi(opciones_menu.valor_opcion(k_idioma).c_str()));
+				traducir_interface();
+			}
+			else if(clave==k_fondo)
+			{
+				SDL_Surface * superficie=DLibV::Utilidades_graficas_SDL::cargar_imagen(opciones_menu.valor_opcion(k_fondo).c_str(), pantalla.acc_ventana());
+				DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(superficie);
+			}
 
-			localizador.cambiar_idioma(std::atoi(opciones_menu.valor_opcion(k_idioma).c_str()));
-			traducir_interface();
 			generar_representacion_menu();
-
-			//TODO: Actualizar según la clave.
 		}
 	}
 }

@@ -25,7 +25,8 @@ class Localizacion
 		opciones_pantalla_06=16,
 		opciones_idioma=20,
 		opciones_idioma_01=21,
-		opciones_idioma_02=22
+		opciones_idioma_02=22,
+		opciones_fondo=30
 	};
 
 	private:

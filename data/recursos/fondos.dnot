@@ -1,0 +1,23 @@
+fondos:
+[
+	{
+		nombre:"Arashiyama", 
+		ruta:"data/graficos/background_01.jpg"
+	},
+	{
+		nombre:"Ryōan-ji", 
+		ruta:"data/graficos/background_02.jpg"
+	},
+	{
+		nombre:"Fushimi Inari-taisha", 
+		ruta:"data/graficos/background_03.jpg"
+	},
+	{
+		nombre:"Kasuga Taisha", 
+		ruta:"data/graficos/background_04.jpg"
+	},
+	{
+		nombre:"Tō-ji", 
+		ruta:"data/graficos/background_05.jpg"
+	}
+]

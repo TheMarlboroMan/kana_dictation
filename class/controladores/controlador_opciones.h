@@ -14,7 +14,7 @@ class Controlador_opciones:public Controlador_base
 {
 	public:
 
-					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&);
+					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&);
 	int				obtener_idioma() const {return std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());}
 	int				obtener_w_ventana() const {return obtener_dimension_ventana(0);}
 	int				obtener_h_ventana() const {return obtener_dimension_ventana(1);}
@@ -37,6 +37,7 @@ class Controlador_opciones:public Controlador_base
 		std::string clave, nombre;
 	};
 
+	DLibV::Pantalla&				pantalla;
 	Herramientas_proyecto::Compositor_vista		escena;
 	Herramientas_proyecto::Menu_opciones<std::string, std::string>	opciones_menu;
 	Herramientas_proyecto::Listado_vertical<t_listado>	listado;
@@ -63,7 +64,8 @@ class Controlador_opciones:public Controlador_base
 							k_tam_pantalla_o6,
 							k_idioma,
 							k_idioma_o1,
-							k_idioma_o2;
+							k_idioma_o2,
+							k_fondo;
 };
 
 #endif
