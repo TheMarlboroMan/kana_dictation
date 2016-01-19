@@ -46,6 +46,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
 	Controlador_opciones 		C_O(DI, akashi, localizador);
+	C_O.generar_menu(config);
+
 	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos());
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
@@ -63,7 +65,13 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			{
 				case Director_estados::t_estados::MENU: break;
 				case Director_estados::t_estados::PRINCIPAL: break;
-				case Director_estados::t_estados::OPCIONES: break;
+				case Director_estados::t_estados::OPCIONES: 
+					config.mut_idioma(C_O.obtener_idioma());
+					config.mut_w_fisica_pantalla(C_O.obtener_w_ventana());
+					config.mut_h_fisica_pantalla(C_O.obtener_h_ventana());
+					config.grabar();
+					//TODO: Actualizar el idioma de todas las interfaces.
+				break;
 				case Director_estados::t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.
 					if(!C_G.cantidad_seleccionados()) confirmar=false;
@@ -79,7 +87,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				case Director_estados::t_estados::GRUPOS: 
 					IC=&C_G; 
 				break;
-				case Director_estados::t_estados::OPCIONES: 
+				case Director_estados::t_estados::OPCIONES:
 					IC=&C_O; 
 				break;
 				case Director_estados::t_estados::PRINCIPAL: 

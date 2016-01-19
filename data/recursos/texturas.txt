@@ -1,2 +1,2 @@
 #indice	ruta	transparencia	rtrans	gtrans	btrans
-1	data/graficos/background.png	0	0	0	0
+1	data/graficos/background_01.jpg	0	0	0	0

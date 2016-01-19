@@ -8,12 +8,17 @@
 #include "../app/definiciones.h"
 #include <class/menu_opciones.h>
 #include <class/listado_vertical.h>
+#include "../framework/derivada/configuracion.h"
 
 class Controlador_opciones:public Controlador_base
 {
 	public:
 
 					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&);
+	int				obtener_idioma() const {return std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());}
+	int				obtener_w_ventana() const {return obtener_dimension_ventana(0);}
+	int				obtener_h_ventana() const {return obtener_dimension_ventana(1);}
+	void				generar_menu(const Configuracion&);
 
 	private:
 
@@ -21,9 +26,11 @@ class Controlador_opciones:public Controlador_base
 	virtual void 			postloop(Input_base& input, float delta) {}
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
+	
+	int				obtener_dimension_ventana(int) const;
 
-	void				generar_menu();
 	void				generar_representacion_menu();
+	void				traducir_interface();
 
 	struct t_listado
 	{
@@ -46,6 +53,13 @@ class Controlador_opciones:public Controlador_base
 							ALTO_ITEM_LISTADO=20,
 							ANCHO_LISTADO=300,
 							MARGEN_Y=16;
+
+	static const std::string 			k_tam_pantalla,
+							k_tam_pantalla_o1,
+							k_tam_pantalla_o2,
+							k_idioma,
+							k_idioma_o1,
+							k_idioma_o2;
 };
 
 #endif

@@ -1,0 +1,6 @@
+De momento tenemos que:
+
+	En menú de opciones, seleccionar la opción actual en menú de configuración al arrancar.
+	Efectuar cambio de idioma en el momento en todos los controladores.
+	Advertir que el cambio de dimensiones de ventana se hará al reiniciar.
+	Configuración de fondos que puedan cambiar, escritos en un dnot.

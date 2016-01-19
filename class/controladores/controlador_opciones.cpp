@@ -1,6 +1,14 @@
 #include "controlador_opciones.h"
 #include "../app/recursos.h"
 #include "../app/localizacion.h"
+#include <source/string_utilidades.h>
+
+const std::string Controlador_opciones::k_tam_pantalla="K_TAM_PANTALLA";
+const std::string Controlador_opciones::k_tam_pantalla_o1="K_TAM_PANTALLA_VIDEO_01";
+const std::string Controlador_opciones::k_tam_pantalla_o2="K_TAM_PANTALLA_VIDEO_02";
+const std::string Controlador_opciones::k_idioma="K_IDIOMA";
+const std::string Controlador_opciones::k_idioma_o1="K_IDIOMA_01_ES";
+const std::string Controlador_opciones::k_idioma_o2="K_IDIOMA_02_EN";
 
 Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc)
 	:Controlador_base(DI), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), rep_listado(true), localizador(loc), ttf_romaji(fr)
@@ -12,32 +20,19 @@ Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fu
 
 	rep_listado.no_imponer_alpha();
 	listado.mut_margen_h(MARGEN_Y);
-
-	generar_menu();
-	generar_representacion_menu();
 }
 
-void Controlador_opciones::generar_menu()
+int Controlador_opciones::obtener_dimension_ventana(int i) const
 {
+	const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_opcion(k_tam_pantalla), 'x');
+	return std::atoi(partes[i].c_str());
+}
+
+void Controlador_opciones::traducir_interface()
+{
+	using namespace App;
 	using namespace Herramientas_proyecto;
 	using traduccion=Menu_opciones<std::string, std::string>::struct_traduccion;
-
-	const std::string k_tam_pantalla="K_TAM_PANTALLA",
-		k_tam_pantalla_o1="K_TAM_PANTALLA_VIDEO_01",
-		k_tam_pantalla_o2="K_TAM_PANTALLA_VIDEO_02",
-		k_idioma="K_IDIOMA",
-		k_idioma_o1="K_IDIOMA_01_ES",
-		k_idioma_o2="K_IDIOMA_02_EN";
-
-	opciones_menu.insertar_opcion(k_tam_pantalla, "--");
-	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o1, "--", "800x500");
-	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o2, "--", "1600x1000");
-
-	opciones_menu.insertar_opcion(k_idioma, "--");
-	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o1, "--", "0");
-	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o2, "--", "1");
-
-	using namespace App;
 
 	std::vector<traduccion> trad={
 		{k_tam_pantalla, localizador.obtener(Localizacion::opciones_pantalla)}, 
@@ -49,6 +44,27 @@ void Controlador_opciones::generar_menu()
 	};
 
 	opciones_menu.traducir(trad);
+}
+
+void Controlador_opciones::generar_menu(const Configuracion& config)
+{
+	if(opciones_menu.size()) return;
+
+	opciones_menu.insertar_opcion(k_tam_pantalla, "--");
+	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o1, "--", "800x500");
+	opciones_menu.insertar_seleccion_en_opcion(k_tam_pantalla, k_tam_pantalla_o2, "--", "1600x1000");
+
+	opciones_menu.insertar_opcion(k_idioma, "--");
+	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o1, "--", "0");
+	opciones_menu.insertar_seleccion_en_opcion(k_idioma, k_idioma_o2, "--", "1");
+
+	const std::string val_tam_pantalla=std::to_string(config.acc_w_fisica_pantalla())+"x"+std::to_string(config.acc_h_fisica_pantalla());
+
+	opciones_menu.seleccionar_opcion_por_valor(k_tam_pantalla, val_tam_pantalla);
+	opciones_menu.seleccionar_opcion_por_valor(k_idioma, std::to_string(config.acc_idioma()));
+
+	traducir_interface();
+	generar_representacion_menu();
 }
 
 void Controlador_opciones::generar_representacion_menu()
