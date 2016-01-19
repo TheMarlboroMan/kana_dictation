@@ -1,5 +1,4 @@
 De momento tenemos que:
 
-	Guardar los kanas seleccionados en la configuración y leerlos también.
 	Advertir que el cambio de dimensiones de ventana se hará al reiniciar.
 	Configuración de fondos que puedan cambiar, escritos en un dnot.

@@ -47,12 +47,9 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Controlador_menu 		C_M(DI, akashi, localizador);
 	Controlador_opciones 		C_O(DI, akashi, localizador);
 	C_O.generar_menu(config);
-
-	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos());
+	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
-
-	//TODO: Asignar al controlador de grupos los grupos que están marcados según la configuración.
 
 	//Loop principal.
 	while(kernel.loop(*IC))
@@ -74,8 +71,15 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				break;
 				case Director_estados::t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.
-					if(!C_G.cantidad_seleccionados()) confirmar=false;
-					//TODO: Guardar preferencias de grupos seleccionados en la configuración.
+					if(!C_G.cantidad_seleccionados()) 
+					{
+						confirmar=false;
+					}
+					else 
+					{
+						config.mut_kanas_activos(C_G.producir_cadena_kanas_activos());
+						config.grabar();
+					}
 				break;
 			}
 

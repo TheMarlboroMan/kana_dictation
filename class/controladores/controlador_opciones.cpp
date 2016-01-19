@@ -101,6 +101,12 @@ void Controlador_opciones::generar_representacion_menu()
 	caja->establecer_alpha(128);
 
 	rep_listado.insertar_representacion(caja);
+
+	//TODO: Poner esto mejor... Pero de momento dejarlo como prueba para localizar el bug de fondos negros.
+	auto * advertencia=new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "CAMBIOS DE RESOLUCION SOLO AL REINICIAR");
+	advertencia->establecer_posicion(300, 300);
+	rep_listado.insertar_representacion(advertencia);
+
 }
 
 void Controlador_opciones::loop(Input_base& input, float delta)

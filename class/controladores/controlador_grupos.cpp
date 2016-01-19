@@ -2,8 +2,12 @@
 #include "../app/recursos.h"
 #include "../app/localizacion.h"
 #include <algorithm>
+#include <source/string_utilidades.h>
 
-Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const std::vector<std::string>& gr)
+//Este valor es conocido también por la configuración en su propia definición. Realmente está repetido.
+const std::string Controlador_grupos::WILDCARD_TODOS_KANAS="*";
+
+Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const std::vector<std::string>& gr, const std::string& kanas_activos)
 	:Controlador_base(DI), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), localizador(loc), ttf_romaji(fr)
 {
 	//Preparar la escena.
@@ -12,14 +16,13 @@ Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente
 	escena.parsear("data/recursos/layout_grupos.dnot", "layout");
 
 	auto v=gr;
-	//TODO: Este sort es una mieeeeerda.
-	std::sort(std::begin(v), std::end(v));
-	for(const auto& n : v) grupos.push_back({n, true});
+	std::sort(std::begin(v), std::end(v)); //Se ordenan por nombre y se insertan sin seleccionar.
+	for(const auto& n : v) grupos.push_back({n, false});
 
 	listado.mut_margen_h(MARGEN_Y);
 	rep_listado.no_imponer_alpha();
 
-	componer_vista_listado();
+	establecer_kanas_activos(kanas_activos);
 }
 
 void Controlador_grupos::componer_vista_listado()
@@ -55,7 +58,8 @@ void Controlador_grupos::componer_vista_listado()
 }
 
 void Controlador_grupos::loop(Input_base& input, float delta)
-{	if(input.es_senal_salida())
+{	
+	if(input.es_senal_salida())
 	{
 		abandonar_aplicacion();
 	}
@@ -81,6 +85,7 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 
 void Controlador_grupos::dibujar(DLibV::Pantalla& pantalla)
 {
+	componer_vista_listado();
 	escena.volcar(pantalla);
 	rep_listado.volcar(pantalla);
 }
@@ -99,4 +104,47 @@ size_t Controlador_grupos::cantidad_seleccionados() const
 	for(const auto &g : grupos)
 		if(g.seleccionado) ++res;
 	return res;
+}
+
+std::string Controlador_grupos::producir_cadena_kanas_activos() const
+{
+	size_t total=0;
+	std::string res;
+
+	for(const auto &g : grupos)
+	{
+		if(g.seleccionado) 
+		{
+			res+=g.nombre+SEPARADOR_KANAS_ACTIVOS;
+			++total;
+		}
+	}
+
+	if(res.size()) res.pop_back();
+	return total==grupos.size() ? WILDCARD_TODOS_KANAS : res;
+}
+
+void Controlador_grupos::establecer_kanas_activos(const std::string& k)
+{
+	if(k==WILDCARD_TODOS_KANAS)
+	{
+		for(auto& g : grupos) g.seleccionado=true;
+	}
+	else
+	{
+		auto v=Herramientas_proyecto::explotar(k, SEPARADOR_KANAS_ACTIVOS);
+
+		for(const auto& clave : v)
+		{
+			for(auto& g : grupos) 
+			{
+				if(g.nombre==clave) 
+				{
+					g.seleccionado=true;
+				}
+			}
+		}
+	}
+
+	componer_vista_listado();
 }

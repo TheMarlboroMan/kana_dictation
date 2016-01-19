@@ -18,9 +18,11 @@ class Controlador_grupos:public Controlador_base
 {
 	public:
 
-					Controlador_grupos(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, const std::vector<std::string>& grupos);
+					Controlador_grupos(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, const std::vector<std::string>& grupos, const std::string& kanas_activos);
 	std::vector<std::string>	obtener_grupos_seleccionados() const;
 	size_t				cantidad_seleccionados() const;
+	void				establecer_kanas_activos(const std::string&);
+	std::string			producir_cadena_kanas_activos() const;
 
 		
 	private:
@@ -38,6 +40,7 @@ class Controlador_grupos:public Controlador_base
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 
 	void				componer_vista_listado();
+	
 
 	Herramientas_proyecto::Compositor_vista		escena;
 	DLibV::Representacion_agrupada		 	rep_listado;
@@ -53,6 +56,9 @@ class Controlador_grupos:public Controlador_base
 							ALTO_ITEM_LISTADO=20,
 							ANCHO_LISTADO=300,
 							MARGEN_Y=16;
+
+	static const char				SEPARADOR_KANAS_ACTIVOS=',';
+	static const std::string			WILDCARD_TODOS_KANAS;
 };
 
 #endif
