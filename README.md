@@ -12,19 +12,18 @@ Features:
 - Allow for user selected sillable groups (ie. practice only the vowels and the "K" group).
 - Configurable kana database via json-like files, in case I forgot to put some in.
 - Quick and to the point. Entirely controlled via keyboard (because mouse pointing is slooooow).
+- Multiple languages in the user interface.
+- Support for multiple screen modes (actually, dirty resizes from a base of 800x500).
 
 Planned features:
 
+- Save user preferences with respect to kanas to practice into configuration files.
 - Invert translation direction: kana to romaji / romaji to kana.
 - A title logo somewhere :P.
-- Save user preferences to configuration files.
-- Multiple languages in the user interface.
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
-- Support for multiple screen modes (if SDL2 allows it). So far it's only 800x500, windowed.
 - Support to practice both hiragana and katakana at the same time.
 
 Thanks to:
 
 Ed Merritt for the Akashi font.
 Kagura Zakayuzu for the Yuzu Pop A font.
-The background image comes from www.filemorgue.com and is a fragment from an original by Kevin Connors.

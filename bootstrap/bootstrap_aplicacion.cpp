@@ -70,7 +70,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 					config.mut_w_fisica_pantalla(C_O.obtener_w_ventana());
 					config.mut_h_fisica_pantalla(C_O.obtener_h_ventana());
 					config.grabar();
-					//TODO: Actualizar el idioma de todas las interfaces.
+					C_M.traducir_interface();
 				break;
 				case Director_estados::t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.

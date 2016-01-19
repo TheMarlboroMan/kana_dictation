@@ -14,7 +14,7 @@ class Controlador_opciones:public Controlador_base
 {
 	public:
 
-					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&);
+					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&);
 	int				obtener_idioma() const {return std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());}
 	int				obtener_w_ventana() const {return obtener_dimension_ventana(0);}
 	int				obtener_h_ventana() const {return obtener_dimension_ventana(1);}
@@ -43,7 +43,7 @@ class Controlador_opciones:public Controlador_base
 	DLibV::Representacion_agrupada		 	rep_listado;
 
 
-	const Herramientas_proyecto::Localizador_base&	localizador;
+	Herramientas_proyecto::Localizador_base&	localizador;	//No es constante, desde aquí puede cambiar.
 	const DLibV::Fuente_TTF& 			ttf_romaji;
 
 	//TODO: Repetidos con respecto a otros... Mejor llevarlos a otro sitio...
@@ -57,6 +57,10 @@ class Controlador_opciones:public Controlador_base
 	static const std::string 			k_tam_pantalla,
 							k_tam_pantalla_o1,
 							k_tam_pantalla_o2,
+							k_tam_pantalla_o3,
+							k_tam_pantalla_o4,
+							k_tam_pantalla_o5,
+							k_tam_pantalla_o6,
 							k_idioma,
 							k_idioma_o1,
 							k_idioma_o2;

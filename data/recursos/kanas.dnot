@@ -1,6 +1,6 @@
 grupos:[
 	{
-		nombre : "1 : Vowels",
+		nombre : "01 : A I U E O",
 		kanas : [{silaba:"A", hiragana:"あ", katakana:"ア"},
 			{silaba:"I", hiragana:"い", katakana:"イ"},
 			{silaba:"U", hiragana:"う", katakana:"ウ"},
@@ -9,7 +9,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "2 : K",
+		nombre: "02 : KA KI KU KE KO",
 		kanas : [{silaba:"KA", hiragana:"か", katakana:"カ"},
 			{silaba:"KI", hiragana:"き", katakana:"キ"},
 			{silaba:"KU", hiragana:"く", katakana:"ク"},
@@ -18,7 +18,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "3 : S",
+		nombre: "03 : SA SHI SU SE SO",
 		kanas : [{silaba:"SA", hiragana:"さ", katakana:"サ"},
 			{silaba:"SHI", hiragana:"し", katakana:"シ"},
 			{silaba:"SU", hiragana:"す", katakana:"ス"},
@@ -27,7 +27,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "4 : T",
+		nombre: "04 : TI CHI TSU TE TO",
 		kanas : [{silaba:"TA", hiragana:"た", katakana:"タ"},
 			{silaba:"CHI", hiragana:"ち", katakana:"チ"},
 			{silaba:"TSU", hiragana:"つ", katakana:"ツ"},
@@ -36,7 +36,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "5 : N",
+		nombre: "05 : NA NI NU NE NO",
 		kanas : [{silaba:"NA", hiragana:"な", katakana:"ナ"},
 			{silaba:"NI", hiragana:"に", katakana:"ニ"},
 			{silaba:"NU", hiragana:"ぬ", katakana:"ヌ"},
@@ -45,7 +45,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "6 : H",
+		nombre: "06 : HA HI FU HE HO",
 		kanas : [{silaba:"HA", hiragana:"は", katakana:"ハ"},
 			{silaba:"HI", hiragana:"ひ", katakana:"ヒ"},
 			{silaba:"FU", hiragana:"ふ", katakana:"フ"},
@@ -54,7 +54,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "7 : M",
+		nombre: "07 : MA MI MU ME MO",
 		kanas : [{silaba:"MA", hiragana:"ま", katakana:"マ"},
 			{silaba:"MI", hiragana:"み", katakana:"ミ"},
 			{silaba:"MU", hiragana:"む", katakana:"ム"},
@@ -63,14 +63,14 @@ grupos:[
 		]
 	},
 	{
-		nombre: "8 : Y",
+		nombre: "08 : YA YU YO",
 		kanas : [{silaba:"YA", hiragana:"や", katakana:"ヤ"},
 			{silaba:"YU", hiragana:"ゆ", katakana:"ユ"},
 			{silaba:"YO", hiragana:"よ", katakana:"ヨ"}
 		]
 	},
 	{
-		nombre: "9 : R",
+		nombre: "09 : RA RI RU RE RO",
 		kanas : [{silaba:"RA", hiragana:"ら", katakana:"ラ"},
 			{silaba:"RI", hiragana:"り", katakana:"リ"},
 			{silaba:"RU", hiragana:"る", katakana:"ル"},
@@ -79,7 +79,7 @@ grupos:[
 		]
 	},
 	{
-		nombre: "10 : W",
+		nombre: "10 : WA WI WE WO",
 		kanas : [{silaba:"WA", hiragana:"わ", katakana:"ワ"},
 			{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
 			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"},

@@ -12,6 +12,11 @@ Controlador_menu::Controlador_menu(Director_estados &DI, const DLibV::Fuente_TTF
 	escena.parsear("data/recursos/layout_menu.dnot", "layout");
 	escena.obtener_por_id("seleccion_menu")->establecer_alpha(128);
 
+	traducir_interface();
+}
+
+void Controlador_menu::traducir_interface()
+{
 	using namespace App;
 
 	std::string str_silabario=localizador.obtener(Localizacion::cadenas::silabario)+localizador.obtener(Localizacion::cadenas::hiragana);
