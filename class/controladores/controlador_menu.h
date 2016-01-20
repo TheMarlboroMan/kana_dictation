@@ -11,11 +11,9 @@ class Controlador_menu:public Controlador_base
 {
 	public:
 
-					Controlador_menu(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&);
+					Controlador_menu(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, int longitud, App::tipos_kana tipo_kana);
 
 	void				traducir_interface();
-	int				acc_longitud_cadena() const {return longitud_actual;}
-	App::tipos_kana			acc_tipo_kana() const {return tipo_kana;}
 
 	private:
 

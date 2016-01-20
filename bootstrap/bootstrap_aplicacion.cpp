@@ -6,6 +6,7 @@
 #include "../class/controladores/controlador_opciones.h"
 #include "../class/app/lector_kana.h"
 #include "../class/app/lista_kanas.h"
+#include "../class/app/eventos/interprete_eventos.h"
 
 using namespace App;
 
@@ -47,64 +48,14 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	localizador.inicializar(config.acc_idioma());
 
 	//Controladores e interfaces.
-
-	/**** TODO TODO TODO */
-	/**** TODO TODO TODO */
-	/**** TODO TODO TODO */
-
-	struct Evento_uno:
-		public Evento_director_estados_base
-	{
-		virtual int tipo_evento() const {return 1;}
-		std::string val;
-		Evento_uno(const std::string& v) {val=v;}
-	};
-
-	struct Evento_dos:
-		public Evento_director_estados_base
-	{
-		virtual int tipo_evento() const {return 2;}
-		int val_a, val_b;
-		Evento_dos(int a, int b) {val_a=a; val_b=b;}
-	};
-
-	class Interprete_eventos:
-		public Interface_interprete_eventos
-	{
-		public:
-		virtual void interpretar_evento(const Evento_director_estados_base& ev)
-		{
-			switch(ev.tipo_evento())
-			{
-				case 1: interpretar_uno(static_cast<const Evento_uno&>(ev)); break;
-				case 2: interpretar_dos(static_cast<const Evento_dos&>(ev)); break;
-			}
-		}
-
-		private:
-
-		void interpretar_uno(const Evento_uno& ev)
-		{
-			std::cout<<"LEYENDO EL EVENTO UNO "<<ev.val<<std::endl;
-		}
-
-		void interpretar_dos(const Evento_dos& ev)
-		{
-			std::cout<<"LEYENDO EL EVENTO DOS "<<ev.val_a<<" "<<ev.val_b<<std::endl;
-		}
-	}I_E;
-
-	/**** TODO TODO TODO */
-	/**** TODO TODO TODO */
-	/**** TODO TODO TODO */
-
 	Director_estados 		DI;
-	Controlador_menu 		C_M(DI, akashi, localizador);
+	Controlador_menu 		C_M(DI, akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
 	Controlador_opciones 		C_O(DI, akashi, localizador, pantalla);
 	C_O.generar_menu(config);
 	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
 	Controlador_principal 		C_P(DI, akashi, kanas);
 	Interface_controlador * 	IC=&C_M;
+	App::Eventos::Interprete_eventos IE(pantalla, config);
 
 	//Loop principal.
 	while(kernel.loop(*IC))
@@ -113,37 +64,17 @@ void App::loop_aplicacion(Kernel_app& kernel)
 		{
 			bool confirmar=true;
 
+			//TODO: Qué tal un método de "wakeup" y otro de "sleep" al confirmar el cambio de estado???
 			switch(DI.acc_estado_actual())
 			{
-				case Director_estados::t_estados::MENU: 
-					DI.encolar_evento(new Evento_uno("HOLA"));
-					DI.encolar_evento(new Evento_dos(1, 2));
-				break;
-				case Director_estados::t_estados::PRINCIPAL: 
-					DI.encolar_evento(new Evento_dos(3, 4));
-				break;
+				case Director_estados::t_estados::MENU: break;
+				case Director_estados::t_estados::PRINCIPAL: break;
 				case Director_estados::t_estados::OPCIONES: 
-					DI.encolar_evento(new Evento_uno("ADIOS"));
-
-					//TODO: Esto ya no sería necesario aquí y podría ir en el intérprete de eventos.
-					config.mut_idioma(C_O.obtener_idioma());
-					config.mut_w_fisica_pantalla(C_O.obtener_w_ventana());
-					config.mut_h_fisica_pantalla(C_O.obtener_h_ventana());
-					config.mut_fondo(C_O.obtener_fondo());
-					config.grabar();
 					C_M.traducir_interface();
 				break;
 				case Director_estados::t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.
-					if(!C_G.cantidad_seleccionados()) 
-					{
-						confirmar=false;
-					}
-					else 
-					{
-						config.mut_kanas_activos(C_G.producir_cadena_kanas_activos());
-						config.grabar();
-					}
+					confirmar=C_G.cantidad_seleccionados();
 				break;
 			}
 
@@ -159,7 +90,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 					IC=&C_O; 
 				break;
 				case Director_estados::t_estados::PRINCIPAL: 
-					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, C_M.acc_longitud_cadena(), C_M.acc_tipo_kana());
+					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
 					if(confirmar) IC=&C_P;
 				break;
 			}
@@ -168,7 +99,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			else DI.cancelar_cambio_estado();
 		}
 		
-		DI.procesar_cola_eventos(I_E);
+		DI.procesar_cola_eventos(IE);
 	};
 }
 

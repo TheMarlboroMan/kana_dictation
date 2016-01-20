@@ -22,7 +22,6 @@ class Controlador_grupos:public Controlador_base
 	std::vector<std::string>	obtener_grupos_seleccionados() const;
 	size_t				cantidad_seleccionados() const;
 	void				establecer_kanas_activos(const std::string&);
-	std::string			producir_cadena_kanas_activos() const;
 
 		
 	private:
@@ -40,6 +39,7 @@ class Controlador_grupos:public Controlador_base
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 
 	void				componer_vista_listado();
+	std::string			producir_cadena_kanas_activos() const;
 	
 
 	Herramientas_proyecto::Compositor_vista		escena;

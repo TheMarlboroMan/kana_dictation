@@ -15,10 +15,6 @@ class Controlador_opciones:public Controlador_base
 	public:
 
 					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&);
-	int				obtener_idioma() const {return std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());}
-	int				obtener_w_ventana() const {return obtener_dimension_ventana(0);}
-	int				obtener_h_ventana() const {return obtener_dimension_ventana(1);}
-	std::string			obtener_fondo() const {return opciones_menu.valor_opcion(k_fondo);}
 	void				generar_menu(const Configuracion&);
 
 	private:
@@ -28,8 +24,6 @@ class Controlador_opciones:public Controlador_base
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	
-	int				obtener_dimension_ventana(int) const;
-
 	void				generar_representacion_menu();
 	void				traducir_interface();
 

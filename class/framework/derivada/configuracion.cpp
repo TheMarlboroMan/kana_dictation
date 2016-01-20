@@ -29,4 +29,6 @@ Configuracion::Configuracion(): Configuracion_base(obtener_ruta_archivo(), obten
 	configurar(CLAVE_H_LOGICA_PANTALLA, H_LOGICA_PANTALLA);
 	configurar(CLAVE_KANAS_ACTIVOS, KANAS_ACTIVOS);
 	configurar(CLAVE_FONDO, FONDO);
+	configurar(CLAVE_LONGITUD, LONGITUD);
+	configurar(CLAVE_SILABARIO, SILABARIO);
 }

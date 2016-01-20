@@ -1,8 +1,10 @@
 #include "controlador_grupos.h"
 #include "../app/recursos.h"
 #include "../app/localizacion.h"
+#include "../app/eventos/cambio_grupos.h"
 #include <algorithm>
 #include <source/string_utilidades.h>
+
 
 //Este valor es conocido también por la configuración en su propia definición. Realmente está repetido.
 const std::string Controlador_grupos::WILDCARD_TODOS_KANAS="*";
@@ -78,6 +80,8 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 		{
 			size_t indice=listado.acc_indice_actual();
 			grupos[indice].seleccionado=!grupos[indice].seleccionado;
+
+			encolar_evento(App::Eventos::Evento_cambio_grupos(producir_cadena_kanas_activos());
 			componer_vista_listado();
 		}
 	}
@@ -126,13 +130,16 @@ std::string Controlador_grupos::producir_cadena_kanas_activos() const
 
 void Controlador_grupos::establecer_kanas_activos(const std::string& k)
 {
+	auto seleccionar_todos=[this]() {for(auto& g : grupos) g.seleccionado=true;};
+
 	if(k==WILDCARD_TODOS_KANAS)
 	{
-		for(auto& g : grupos) g.seleccionado=true;
+		seleccionar_todos();
 	}
 	else
 	{
 		auto v=Herramientas_proyecto::explotar(k, SEPARADOR_KANAS_ACTIVOS);
+		int total_activos=0;
 
 		for(const auto& clave : v)
 		{
@@ -141,10 +148,15 @@ void Controlador_grupos::establecer_kanas_activos(const std::string& k)
 				if(g.nombre==clave) 
 				{
 					g.seleccionado=true;
+					++total_activos;
 				}
 			}
 		}
+
+		if(!total_activos) seleccionar_todos();	//Si no hay ninguno activo porque la configuración esté reventada, los seleccionamos todos.
 	}
+
+	//TODO: Lanzar evento...
 
 	componer_vista_listado();
 }

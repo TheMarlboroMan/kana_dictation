@@ -3,6 +3,9 @@
 #include "../app/localizacion.h"
 #include <source/string_utilidades.h>
 #include <class/dnot_parser.h>
+#include "../app/eventos/cambio_fondo.h"
+#include "../app/eventos/cambio_idioma.h"
+#include "../app/eventos/cambio_ventana.h"
 
 const std::string Controlador_opciones::k_tam_pantalla="01_K_TAM_VENTANA";
 const std::string Controlador_opciones::k_idioma="02_K_IDIOMA";
@@ -18,12 +21,6 @@ Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fu
 
 	rep_listado.no_imponer_alpha();
 	listado.mut_margen_h(MARGEN_Y);
-}
-
-int Controlador_opciones::obtener_dimension_ventana(int i) const
-{
-	const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_opcion(k_tam_pantalla), 'x');
-	return std::atoi(partes[i].c_str());
 }
 
 void Controlador_opciones::traducir_interface()
@@ -62,6 +59,8 @@ void Controlador_opciones::generar_menu(const Configuracion& config)
 			opciones_menu.insertar_seleccion_en_opcion(k_opcion, k_seleccion, "--", seleccion["valor"]);
 		}
 	}
+
+	//TODO: Eliminar esta dependencia: mejor pasar los valores en el constructor.
 
 	//Escoger las opciones adecuadas según la configuración del usuario.
 	const std::string val_tam_pantalla=std::to_string(config.acc_w_fisica_pantalla())+"x"+std::to_string(config.acc_h_fisica_pantalla());
@@ -127,14 +126,22 @@ void Controlador_opciones::loop(Input_base& input, float delta)
 
 			if(clave==k_idioma)
 			{
-				localizador.cambiar_idioma(std::atoi(opciones_menu.valor_opcion(k_idioma).c_str()));
+				int id_idioma=std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());
+				localizador.cambiar_idioma(id_idioma);
 				traducir_interface();
+				encolar_evento(new App::Eventos::Evento_cambio_idioma(id_idioma));
 			}
 			else if(clave==k_fondo)
 			{
-				//TODO: Esto estaría bien sacarlo fuera...
-				SDL_Surface * superficie=DLibV::Utilidades_graficas_SDL::cargar_imagen(opciones_menu.valor_opcion(k_fondo).c_str(), pantalla.acc_ventana());
-				DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(superficie);
+				const std::string fondo=opciones_menu.valor_opcion(k_fondo);
+				encolar_evento(new App::Eventos::Evento_cambio_fondo(fondo));
+			}
+			else if(clave==k_tam_pantalla)
+			{
+				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_opcion(k_tam_pantalla), 'x');
+				int w=std::atoi(partes[0].c_str());
+				int h=std::atoi(partes[1].c_str());
+				encolar_evento(new App::Eventos::Evento_cambio_ventana(w, h));
 			}
 
 			generar_representacion_menu();

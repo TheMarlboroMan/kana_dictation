@@ -13,6 +13,8 @@ $(DIR_O_HERRAMIENTAS_PROYECTO)listado_vertical.o\
 DEP_CLASES_APP=$(DIR_O)kana.o \
 $(DIR_O)lector_kana.o \
 $(DIR_O)lista_kanas.o \
+$(DIR_O)interprete_eventos.o \
+$(DIR_O)definiciones.o \
 
 DEP_CONTROLADORES=$(DIR_O)controlador_base.o \
 $(DIR_O)controlador_principal.o \

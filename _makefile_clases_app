@@ -2,12 +2,20 @@
 #Definciones
 
 DIR_CLASES_APP=./class/app/
+DIR_CLASES_EVENTOS=./class/app/eventos/
+
+################################################################################
+#Definiciones...
+################################################################################
+
+$(DIR_O)definiciones.o:\
+$(DIR_CLASES_APP)definiciones.h \
+$(DIR_CLASES_APP)definiciones.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)definiciones.cpp -o $(DIR_O)definiciones.o
 
 ################################################################################
 #Clases...
-
 ################################################################################
-#Definiciones
 
 $(DIR_O)lista_kanas.o:\
 $(DIR_O)lector_kana.o\
@@ -25,3 +33,18 @@ $(DIR_O)kana.o:\
 $(DIR_CLASES_APP)kana.h \
 $(DIR_CLASES_APP)kana.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)kana.cpp -o $(DIR_O)kana.o
+
+################################################################################
+#Eventos...
+################################################################################
+
+$(DIR_O)interprete_eventos.o:\
+$(DIR_CLASES_EVENTOS)cambio_fondo.h \
+$(DIR_CLASES_EVENTOS)cambio_idioma.h \
+$(DIR_CLASES_EVENTOS)cambio_kanas.h \
+$(DIR_CLASES_EVENTOS)cambio_longitud.h \
+$(DIR_CLASES_EVENTOS)cambio_ventana.h \
+$(DIR_CLASES_EVENTOS)definiciones.h \
+$(DIR_CLASES_EVENTOS)interprete_eventos.h \
+$(DIR_CLASES_EVENTOS)interprete_eventos.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_EVENTOS)interprete_eventos.cpp -o $(DIR_O)interprete_eventos.o
