@@ -15,6 +15,8 @@ class Controlador_base:public Interface_controlador
 
 	public:
 
+	void					encolar_evento(Evento_director_estados_base * ev) {DI.encolar_evento(ev);}
+
 	void solicitar_cambio_estado(Director_estados::t_estados v) {DI.solicitar_cambio_estado(v);}
 
 	bool es_abandonar_aplicacion() const {return abandonar;}

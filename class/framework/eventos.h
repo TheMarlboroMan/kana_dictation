@@ -16,13 +16,14 @@ class Interface_interprete_eventos;
 
 /**
 * Base para un evento. Un evento es una estructura que tendrá sus propios 
-* valores indicando lo que sea que haya ocurrido.
+* valores indicando lo que sea que haya ocurrido. Incluye un método virtual
+* para indicar su tipo de evento de acuerdo con un entero. Es tarea del 
+* intérprete "desmontar" cada evento para convertirlo en el tipo deseado.
 */
 
 struct Evento_director_estados_base
 {
-	//Aún no lo tengo claro.
-	//void disparar_evento(Interface_interprete_eventos&)=0;
+	virtual	int		tipo_evento() const=0;
 };
 
 
@@ -38,8 +39,7 @@ class Interface_interprete_eventos
 {
 	public:
 
-	//TODO: ¿Esto qué hace?.
-	//Clase base para un intérprete propio.
+	virtual void		interpretar_evento(const Evento_director_estados_base& ev)=0;
 };
 
 #endif

@@ -47,7 +47,56 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	localizador.inicializar(config.acc_idioma());
 
 	//Controladores e interfaces.
-	//TODO: Crear interprete de eventos.
+
+	/**** TODO TODO TODO */
+	/**** TODO TODO TODO */
+	/**** TODO TODO TODO */
+
+	struct Evento_uno:
+		public Evento_director_estados_base
+	{
+		virtual int tipo_evento() const {return 1;}
+		std::string val;
+		Evento_uno(const std::string& v) {val=v;}
+	};
+
+	struct Evento_dos:
+		public Evento_director_estados_base
+	{
+		virtual int tipo_evento() const {return 2;}
+		int val_a, val_b;
+		Evento_dos(int a, int b) {val_a=a; val_b=b;}
+	};
+
+	class Interprete_eventos:
+		public Interface_interprete_eventos
+	{
+		public:
+		virtual void interpretar_evento(const Evento_director_estados_base& ev)
+		{
+			switch(ev.tipo_evento())
+			{
+				case 1: interpretar_uno(static_cast<const Evento_uno&>(ev)); break;
+				case 2: interpretar_dos(static_cast<const Evento_dos&>(ev)); break;
+			}
+		}
+
+		private:
+
+		void interpretar_uno(const Evento_uno& ev)
+		{
+			std::cout<<"LEYENDO EL EVENTO UNO "<<ev.val<<std::endl;
+		}
+
+		void interpretar_dos(const Evento_dos& ev)
+		{
+			std::cout<<"LEYENDO EL EVENTO DOS "<<ev.val_a<<" "<<ev.val_b<<std::endl;
+		}
+	}I_E;
+
+	/**** TODO TODO TODO */
+	/**** TODO TODO TODO */
+	/**** TODO TODO TODO */
 
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
@@ -66,9 +115,15 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 			switch(DI.acc_estado_actual())
 			{
-				case Director_estados::t_estados::MENU: break;
-				case Director_estados::t_estados::PRINCIPAL: break;
+				case Director_estados::t_estados::MENU: 
+					DI.encolar_evento(new Evento_uno("HOLA"));
+					DI.encolar_evento(new Evento_dos(1, 2));
+				break;
+				case Director_estados::t_estados::PRINCIPAL: 
+					DI.encolar_evento(new Evento_dos(3, 4));
+				break;
 				case Director_estados::t_estados::OPCIONES: 
+					DI.encolar_evento(new Evento_uno("ADIOS"));
 
 					//TODO: Esto ya no sería necesario aquí y podría ir en el intérprete de eventos.
 					config.mut_idioma(C_O.obtener_idioma());
@@ -112,9 +167,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			if(confirmar) DI.confirmar_cambio_estado();
 			else DI.cancelar_cambio_estado();
 		}
-
-		//TODO: El intérprete de eventos procesa los cambios.
-		//DI.procesar_cola_eventos(I_E);
+		
+		DI.procesar_cola_eventos(I_E);
 	};
 }
 
