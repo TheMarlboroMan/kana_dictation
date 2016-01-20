@@ -18,6 +18,7 @@ class Controlador_opciones:public Controlador_base
 	int				obtener_idioma() const {return std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());}
 	int				obtener_w_ventana() const {return obtener_dimension_ventana(0);}
 	int				obtener_h_ventana() const {return obtener_dimension_ventana(1);}
+	std::string			obtener_fondo() const {return opciones_menu.valor_opcion(k_fondo);}
 	void				generar_menu(const Configuracion&);
 
 	private:
@@ -38,33 +39,27 @@ class Controlador_opciones:public Controlador_base
 	};
 
 	DLibV::Pantalla&				pantalla;
+	Herramientas_proyecto::Localizador_base&	localizador;	//No es constante, desde aquí puede cambiar.
+	const DLibV::Fuente_TTF& 			ttf_romaji;
+
+	DLibV::Representacion_agrupada		 	rep_listado;
 	Herramientas_proyecto::Compositor_vista		escena;
 	Herramientas_proyecto::Menu_opciones<std::string, std::string>	opciones_menu;
 	Herramientas_proyecto::Listado_vertical<t_listado>	listado;
-	DLibV::Representacion_agrupada		 	rep_listado;
+	std::map<std::string, int>			mapa_traducciones;	//Mapa de traducción del menú: la clave X se corresponderá con el indice Y del localizador.
 
-
-	Herramientas_proyecto::Localizador_base&	localizador;	//No es constante, desde aquí puede cambiar.
-	const DLibV::Fuente_TTF& 			ttf_romaji;
 
 	//TODO: Repetidos con respecto a otros... Mejor llevarlos a otro sitio...
 	static const int 				X_LISTADO=16,
 							Y_LISTADO=32,
 //							X_SELECCION=270,
 							ALTO_ITEM_LISTADO=20,
-							ANCHO_LISTADO=300,
+							//TODO: Ojo, este no se repite!!!.
+							ANCHO_LISTADO=400,
 							MARGEN_Y=16;
 
 	static const std::string 			k_tam_pantalla,
-							k_tam_pantalla_o1,
-							k_tam_pantalla_o2,
-							k_tam_pantalla_o3,
-							k_tam_pantalla_o4,
-							k_tam_pantalla_o5,
-							k_tam_pantalla_o6,
 							k_idioma,
-							k_idioma_o1,
-							k_idioma_o2,
 							k_fondo;
 };
 

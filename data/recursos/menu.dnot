@@ -1,0 +1,32 @@
+menu:[
+	{
+		clave:"01_K_TAM_VENTANA",
+		trans:10,
+		opciones:[
+			{clave:"01_K_TAM_VENTANA_O01", valor: "800x500", trans:11},
+			{clave:"01_K_TAM_VENTANA_O02", valor: "960x600", trans:12},
+			{clave:"01_K_TAM_VENTANA_O03", valor: "1120x700", trans:13},
+			{clave:"01_K_TAM_VENTANA_O04", valor: "1440x900", trans:14},
+			{clave:"01_K_TAM_VENTANA_O05", valor: "1600x1000", trans:15}
+		]
+	},
+	{
+		clave:"02_K_IDIOMA",
+		trans:20,
+		opciones:[
+			{clave:"02_K_IDIOMA_O01", valor: "0", trans:21},
+			{clave:"02_K_IDIOMA_O02", valor: "1", trans:22}
+		]
+	},
+	{
+		clave:"03_K_FONDO",
+		trans:30,
+		opciones:[
+			{clave:"03_K_FONDO_O01", valor: "data/graficos/background_01.jpg", trans:31},
+			{clave:"03_K_FONDO_O02", valor: "data/graficos/background_02.jpg", trans:32},
+			{clave:"03_K_FONDO_O03", valor: "data/graficos/background_03.jpg", trans:33},
+			{clave:"03_K_FONDO_O04", valor: "data/graficos/background_04.jpg", trans:34},
+			{clave:"03_K_FONDO_O05", valor: "data/graficos/background_05.jpg", trans:35}
+		]
+	}
+]

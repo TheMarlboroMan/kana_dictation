@@ -1,4 +1,3 @@
 De momento tenemos que:
 
 	Advertir que el cambio de dimensiones de ventana se hará al reiniciar.
-	Configuración de fondos que puedan cambiar, escritos en un dnot.

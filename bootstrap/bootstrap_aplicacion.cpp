@@ -24,6 +24,10 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	pantalla.establecer_medidas_logicas(wl, hl);
 	pantalla.establecer_modo_ventana(config.acc_modo_pantalla());
 	pantalla.establecer_posicion(0, 0);
+
+	//Establecer el fondo según valores de configuración.
+	SDL_Surface * superficie=DLibV::Utilidades_graficas_SDL::cargar_imagen(config.acc_fondo().c_str(), pantalla.acc_ventana());
+	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(superficie);
 	
 	//Ojo con retirar esto porque si no cargamos recursos va a estallar :D.
 	kernel.mut_mostrar_fps(false);
@@ -66,6 +70,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 					config.mut_idioma(C_O.obtener_idioma());
 					config.mut_w_fisica_pantalla(C_O.obtener_w_ventana());
 					config.mut_h_fisica_pantalla(C_O.obtener_h_ventana());
+					config.mut_fondo(C_O.obtener_fondo());
 					config.grabar();
 					C_M.traducir_interface();
 				break;

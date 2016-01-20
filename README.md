@@ -15,10 +15,10 @@ Features:
 - Multiple languages in the user interface.
 - Support for multiple screen modes (actually, dirty resizes from a base of 800x500).
 - Save user preferences with respect to kanas to practice into configuration files.
+- Configurable backgrounds (up to five preinstalled) for a more pleasant visual experience.
 
 Planned features:
 
-- More backgrounds.
 - Invert translation direction: kana to romaji / romaji to kana.
 - A title logo somewhere :P.
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
