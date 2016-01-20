@@ -44,6 +44,8 @@ class Configuracion: public Configuracion_base
 	static const std::string CLAVE_H_FISICA_PANTALLA;
 	static const std::string CLAVE_KANAS_ACTIVOS;
 	static const std::string CLAVE_FONDO;
+	static const std::string CLAVE_LONGITUD;
+	static const std::string CLAVE_SILABARIO;
 
 	static const std::string ID_IDIOMA;
 	static const std::string W_FISICA_PANTALLA;
@@ -52,6 +54,8 @@ class Configuracion: public Configuracion_base
 	static const std::string H_LOGICA_PANTALLA;
 	static const std::string KANAS_ACTIVOS;
 	static const std::string FONDO;
+	static const std::string LONGITUD;
+	static const std::string SILABARIO;
 
 	////////////////////////////////////
 	// Implementacion...

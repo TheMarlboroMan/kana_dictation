@@ -47,6 +47,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	localizador.inicializar(config.acc_idioma());
 
 	//Controladores e interfaces.
+	//TODO: Crear interprete de eventos.
+
 	Director_estados 		DI;
 	Controlador_menu 		C_M(DI, akashi, localizador);
 	Controlador_opciones 		C_O(DI, akashi, localizador, pantalla);
@@ -67,6 +69,8 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				case Director_estados::t_estados::MENU: break;
 				case Director_estados::t_estados::PRINCIPAL: break;
 				case Director_estados::t_estados::OPCIONES: 
+
+					//TODO: Esto ya no sería necesario aquí y podría ir en el intérprete de eventos.
 					config.mut_idioma(C_O.obtener_idioma());
 					config.mut_w_fisica_pantalla(C_O.obtener_w_ventana());
 					config.mut_h_fisica_pantalla(C_O.obtener_h_ventana());
@@ -108,6 +112,9 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			if(confirmar) DI.confirmar_cambio_estado();
 			else DI.cancelar_cambio_estado();
 		}
+
+		//TODO: El intérprete de eventos procesa los cambios.
+		//DI.procesar_cola_eventos(I_E);
 	};
 }
 
