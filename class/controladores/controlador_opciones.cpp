@@ -21,6 +21,11 @@ Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fu
 
 	rep_listado.no_imponer_alpha();
 	listado.mut_margen_h(MARGEN_Y);
+
+	//TODO: Especificar visibilidad en layout.
+	escena.obtener_por_id("caja_reinicio_ventana")->hacer_invisible();
+	escena.obtener_por_id("fondo_reinicio_ventana")->hacer_invisible();
+	escena.obtener_por_id("txt_reinicio_ventana")->hacer_invisible();
 }
 
 void Controlador_opciones::traducir_interface()
@@ -34,6 +39,9 @@ void Controlador_opciones::traducir_interface()
 		trad.push_back({par.first, localizador.obtener(par.second)});
 
 	opciones_menu.traducir(trad);
+	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_reinicio_ventana"))->asignar(localizador.obtener(Localizacion::cadenas::reinicio_ventana));
+
+
 }
 
 void Controlador_opciones::generar_menu(const Configuracion& config)
@@ -95,10 +103,11 @@ void Controlador_opciones::generar_representacion_menu()
 
 	rep_listado.insertar_representacion(caja);
 
-	//TODO: Poner esto mejor... Pero de momento dejarlo como prueba para localizar el bug de fondos negros.
-	auto * advertencia=new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "CAMBIOS DE RESOLUCION SOLO AL REINICIAR");
+	//TODO: Revisar, bug en la librería????
+	/*auto * advertencia=new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "CAMBIOS DE RESOLUCION SOLO AL REINICIAR");
 	advertencia->establecer_posicion(300, 300);
 	rep_listado.insertar_representacion(advertencia);	
+	*/
 }
 
 void Controlador_opciones::loop(Input_base& input, float delta)
@@ -141,6 +150,11 @@ void Controlador_opciones::loop(Input_base& input, float delta)
 				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_opcion(k_tam_pantalla), 'x');
 				int w=std::atoi(partes[0].c_str());
 				int h=std::atoi(partes[1].c_str());
+
+				escena.obtener_por_id("caja_reinicio_ventana")->hacer_visible();
+				escena.obtener_por_id("fondo_reinicio_ventana")->hacer_visible();
+				escena.obtener_por_id("txt_reinicio_ventana")->hacer_visible();
+
 				encolar_evento(new App::Eventos::Evento_cambio_ventana(w, h));
 			}
 

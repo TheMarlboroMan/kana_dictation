@@ -16,5 +16,22 @@ layout:
 	{
 		tipo:"caja",
 		pos:[0, 20, 446, 474], rgb:[0, 0, 0], orden:20
+	},
+	{
+		tipo:"caja",
+		pos:[20, 400, 760, 60], rgb:[255, 255, 255], orden:30,
+		id:"caja_reinicio_ventana"
+	},
+	{
+		tipo:"caja",
+		pos:[23, 404, 754, 54], rgb:[0, 0, 0], orden:40,
+		id:"fondo_reinicio_ventana"
+	},
+	{
+		tipo:"ttf",
+		pos:[34, 420],
+		texto:"--",
+		fuente:"romaji", rgba:[0, 64, 192, 255], orden:50,
+		id:"txt_reinicio_ventana"
 	}
 ]

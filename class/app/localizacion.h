@@ -15,7 +15,8 @@ class Localizacion
 		hiragana=4,
 		katakana=5,
 		escoger_sets=6,
-		configuracion=7
+		configuracion=7,
+		reinicio_ventana=8
 	};
 
 	private:

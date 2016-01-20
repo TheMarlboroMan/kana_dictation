@@ -81,7 +81,7 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 			size_t indice=listado.acc_indice_actual();
 			grupos[indice].seleccionado=!grupos[indice].seleccionado;
 
-			encolar_evento(App::Eventos::Evento_cambio_grupos(producir_cadena_kanas_activos());
+			encolar_evento(new App::Eventos::Evento_cambio_grupos(producir_cadena_kanas_activos()));
 			componer_vista_listado();
 		}
 	}
