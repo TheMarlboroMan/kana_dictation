@@ -12,6 +12,62 @@ Controlador_menu::Controlador_menu(Director_estados &DI, const DLibV::Fuente_TTF
 	escena.parsear("data/recursos/layout_menu.dnot", "layout");
 	escena.obtener_por_id("seleccion_menu")->establecer_alpha(128);
 
+	//TODO: Recibir los parámetros de la configuración.
+
+	//TODO: Hacer algo nuevo para el tema de la configuración: pasar un algo que
+	//tire eventos y que se recojan en el main, por ejemplo. Así no tendremos que
+	//ir pasando el objeto de configuración de un lado a otro.
+	//TODO: Esto habría que estudiarlo mejor. 
+	//TODO: 
+	/*	
+		
+		El controlador base podría comunicarse con el director de estados
+		que ya podría comunicarse a su vez con un intérprete de eventos
+		propio para cada proyecto. Si lo hacemos de esta manera no tenemos
+		que tocar demasiadas películas en la base y es, básicamente,
+		completamente opcional.
+
+		class Interface_interprete_eventos
+		{
+			//Clase base para un intérprete propio.
+		};
+
+		struct Evento_director_estados_base
+		{
+			//Aún no lo tengo claro.	
+			//void disparar_evento(Interface_interprete_eventos&)=0;
+		};
+
+		En el director de estados:
+		std::vector<std::unique_ptr<Evento_director_estados_base>>	eventos;
+		void encolar_evento(Evento_director_estados_base * ev) {eventos.push_back(std::unique_ptr<Evento_director_estados_base>(ev));}
+
+		Y que luego pueda hacer...
+		D_I.procesar_eventos(Interface_interprete_eventos& i)
+		{
+			for(const auto& ev : eventos)
+				ev->disparar(i);
+
+			eventos.clear();
+		}
+	*/
+
+	/*
+		event_handler.queue_event(new Evento_cambio_longitud(10));
+		event_handler.queue_event(new Evento_cambio_kanas(hiragana));
+		event_handler.queue_event(new Evento_cambio_pantalla(w, h));
+		event_handler.queue_event(new Evento_cambio_fondo(ruta_fondo_str...);
+
+		for(auto& e : eventos)
+		{
+			e->fire();
+		}
+
+		//Delete todos los eventos...
+	*/
+
+	//TODO: Validar información de longitud actual de entrada si es parametrizable.
+
 	traducir_interface();
 }
 
@@ -21,6 +77,9 @@ void Controlador_menu::traducir_interface()
 
 	std::string str_silabario=localizador.obtener(Localizacion::cadenas::silabario)+localizador.obtener(Localizacion::cadenas::hiragana);
 	std::string str_longitud=localizador.obtener(Localizacion::cadenas::longitud)+std::to_string(longitud_actual);
+
+	//TODO: Quizás la posibilidad de traducir una escena podamos hacerla directamente en la clase escena
+	//usando unidades de traducción.
 
 	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_menu_1"))->asignar(localizador.obtener(Localizacion::cadenas::iniciar));
 	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_menu_2"))->asignar(str_longitud);
@@ -83,6 +142,9 @@ void Controlador_menu::cambiar_longitud_actual(int dir)
 		longitud_actual=temp;
 		std::string str_longitud=localizador.obtener(Localizacion::cadenas::longitud)+std::to_string(longitud_actual);
 		static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_menu_2"))->asignar(str_longitud);
+
+		//TODO: Guardar en la configuracion!!!!
+		//Controlador_base::encolar_evento(new Evento_cambio_longitud(longitud_actual);
 	}
 }
 
@@ -104,6 +166,9 @@ void Controlador_menu::cambiar_tipo_kana()
 
 	std::string str_silabario=localizador.obtener(Localizacion::cadenas::silabario)+localizador.obtener(tipo_str);
 	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_menu_3"))->asignar(str_silabario);
+
+	//TODO: Guardar en la configuracion!!!!
+	//Controlador_base::encolar_evento(new Evento_cambio_kanas(tipo_kana);
 }
 
 void Controlador_menu::dibujar(DLibV::Pantalla& pantalla)

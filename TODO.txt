@@ -1,3 +1,4 @@
 De momento tenemos que:
 
+	Guardar preferencias de silabario y longitud.
 	Advertir que el cambio de dimensiones de ventana se hará al reiniciar.

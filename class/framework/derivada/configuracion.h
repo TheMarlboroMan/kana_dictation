@@ -17,6 +17,8 @@ class Configuracion: public Configuracion_base
 	int acc_h_fisica_pantalla() const {return std::atoi(valor_configuracion(CLAVE_H_FISICA_PANTALLA).c_str());}
 	const std::string& acc_kanas_activos() const {return valor_configuracion(CLAVE_KANAS_ACTIVOS);}
 	const std::string& acc_fondo() const {return valor_configuracion(CLAVE_FONDO);}
+	int acc_longitud() const {return std::atoi(valor_configuracion(CLAVE_LONGITUD).c_str());}
+	const std::string& acc_silabario() const {return valor_configuracion(CLAVE_SILABARIO);}
 
 	void mut_idioma(int p_valor) {configurar(CLAVE_IDIOMA, std::to_string(p_valor));}
 	void mut_w_logica_pantalla(int p_valor) {configurar(CLAVE_W_LOGICA_PANTALLA, std::to_string(p_valor));}
@@ -25,6 +27,8 @@ class Configuracion: public Configuracion_base
 	void mut_h_fisica_pantalla(int p_valor) {configurar(CLAVE_H_FISICA_PANTALLA, std::to_string(p_valor));}
 	void mut_kanas_activos(const std::string& p_valor) {configurar(CLAVE_KANAS_ACTIVOS, p_valor);}
 	void mut_fondo(const std::string& p_valor) {configurar(CLAVE_FONDO, p_valor);}
+	void mut_longitud(int p_valor) {configurar(CLAVE_LONGITUD, std::to_string(p_valor));}
+	void mut_silabario(const std::string& p_valor) {configurar(CLAVE_SILABARIO, p_valor);}
 
 	Configuracion();
 
