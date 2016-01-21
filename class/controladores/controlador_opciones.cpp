@@ -168,3 +168,13 @@ void Controlador_opciones::dibujar(DLibV::Pantalla& pantalla)
 	escena.volcar(pantalla);
 	rep_listado.volcar(pantalla);
 }
+
+void Controlador_opciones::despertar()
+{
+
+}
+
+void Controlador_opciones::dormir()
+{
+
+}

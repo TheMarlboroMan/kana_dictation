@@ -37,6 +37,8 @@ class Controlador_grupos:public Controlador_base
 	virtual void 			postloop(Input_base& input, float delta) {}
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
+	virtual void 			despertar();
+	virtual void 			dormir();
 
 	void				componer_vista_listado();
 	std::string			producir_cadena_kanas_activos() const;

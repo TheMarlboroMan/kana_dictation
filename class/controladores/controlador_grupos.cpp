@@ -160,3 +160,13 @@ void Controlador_grupos::establecer_kanas_activos(const std::string& k)
 
 	componer_vista_listado();
 }
+
+void Controlador_grupos::despertar()
+{
+
+}
+
+void Controlador_grupos::dormir()
+{
+
+}

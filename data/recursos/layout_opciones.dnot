@@ -24,7 +24,7 @@ layout:
 	},
 	{
 		tipo:"caja",
-		pos:[23, 404, 754, 54], rgb:[0, 0, 0], orden:40,
+		pos:[23, 403, 754, 54], rgb:[0, 0, 0], orden:40,
 		id:"fondo_reinicio_ventana"
 	},
 	{

@@ -28,6 +28,8 @@ class Interface_controlador
 	virtual void dibujar(DLibV::Pantalla& pantalla)=0;
 	virtual bool es_abandonar_aplicacion() const=0;
 	virtual bool es_romper_loop() const=0;
+	virtual void despertar()=0;
+	virtual void dormir()=0;
 };
 
 

@@ -120,3 +120,13 @@ void Controlador_menu::dibujar(DLibV::Pantalla& pantalla)
 {
 	escena.volcar(pantalla);
 }
+
+void Controlador_menu::despertar()
+{
+
+}
+
+void Controlador_menu::dormir()
+{
+
+}

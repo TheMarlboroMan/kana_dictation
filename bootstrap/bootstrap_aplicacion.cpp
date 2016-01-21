@@ -95,6 +95,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 				break;
 			}
 
+			//TODO: Sería magnífico si esto pudiera ser automático.
 			if(confirmar) DI.confirmar_cambio_estado();
 			else DI.cancelar_cambio_estado();
 		}

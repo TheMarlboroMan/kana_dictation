@@ -21,6 +21,8 @@ class Controlador_menu:public Controlador_base
 	virtual void 			postloop(Input_base& input, float delta) {}
 	virtual void 			loop(Input_base& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
+	virtual void 			despertar();
+	virtual void 			dormir();
 
 	void				cambiar_seleccion_actual(int);
 	void				cambiar_tipo_kana();

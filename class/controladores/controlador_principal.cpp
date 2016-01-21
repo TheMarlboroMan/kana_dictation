@@ -89,3 +89,13 @@ void Controlador_principal::dibujar(DLibV::Pantalla& pantalla)
 
 	escena.volcar(pantalla);
 }
+
+void Controlador_principal::despertar()
+{
+
+}
+
+void Controlador_principal::dormir()
+{
+
+}
