@@ -26,10 +26,6 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	pantalla.establecer_modo_ventana(config.acc_modo_pantalla());
 	pantalla.establecer_posicion(0, 0);
 
-	//Establecer el fondo según valores de configuración.
-	SDL_Surface * superficie=DLibV::Utilidades_graficas_SDL::cargar_imagen(config.acc_fondo().c_str(), pantalla.acc_ventana());
-	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(superficie);
-	
 	//Ojo con retirar esto porque si no cargamos recursos va a estallar :D.
 	kernel.mut_mostrar_fps(false);
 
@@ -47,6 +43,14 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Localizador localizador=Localizador("data/localizacion/strings");
 	localizador.inicializar(config.acc_idioma());
 
+	//Control de eventos.
+	App::Eventos::Interprete_eventos IE(pantalla, config);
+	//Establecer el fondo según valores de configuración.
+	//TODO: Disparar un evento, mejor.
+	DLibV::Imagen img(config.acc_fondo().c_str(), pantalla.acc_ventana());
+	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(img);
+
+	
 	//Controladores e interfaces.
 	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
 	Controlador_opciones 		C_O(akashi, localizador, pantalla, config);
@@ -64,8 +68,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	//Despertar el primer controlador.
 
 	Interface_controlador * 	IC=&C_M;
-	App::Eventos::Interprete_eventos IE(pantalla, config);
-	IC->despertar();
+	IC->despertar();		//TODO: Ugly.
 
 	//TODO: En todos los "despertar" y "dormir" vamos a poner ahora también el montaje y desmontaje de la 
 	//escena. Probablemente tengamos que tocar la escena en si.

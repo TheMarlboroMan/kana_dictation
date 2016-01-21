@@ -1,6 +1,7 @@
 #include "interprete_eventos.h"
 #include "../recursos.h"
 #include "../definiciones.h"
+#include <video/superficie/imagen.h>
 #include <herramientas/log_base/log_base.h>
 #include <video/utilidades_graficas_sdl/utilidades_graficas_sdl.h>
 #include <video/gestores/gestor_texturas.h>
@@ -37,8 +38,8 @@ void Interprete_eventos::interpretar_evento(const Evento_cambio_fondo& ev)
 	LOG<<"Recibido evento de cambio de fondo "<<ev.ruta_fondo<<std::endl;
 	config.mut_fondo(ev.ruta_fondo);
 
-	SDL_Surface * superficie=DLibV::Utilidades_graficas_SDL::cargar_imagen(ev.ruta_fondo.c_str(), pantalla.acc_ventana());
-	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(superficie);
+	DLibV::Imagen img(ev.ruta_fondo.c_str(), pantalla.acc_ventana());
+	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(img);
 
 	config.grabar();
 }
