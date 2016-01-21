@@ -11,8 +11,8 @@ const std::string Controlador_opciones::k_tam_pantalla="01_K_TAM_VENTANA";
 const std::string Controlador_opciones::k_idioma="02_K_IDIOMA";
 const std::string Controlador_opciones::k_fondo="03_K_FONDO";
 
-Controlador_opciones::Controlador_opciones(Director_estados &DI, const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p)
-	:Controlador_base(DI), pantalla(p), localizador(loc), ttf_romaji(fr), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO)
+Controlador_opciones::Controlador_opciones(const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p)
+	:Controlador_base(), pantalla(p), localizador(loc), ttf_romaji(fr), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -120,7 +120,7 @@ void Controlador_opciones::loop(Input_base& input, float delta)
 	{
 		if(input.es_input_down(Input::I_ESCAPE))
 		{
-			solicitar_cambio_estado(Director_estados::t_estados::MENU);
+			solicitar_cambio_estado(t_estados::MENU);
 		}
 		else if(input.es_input_down(Input::I_ARRIBA) || input.es_input_down(Input::I_ABAJO))
 		{
@@ -171,7 +171,7 @@ void Controlador_opciones::dibujar(DLibV::Pantalla& pantalla)
 
 void Controlador_opciones::despertar()
 {
-
+	traducir_interface();
 }
 
 void Controlador_opciones::dormir()

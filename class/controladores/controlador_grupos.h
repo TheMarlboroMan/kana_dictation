@@ -18,7 +18,7 @@ class Controlador_grupos:public Controlador_base
 {
 	public:
 
-					Controlador_grupos(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, const std::vector<std::string>& grupos, const std::string& kanas_activos);
+					Controlador_grupos(const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, const std::vector<std::string>& grupos, const std::string& kanas_activos);
 	std::vector<std::string>	obtener_grupos_seleccionados() const;
 	size_t				cantidad_seleccionados() const;
 	void				establecer_kanas_activos(const std::string&);

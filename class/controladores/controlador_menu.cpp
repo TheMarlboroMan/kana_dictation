@@ -4,8 +4,8 @@
 #include "../app/eventos/cambio_longitud.h"
 #include "../app/eventos/cambio_kanas.h"
 
-Controlador_menu::Controlador_menu(Director_estados &DI, const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, int longitud, App::tipos_kana tipo_kana)
-	:Controlador_base(DI), localizador(loc), ttf_romaji(fr), seleccion_actual(0), 
+Controlador_menu::Controlador_menu(const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, int longitud, App::tipos_kana tipo_kana)
+	:localizador(loc), ttf_romaji(fr), seleccion_actual(0), 
 	longitud_actual(longitud), tipo_kana(tipo_kana)
 {
 	//Preparar la escena.
@@ -60,10 +60,10 @@ void Controlador_menu::loop(Input_base& input, float delta)
 		{
 			switch(seleccion_actual)
 			{
-				case iniciar: solicitar_cambio_estado(Director_estados::t_estados::PRINCIPAL); break;
-				case seleccion_grupo: solicitar_cambio_estado(Director_estados::t_estados::GRUPOS); break;
-				case cambiar_tipo: cambiar_tipo_kana(); break;
-				case opciones: solicitar_cambio_estado(Director_estados::t_estados::OPCIONES); break;
+				case iniciar: 		solicitar_cambio_estado(t_estados::PRINCIPAL); break;
+				case seleccion_grupo: 	solicitar_cambio_estado(t_estados::GRUPOS); break;
+				case cambiar_tipo: 	cambiar_tipo_kana(); break;
+				case opciones: 		solicitar_cambio_estado(t_estados::OPCIONES); break;
 			}
 		}
 	}

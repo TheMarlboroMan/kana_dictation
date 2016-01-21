@@ -9,8 +9,8 @@
 //Este valor es conocido también por la configuración en su propia definición. Realmente está repetido.
 const std::string Controlador_grupos::WILDCARD_TODOS_KANAS="*";
 
-Controlador_grupos::Controlador_grupos(Director_estados &DI, const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const std::vector<std::string>& gr, const std::string& kanas_activos)
-	:Controlador_base(DI), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), localizador(loc), ttf_romaji(fr)
+Controlador_grupos::Controlador_grupos(const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const std::vector<std::string>& gr, const std::string& kanas_activos)
+	:Controlador_base(), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), localizador(loc), ttf_romaji(fr)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -69,7 +69,7 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 	{
 		if(input.es_input_down(Input::I_ESCAPE))
 		{
-			solicitar_cambio_estado(Director_estados::t_estados::MENU);
+			solicitar_cambio_estado(t_estados::MENU);
 		}
 		else if(input.es_input_down(Input::I_ARRIBA) || input.es_input_down(Input::I_ABAJO))
 		{

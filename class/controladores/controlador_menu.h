@@ -11,7 +11,7 @@ class Controlador_menu:public Controlador_base
 {
 	public:
 
-					Controlador_menu(Director_estados& d, const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, int longitud, App::tipos_kana tipo_kana);
+					Controlador_menu(const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, int longitud, App::tipos_kana tipo_kana);
 
 	void				traducir_interface();
 

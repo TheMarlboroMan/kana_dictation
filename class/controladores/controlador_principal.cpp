@@ -2,8 +2,8 @@
 #include <class/generador_numeros.h>
 #include "../app/recursos.h"
 
-Controlador_principal::Controlador_principal(Director_estados &DI, const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk)
-	:Controlador_base(DI), ttf_romaji(fr), ttf_kanas(fk), longitud_cadena(6), resuelto(false), tipo_kana(App::tipos_kana::hiragana)
+Controlador_principal::Controlador_principal(const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk)
+	:ttf_romaji(fr), ttf_kanas(fk), longitud_cadena(6), resuelto(false), tipo_kana(App::tipos_kana::hiragana)
 {
 	escena.mapear_fuente("kana", &ttf_kanas);
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -57,7 +57,7 @@ void Controlador_principal::loop(Input_base& input, float delta)
 	{
 		if(input.es_input_down(Input::I_ESCAPE))
 		{
-			solicitar_cambio_estado(Director_estados::t_estados::MENU);
+			solicitar_cambio_estado(t_estados::MENU);
 		}
 		else if(input.es_input_down(Input::I_ACEPTAR))
 		{

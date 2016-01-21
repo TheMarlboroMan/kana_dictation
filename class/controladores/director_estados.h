@@ -2,23 +2,16 @@
 #define DIRECTOR_ESTADOS
 
 #include "../framework/base_director_estados.h"
+#include "estados_controladores.h"
 
 class Director_estados:
 	public Base_director_estados
 {
 	public:
-	enum t_estados {MENU, PRINCIPAL, GRUPOS, OPCIONES};
-
-	public:
 
 	Director_estados()
-		:Base_director_estados(t_estados::MENU)
+		:Base_director_estados(t_estados::MENU, std::function<bool(int)>([](int v){return v >= MENU && v < MAX_ESTADOS;}))
 	{}
-
-	virtual bool validar_cambio_estado(int e)
-	{
-		return e >= MENU && e <= OPCIONES;
-	}
 };
 
 #endif

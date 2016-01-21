@@ -14,7 +14,7 @@ class Controlador_opciones:public Controlador_base
 {
 	public:
 
-					Controlador_opciones(Director_estados& d, const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&);
+					Controlador_opciones(const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&);
 	void				generar_menu(const Configuracion&);
 
 	private:

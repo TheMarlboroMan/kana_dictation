@@ -1,6 +1,9 @@
 #ifndef FRAMEWORK_EVENTOS_H
 #define FRAMEWORK_EVENTOS_H
 
+#include <vector>
+#include <memory>
+
 /**
 * Un sistema de mensajería (no necesariamente eventos, pero es un buen nombre)
 * para que los diferentes controladores puedan comunicarse con una central,
@@ -40,6 +43,32 @@ class Interface_interprete_eventos
 	public:
 
 	virtual void		interpretar_evento(const Evento_director_estados_base& ev)=0;
+};
+
+/**
+* La cola de eventos es una clase separada que contiene el vector. Será propiedad
+* del director de estados pero se inyectará en los controladores al registrarlos.
+*/
+
+class Cola_eventos
+{
+	public:
+
+	void			encolar_evento(Evento_director_estados_base * ev)
+	{
+		cola_eventos.push_back(std::unique_ptr<Evento_director_estados_base>(ev));
+	}
+
+	void			procesar_cola_completa(Interface_interprete_eventos& i)
+	{
+		for(auto& ev : cola_eventos) i.interpretar_evento(*ev);
+		cola_eventos.clear();
+	}
+
+	private:
+
+	std::vector<std::unique_ptr<Evento_director_estados_base>>	cola_eventos;
+	
 };
 
 #endif

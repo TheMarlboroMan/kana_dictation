@@ -11,7 +11,7 @@ class Controlador_principal:public Controlador_base
 {
 	public:
 
-					Controlador_principal(Director_estados& d, const DLibV::Fuente_TTF&, const DLibV::Fuente_TTF&);
+					Controlador_principal(const DLibV::Fuente_TTF&, const DLibV::Fuente_TTF&);
 	void				establecer_kanas(const std::vector<App::Kana>& k) {kanas=k;}
 	void				generar_cadena_kanas();
 	void				establecer_longitud_cadena(size_t l) {longitud_cadena=l;}

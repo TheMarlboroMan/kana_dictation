@@ -48,14 +48,30 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	localizador.inicializar(config.acc_idioma());
 
 	//Controladores e interfaces.
+	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
+	Controlador_opciones 		C_O(akashi, localizador, pantalla);
+	Controlador_grupos 		C_G(akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
+	Controlador_principal 		C_P(akashi, kanas);
+
+	//Registrar los controladores con el director de estados.
 	Director_estados 		DI;
-	Controlador_menu 		C_M(DI, akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
-	Controlador_opciones 		C_O(DI, akashi, localizador, pantalla);
-	C_O.generar_menu(config);
-	Controlador_grupos 		C_G(DI, akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
-	Controlador_principal 		C_P(DI, akashi, kanas);
+	DI.registrar_controlador(t_estados::MENU, C_M);
+	DI.registrar_controlador(t_estados::PRINCIPAL, C_P);
+	DI.registrar_controlador(t_estados::OPCIONES, C_O);
+	DI.registrar_controlador(t_estados::GRUPOS, C_G);
+
+	//TODO: Quizás para despertar al primer controlador podamos tener un método "DI->despertar()";
+	//Despertar el primer controlador.
+
 	Interface_controlador * 	IC=&C_M;
 	App::Eventos::Interprete_eventos IE(pantalla, config);
+	IC->despertar();
+
+	//Preparar controladores...
+	C_O.generar_menu(config);	//TODO: Quizás mejor lo podamos poner en el constructor.
+
+	//TODO: En todos los "despertar" y "dormir" vamos a poner ahora también el montaje y desmontaje de la 
+	//escena. Probablemente tengamos que tocar la escena en si.
 
 	//Loop principal.
 	while(kernel.loop(*IC))
@@ -63,16 +79,9 @@ void App::loop_aplicacion(Kernel_app& kernel)
 		if(DI.es_cambio_estado())
 		{
 			bool confirmar=true;
-
-			//TODO: Qué tal un método de "wakeup" y otro de "sleep" al confirmar el cambio de estado???
 			switch(DI.acc_estado_actual())
 			{
-				case Director_estados::t_estados::MENU: break;
-				case Director_estados::t_estados::PRINCIPAL: break;
-				case Director_estados::t_estados::OPCIONES: 
-					C_M.traducir_interface();
-				break;
-				case Director_estados::t_estados::GRUPOS: 
+				case t_estados::GRUPOS: 
 					//Comprobar que hay algún grupo seleccionado.
 					confirmar=C_G.cantidad_seleccionados();
 				break;
@@ -80,23 +89,12 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 			switch(DI.acc_estado_deseado())
 			{	
-				case Director_estados::t_estados::MENU: 
-					IC=&C_M; 
-				break;
-				case Director_estados::t_estados::GRUPOS: 
-					IC=&C_G; 
-				break;
-				case Director_estados::t_estados::OPCIONES:
-					IC=&C_O; 
-				break;
-				case Director_estados::t_estados::PRINCIPAL: 
+				case t_estados::PRINCIPAL: 
 					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
-					if(confirmar) IC=&C_P;
 				break;
 			}
 
-			//TODO: Sería magnífico si esto pudiera ser automático.
-			if(confirmar) DI.confirmar_cambio_estado();
+			if(confirmar) DI.confirmar_cambio_estado(IC);
 			else DI.cancelar_cambio_estado();
 		}
 		
