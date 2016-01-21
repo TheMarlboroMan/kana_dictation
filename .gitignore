@@ -1,3 +1,4 @@
 a.out
+makefile_linux
 objects/*
 data/logs/*
