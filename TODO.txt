@@ -1,5 +1,4 @@
 De momento tenemos que:
 
-	Añadir métodos de sleep y wakeup para controladores.
+	Incluir el sistema inverso: de kanas a txt.
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.
-	Advertir que el cambio de dimensiones de ventana se hará al reiniciar.

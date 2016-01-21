@@ -114,7 +114,6 @@ bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador
 	}
 
 	//TODO: Comprobar esto trasteando con el fichero de config.
-
 	if(!kanas_temporales.size())
 	{
 		return false;
