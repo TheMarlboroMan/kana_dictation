@@ -11,21 +11,16 @@ const std::string Controlador_opciones::k_tam_pantalla="01_K_TAM_VENTANA";
 const std::string Controlador_opciones::k_idioma="02_K_IDIOMA";
 const std::string Controlador_opciones::k_fondo="03_K_FONDO";
 
-Controlador_opciones::Controlador_opciones(const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p)
+Controlador_opciones::Controlador_opciones(const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p, const Configuracion& config)
 	:Controlador_base(), pantalla(p), localizador(loc), ttf_romaji(fr), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
-	escena.parsear("data/recursos/layout_opciones.dnot", "layout");
+	generar_menu(config);
 
 	rep_listado.no_imponer_alpha();
 	listado.mut_margen_h(MARGEN_Y);
-
-	//TODO: Especificar visibilidad en layout.
-	escena.obtener_por_id("caja_reinicio_ventana")->hacer_invisible();
-	escena.obtener_por_id("fondo_reinicio_ventana")->hacer_invisible();
-	escena.obtener_por_id("txt_reinicio_ventana")->hacer_invisible();
 }
 
 void Controlador_opciones::traducir_interface()
@@ -40,9 +35,11 @@ void Controlador_opciones::traducir_interface()
 
 	opciones_menu.traducir(trad);
 	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_reinicio_ventana"))->asignar(localizador.obtener(Localizacion::cadenas::reinicio_ventana));
-
-
 }
+
+/**
+* Parte del proceso de constructor.
+*/
 
 void Controlador_opciones::generar_menu(const Configuracion& config)
 {
@@ -68,16 +65,11 @@ void Controlador_opciones::generar_menu(const Configuracion& config)
 		}
 	}
 
-	//TODO: Eliminar esta dependencia: mejor pasar los valores en el constructor.
-
 	//Escoger las opciones adecuadas según la configuración del usuario.
 	const std::string val_tam_pantalla=std::to_string(config.acc_w_fisica_pantalla())+"x"+std::to_string(config.acc_h_fisica_pantalla());
 	opciones_menu.seleccionar_opcion_por_valor(k_tam_pantalla, val_tam_pantalla);
 	opciones_menu.seleccionar_opcion_por_valor(k_idioma, std::to_string(config.acc_idioma()));
 	opciones_menu.seleccionar_opcion_por_valor(k_fondo, config.acc_fondo());
-
-	traducir_interface();
-	generar_representacion_menu();
 }
 
 void Controlador_opciones::generar_representacion_menu()
@@ -171,10 +163,14 @@ void Controlador_opciones::dibujar(DLibV::Pantalla& pantalla)
 
 void Controlador_opciones::despertar()
 {
+	escena.parsear("data/recursos/layout_opciones.dnot", "layout");
 	traducir_interface();
+	generar_representacion_menu();
 }
 
 void Controlador_opciones::dormir()
 {
-
+	escena.vaciar_vista();
+	listado.clear();
+	rep_listado.vaciar_grupo();
 }

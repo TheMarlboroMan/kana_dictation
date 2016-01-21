@@ -49,7 +49,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 	//Controladores e interfaces.
 	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
-	Controlador_opciones 		C_O(akashi, localizador, pantalla);
+	Controlador_opciones 		C_O(akashi, localizador, pantalla, config);
 	Controlador_grupos 		C_G(akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
 	Controlador_principal 		C_P(akashi, kanas);
 
@@ -66,9 +66,6 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Interface_controlador * 	IC=&C_M;
 	App::Eventos::Interprete_eventos IE(pantalla, config);
 	IC->despertar();
-
-	//Preparar controladores...
-	C_O.generar_menu(config);	//TODO: Quizás mejor lo podamos poner en el constructor.
 
 	//TODO: En todos los "despertar" y "dormir" vamos a poner ahora también el montaje y desmontaje de la 
 	//escena. Probablemente tengamos que tocar la escena en si.

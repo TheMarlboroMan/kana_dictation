@@ -11,12 +11,8 @@ Controlador_menu::Controlador_menu(const DLibV::Fuente_TTF& fr, const Herramient
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
-	escena.parsear("data/recursos/layout_menu.dnot", "layout");
-	escena.obtener_por_id("seleccion_menu")->establecer_alpha(128);
-
+	
 	if(longitud_actual < 1 || longitud_actual > LONGITUD_MAX) longitud_actual=5;
-
-	traducir_interface();
 }
 
 void Controlador_menu::traducir_interface()
@@ -123,10 +119,12 @@ void Controlador_menu::dibujar(DLibV::Pantalla& pantalla)
 
 void Controlador_menu::despertar()
 {
-
+	escena.parsear("data/recursos/layout_menu.dnot", "layout");
+	escena.obtener_por_id("seleccion_menu")->establecer_alpha(128);
+	traducir_interface();
 }
 
 void Controlador_menu::dormir()
 {
-
+	escena.vaciar_vista();
 }

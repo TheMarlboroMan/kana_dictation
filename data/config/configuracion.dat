@@ -4,7 +4,7 @@ audio_ratio:44100
 audio_salidas:0
 doble_buffer:1
 fondo:data/graficos/background_03.jpg
-h_fisica_ventana:500
+h_fisica_ventana:600
 h_logica_ventana:500
 idioma:0
 kanas_activos:01 : A I U E O,02 : KA KI KU KE KO,03 : SA SHI SU SE SO,04 : TI CHI TSU TE TO,05 : NA NI NU NE NO,06 : HA HI FU HE HO,11 : N
@@ -16,5 +16,5 @@ silabario:hiragana
 v:1
 volumen_audio:64
 volumen_musica:64
-w_fisica_ventana:800
+w_fisica_ventana:960
 w_logica_ventana:800

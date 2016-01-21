@@ -15,6 +15,8 @@ Controlador_grupos::Controlador_grupos(const DLibV::Fuente_TTF& fr, const Herram
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
+
+//TODO: Actualizar esto para trabajar al despertar y dormir.
 	escena.parsear("data/recursos/layout_grupos.dnot", "layout");
 
 	auto v=gr;
@@ -156,17 +158,15 @@ void Controlador_grupos::establecer_kanas_activos(const std::string& k)
 		if(!total_activos) seleccionar_todos();	//Si no hay ninguno activo porque la configuración esté reventada, los seleccionamos todos.
 	}
 
-	//TODO: Lanzar evento...
-
 	componer_vista_listado();
 }
 
 void Controlador_grupos::despertar()
 {
-
+	//TODO: Montar todo.
 }
 
 void Controlador_grupos::dormir()
 {
-
+	//TODO: Desmontar todo.
 }

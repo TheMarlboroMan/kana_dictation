@@ -14,9 +14,7 @@ class Controlador_opciones:public Controlador_base
 {
 	public:
 
-					Controlador_opciones(const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&);
-	void				generar_menu(const Configuracion&);
-
+					Controlador_opciones(const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&, const Configuracion& c);
 	private:
 
 	virtual void 			preloop(Input_base& input, float delta) {}
@@ -26,6 +24,7 @@ class Controlador_opciones:public Controlador_base
 	virtual void 			despertar();
 	virtual void 			dormir();
 	
+	void				generar_menu(const Configuracion&);
 	void				generar_representacion_menu();
 	void				traducir_interface();
 
