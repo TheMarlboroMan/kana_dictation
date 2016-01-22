@@ -12,6 +12,7 @@
 #include "cambio_ventana.h"
 #include "cambio_longitud.h"
 #include "cambio_grupos.h"
+#include "cambio_direccion.h"
 
 namespace App
 {
@@ -37,6 +38,7 @@ class Interprete_eventos:
 	void			interpretar_evento(const Evento_cambio_longitud&);
 	void			interpretar_evento(const Evento_cambio_ventana&);
 	void			interpretar_evento(const Evento_cambio_grupos&);
+	void			interpretar_evento(const Evento_cambio_direccion&);
 };
 
 

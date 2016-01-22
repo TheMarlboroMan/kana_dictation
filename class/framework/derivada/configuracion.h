@@ -19,6 +19,8 @@ class Configuracion: public Configuracion_base
 	const std::string& acc_fondo() const {return valor_configuracion(CLAVE_FONDO);}
 	int acc_longitud() const {return std::atoi(valor_configuracion(CLAVE_LONGITUD).c_str());}
 	const std::string& acc_silabario() const {return valor_configuracion(CLAVE_SILABARIO);}
+	const std::string& acc_direccion() const {return valor_configuracion(CLAVE_DIRECCION);}
+
 
 	void mut_idioma(int p_valor) {configurar(CLAVE_IDIOMA, std::to_string(p_valor));}
 	void mut_w_logica_pantalla(int p_valor) {configurar(CLAVE_W_LOGICA_PANTALLA, std::to_string(p_valor));}
@@ -29,6 +31,7 @@ class Configuracion: public Configuracion_base
 	void mut_fondo(const std::string& p_valor) {configurar(CLAVE_FONDO, p_valor);}
 	void mut_longitud(int p_valor) {configurar(CLAVE_LONGITUD, std::to_string(p_valor));}
 	void mut_silabario(const std::string& p_valor) {configurar(CLAVE_SILABARIO, p_valor);}
+	void mut_direccion(const std::string& p_valor) {configurar(CLAVE_DIRECCION, p_valor);}
 
 	Configuracion();
 
@@ -46,6 +49,7 @@ class Configuracion: public Configuracion_base
 	static const std::string CLAVE_FONDO;
 	static const std::string CLAVE_LONGITUD;
 	static const std::string CLAVE_SILABARIO;
+	static const std::string CLAVE_DIRECCION;
 
 	static const std::string ID_IDIOMA;
 	static const std::string W_FISICA_PANTALLA;
@@ -56,6 +60,7 @@ class Configuracion: public Configuracion_base
 	static const std::string FONDO;
 	static const std::string LONGITUD;
 	static const std::string SILABARIO;
+	static const std::string DIRECCION;
 
 	////////////////////////////////////
 	// Implementacion...

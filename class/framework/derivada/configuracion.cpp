@@ -9,6 +9,7 @@ const std::string Configuracion::CLAVE_KANAS_ACTIVOS="kanas_activos";
 const std::string Configuracion::CLAVE_FONDO="fondo";
 const std::string Configuracion::CLAVE_LONGITUD="longitud";
 const std::string Configuracion::CLAVE_SILABARIO="silabario";
+const std::string Configuracion::CLAVE_DIRECCION="direccion";
 
 const std::string Configuracion::ID_IDIOMA="0";
 const std::string Configuracion::W_FISICA_PANTALLA="800";
@@ -19,6 +20,7 @@ const std::string Configuracion::KANAS_ACTIVOS="*";
 const std::string Configuracion::FONDO="data/graficos/background_01.jpg";
 const std::string Configuracion::LONGITUD="5";
 const std::string Configuracion::SILABARIO="hiragana";
+const std::string Configuracion::DIRECCION="a_kana";
 
 Configuracion::Configuracion(): Configuracion_base(obtener_ruta_archivo(), obtener_separador_archivo(), obtener_comentario_archivo())
 {
@@ -31,4 +33,5 @@ Configuracion::Configuracion(): Configuracion_base(obtener_ruta_archivo(), obten
 	configurar(CLAVE_FONDO, FONDO);
 	configurar(CLAVE_LONGITUD, LONGITUD);
 	configurar(CLAVE_SILABARIO, SILABARIO);
+	configurar(CLAVE_DIRECCION, DIRECCION);
 }

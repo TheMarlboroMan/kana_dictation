@@ -13,9 +13,9 @@ class Controlador_principal:public Controlador_base
 
 					Controlador_principal(const DLibV::Fuente_TTF&, const DLibV::Fuente_TTF&);
 	void				establecer_kanas(const std::vector<App::Kana>& k) {kanas=k;}
-	void				generar_cadena_kanas();
-	void				establecer_longitud_cadena(size_t l) {longitud_cadena=l;}
+	void				generar_cadena_kanas(size_t);
 	void				establecer_tipo_kana(App::tipos_kana t) {tipo_kana=t;}
+	void				establecer_direccion(App::direcciones_traduccion d) {direccion=d;}
 
 	private:
 
@@ -32,9 +32,13 @@ class Controlador_principal:public Controlador_base
 	const DLibV::Fuente_TTF& 			ttf_romaji;
 	const DLibV::Fuente_TTF& 			ttf_kanas;
 
-	size_t						longitud_cadena;
 	bool 						resuelto;
+
+	//TODO: Realmente no me gusta... son copias!.
+
 	App::tipos_kana					tipo_kana;
+	App::direcciones_traduccion			direccion;
+	size_t						copia_longitud;
 
 	
 

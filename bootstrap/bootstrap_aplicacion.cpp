@@ -52,7 +52,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 
 	
 	//Controladores e interfaces.
-	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
+	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
 	Controlador_opciones 		C_O(akashi, localizador, pantalla, config);
 	Controlador_grupos 		C_G(akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
 	Controlador_principal 		C_P(akashi, kanas);
@@ -90,7 +90,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 			switch(DI.acc_estado_deseado())
 			{	
 				case t_estados::PRINCIPAL: 
-					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()));
+					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
 				break;
 			}
 
@@ -102,7 +102,7 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	};
 }
 
-bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador_grupos& C_G, const Lista_kanas& lista_kanas, int longitud, App::tipos_kana t)
+bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador_grupos& C_G, const Lista_kanas& lista_kanas, int longitud, App::tipos_kana t, App::direcciones_traduccion dir)
 {
 	std::vector<Kana> kanas_temporales;
 	const auto grupos=C_G.obtener_grupos_seleccionados();
@@ -120,9 +120,9 @@ bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador
 	}
 
 	C_P.establecer_kanas(kanas_temporales);
-	C_P.establecer_longitud_cadena(longitud);
+	C_P.establecer_direccion(dir);
 	C_P.establecer_tipo_kana(t);
-	C_P.generar_cadena_kanas();
+	C_P.generar_cadena_kanas(longitud);
 
 	return true;
 }

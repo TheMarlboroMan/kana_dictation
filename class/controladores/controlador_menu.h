@@ -11,7 +11,7 @@ class Controlador_menu:public Controlador_base
 {
 	public:
 
-					Controlador_menu(const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, int longitud, App::tipos_kana tipo_kana);
+					Controlador_menu(const DLibV::Fuente_TTF&, const Herramientas_proyecto::Localizador_base&, int longitud, App::tipos_kana tipo_kana, App::direcciones_traduccion dir);
 
 	void				traducir_interface();
 
@@ -27,6 +27,7 @@ class Controlador_menu:public Controlador_base
 	void				cambiar_seleccion_actual(int);
 	void				cambiar_tipo_kana();
 	void				cambiar_longitud_actual(int);
+	void				cambiar_direccion_traduccion();
 
 	Herramientas_proyecto::Compositor_vista		escena;
 	const Herramientas_proyecto::Localizador_base&	localizador;
@@ -35,8 +36,9 @@ class Controlador_menu:public Controlador_base
 	int						seleccion_actual;
 	int						longitud_actual;
 	App::tipos_kana					tipo_kana;
+	App::direcciones_traduccion			direccion_traduccion;
 
-	static const int				ENTRADAS_MENU=4;
+	static const int				ENTRADAS_MENU=6;
 	static const int				LONGITUD_MAX=20;
 	static const int				SALTO_MENU=60;
 
@@ -44,8 +46,9 @@ class Controlador_menu:public Controlador_base
 		iniciar=0,
 		longitud=1,
 		cambiar_tipo=2,
-		seleccion_grupo=3,
-		opciones=4
+		cambiar_direccion=3,
+		seleccion_grupo=4,
+		opciones=5
 	};
 };
 

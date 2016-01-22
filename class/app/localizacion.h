@@ -16,7 +16,9 @@ class Localizacion
 		katakana=5,
 		escoger_sets=6,
 		configuracion=7,
-		reinicio_ventana=8
+		reinicio_ventana=8,
+		direccion_romaji_kana=40,
+		direccion_kana_romaji=41		
 	};
 
 	private:

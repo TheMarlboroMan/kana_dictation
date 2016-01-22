@@ -1,4 +1,12 @@
 De momento tenemos que:
 
-	Incluir el sistema inverso: de kanas a txt.
+	Arreglar el tema de que haya copias de la longitud de cadena, dirección 
+		y tipo de kana. Podríamos meterlo todo en una sóla clase de 
+		configuración del ejercicio y pasar esa clase cada vez que se
+		generen las cadenas. Los cambios de valores en el menú harían
+		cambios sobre la referencia de la configuración del ejercicio.
+		Nos queda pendiente la generación de las cadenas sin copiar
+		la longitud pero podemos pasar la misma referencia y simplemente
+		invocar al método.
+
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.

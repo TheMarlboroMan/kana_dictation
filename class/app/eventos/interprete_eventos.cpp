@@ -27,6 +27,7 @@ void Interprete_eventos::interpretar_evento(const Evento_director_estados_base& 
 		case cambio_kanas:	interpretar_evento(static_cast<const Evento_cambio_kanas&>(ev)); break;
 		case cambio_longitud:	interpretar_evento(static_cast<const Evento_cambio_longitud&>(ev)); break;
 		case cambio_grupos:	interpretar_evento(static_cast<const Evento_cambio_grupos&>(ev)); break;
+		case cambio_direccion:	interpretar_evento(static_cast<const Evento_cambio_direccion&>(ev)); break;
 		default:
 			LOG<<"Un evento del tipo "<<ev.tipo_evento()<<" no ha sido interpretado"<<std::endl;
 		break;
@@ -77,5 +78,12 @@ void Interprete_eventos::interpretar_evento(const Evento_cambio_grupos& ev)
 {
 	LOG<<"Recibido evento de cambio de grupos "<<ev.grupos<<std::endl;
 	config.mut_kanas_activos(ev.grupos);
+	config.grabar();
+}
+
+void Interprete_eventos::interpretar_evento(const Evento_cambio_direccion& ev)
+{
+	LOG<<"Recibido evento de cambio de direccion"<<std::endl;
+	config.mut_direccion(App::direccion_traduccion_to_string(ev.direccion));
 	config.grabar();
 }

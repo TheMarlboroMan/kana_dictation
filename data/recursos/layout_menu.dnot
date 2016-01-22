@@ -12,16 +12,16 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 160, 400, 32], rgb:[255, 255, 255], orden:10,
+		pos:[0, 120, 400, 32], rgb:[255, 255, 255], orden:10,
 		id:"menu_1"
 	},
 	{
 		tipo:"caja",
-		pos:[0, 162, 398, 28], rgb:[0, 0, 0], orden:20
+		pos:[0, 122, 398, 28], rgb:[0, 0, 0], orden:20
 	},
 	{
 		tipo:"ttf",
-		pos:[16, 168],
+		pos:[16, 128],
 		texto:"MENU I",
 		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
 		id:"txt_menu_1"
@@ -29,15 +29,15 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 220, 400, 32], rgb:[255, 255, 255], orden:10
+		pos:[0, 180, 400, 32], rgb:[255, 255, 255], orden:10
 	},
 	{
 		tipo:"caja",
-		pos:[0, 222, 398, 28], rgb:[0, 0, 0], orden:20
+		pos:[0, 182, 398, 28], rgb:[0, 0, 0], orden:20
 	},
 	{
 		tipo:"ttf",
-		pos:[16, 228],
+		pos:[16, 188],
 		texto:"MENU II",
 		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
 		id:"txt_menu_2"
@@ -45,15 +45,15 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 280, 400, 32], rgb:[255, 255, 255], orden:10
+		pos:[0, 240, 400, 32], rgb:[255, 255, 255], orden:10
 	},
 	{
 		tipo:"caja",
-		pos:[0, 282, 398, 28], rgb:[0, 0, 0], orden:20
+		pos:[0, 242, 398, 28], rgb:[0, 0, 0], orden:20
 	},
 	{
 		tipo:"ttf",
-		pos:[16, 288],
+		pos:[16, 248],
 		texto:"MENU III",
 		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
 		id:"txt_menu_3"
@@ -61,15 +61,15 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 340, 400, 32], rgb:[255, 255, 255], orden:10
+		pos:[0, 300, 400, 32], rgb:[255, 255, 255], orden:10
 	},
 	{
 		tipo:"caja",
-		pos:[0, 342, 398, 28], rgb:[0, 0, 0], orden:20
+		pos:[0, 302, 398, 28], rgb:[0, 0, 0], orden:20
 	},
 	{
 		tipo:"ttf",
-		pos:[16, 348],
+		pos:[16, 308],
 		texto:"MENU IV",
 		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
 		id:"txt_menu_4"
@@ -77,24 +77,39 @@ layout:
 
 	{
 		tipo:"caja",
-		pos:[0, 400, 400, 32], rgb:[255, 255, 255], orden:10
+		pos:[0, 360, 400, 32], rgb:[255, 255, 255], orden:10
 	},
 	{
 		tipo:"caja",
-		pos:[0, 402, 398, 28], rgb:[0, 0, 0], orden:20
+		pos:[0, 362, 398, 28], rgb:[0, 0, 0], orden:20
 	},
 	{
 		tipo:"ttf",
-		pos:[16, 408],
+		pos:[16, 368],
 		texto:"MENU V",
 		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
 		id:"txt_menu_5"
 	},
 
+	{
+		tipo:"caja",
+		pos:[0, 420, 400, 32], rgb:[255, 255, 255], orden:10
+	},
+	{
+		tipo:"caja",
+		pos:[0, 422, 398, 28], rgb:[0, 0, 0], orden:20
+	},
+	{
+		tipo:"ttf",
+		pos:[16, 428],
+		texto:"MENU VI",
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		id:"txt_menu_6"
+	},
 
 	{
 		tipo:"caja",
-		pos:[0, 160, 398, 32], 
+		pos:[0, 120, 398, 32], 
 		rgb:[128, 128, 128], 
 		id:"seleccion_menu", 
 		orden:20

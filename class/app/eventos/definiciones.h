@@ -14,7 +14,8 @@ namespace Eventos
 		cambio_fondo,
 		cambio_kanas,
 		cambio_longitud,
-		cambio_grupos
+		cambio_grupos,
+		cambio_direccion
 	};
 
 } //Fin namespace eventos.

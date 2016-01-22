@@ -23,7 +23,8 @@ layout:
 		fuente:"romaji",
 		texto:"",
 		rgba:[255, 255, 255, 255],
-		id:"txt_romaji"
+		id:"txt_romaji",
+		visible:false
 	},
 	{
 		tipo:"ttf",
@@ -31,6 +32,7 @@ layout:
 		fuente:"kana",
 		texto:"",
 		rgba:[255, 255, 255, 255],
-		id:"txt_kana"
+		id:"txt_kana",
+		visible:false
 	}
 ]

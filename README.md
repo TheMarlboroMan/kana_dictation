@@ -9,6 +9,7 @@ Features:
 
 - Choose from hiragana or katakana sillabaries to practice.
 - Choose from 1 or 20 sillables to practice at once.
+- Configurable translation direction (romaji to kana or kana to romaji).
 - Allow for user selected sillable groups (ie. practice only the vowels and the "K" group).
 - Configurable kana database via json-like files, in case I forgot to put some in.
 - Quick and to the point. Entirely controlled via keyboard (because mouse pointing is slooooow).
@@ -19,8 +20,10 @@ Features:
 
 Planned features:
 
-- Invert translation direction: kana to romaji / romaji to kana.
 - A title logo somewhere :P.
+
+Maybe, in the future:
+
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
 - Support to practice both hiragana and katakana at the same time.
 
