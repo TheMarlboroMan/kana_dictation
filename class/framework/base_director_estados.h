@@ -22,6 +22,12 @@ class Base_director_estados
 						~Base_director_estados() 
 	{}
 
+	//Este método se ejecutará justo antes de confirmar un cambio de estado. Se 
+	//puede usar para intercambiar información entre controladores justo antes
+	//de despertar a uno nuevo.
+
+	virtual void				preparar_cambio_estado()=0;
+
 	bool					es_cambio_estado() const {return estados.es_cambio_estado();}
 
 	void					confirmar_cambio_estado(Interface_controlador *& IC) 
@@ -35,6 +41,12 @@ class Base_director_estados
 		IC=controladores[estado_deseado];
 
 		estados.confirmar_cambio_estado();
+	}
+
+	void					despertar_controlador_inicial(Interface_controlador *& IC) 
+	{
+		IC=controladores[estados.acc_estado_actual()];
+		IC->despertar();
 	}
 
 	void					cancelar_cambio_estado() {estados.cancelar_cambio_estado();}
@@ -57,7 +69,7 @@ class Base_director_estados
 		controlador.inyectar_control_estados(estados);
 	}
 
-	private:
+	protected:
 	
 	std::map<int, Interface_controlador *>	controladores;
 	Control_estados				estados;

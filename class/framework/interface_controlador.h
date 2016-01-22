@@ -42,6 +42,7 @@ class Interface_controlador
 	virtual void 			dibujar(DLibV::Pantalla& pantalla)=0;
 	virtual void 			despertar()=0;
 	virtual void 			dormir()=0;
+	virtual bool			es_posible_abandonar_estado() const=0;
 
 	private:
 

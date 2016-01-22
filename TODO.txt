@@ -1,12 +1,9 @@
 De momento tenemos que:
 
-	Arreglar el tema de que haya copias de la longitud de cadena, dirección 
-		y tipo de kana. Podríamos meterlo todo en una sóla clase de 
-		configuración del ejercicio y pasar esa clase cada vez que se
-		generen las cadenas. Los cambios de valores en el menú harían
-		cambios sobre la referencia de la configuración del ejercicio.
-		Nos queda pendiente la generación de las cadenas sin copiar
-		la longitud pero podemos pasar la misma referencia y simplemente
-		invocar al método.
+	Finalizar el cambio en el bootstrap.
+
+	Bug en controlador principal al generar más de una frase.
 
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.
+
+

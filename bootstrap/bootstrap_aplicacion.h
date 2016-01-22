@@ -12,7 +12,7 @@ namespace App
 {
 class Lista_kanas;
 
-bool preparar_kanas_principal(Controlador_principal&, const Controlador_grupos&, const Lista_kanas&, int, App::tipos_kana, App::direcciones_traduccion);
+void preparar_kanas_principal(Controlador_principal&, const Controlador_grupos&, const Lista_kanas&, int, App::tipos_kana, App::direcciones_traduccion);
 void loop_aplicacion(Kernel_app& kernel);
 }
 

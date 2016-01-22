@@ -21,6 +21,7 @@ $(DIR_O)controlador_principal.o \
 $(DIR_O)controlador_menu.o \
 $(DIR_O)controlador_grupos.o \
 $(DIR_O)controlador_opciones.o \
+$(DIR_O)director_estados.o \
 
 DEP_FRAMEWORK_BASE=$(DIR_O)input_base.o \
 $(DIR_O)configuracion_base.o \

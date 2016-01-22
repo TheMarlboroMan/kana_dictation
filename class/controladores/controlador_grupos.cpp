@@ -16,15 +16,12 @@ Controlador_grupos::Controlador_grupos(const DLibV::Fuente_TTF& fr, const Herram
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
 
-//TODO: Actualizar esto para trabajar al despertar y dormir.
-	escena.parsear("data/recursos/layout_grupos.dnot", "layout");
+	listado.mut_margen_h(MARGEN_Y);
+	rep_listado.no_imponer_alpha();
 
 	auto v=gr;
 	std::sort(std::begin(v), std::end(v)); //Se ordenan por nombre y se insertan sin seleccionar.
 	for(const auto& n : v) grupos.push_back({n, false});
-
-	listado.mut_margen_h(MARGEN_Y);
-	rep_listado.no_imponer_alpha();
 
 	establecer_kanas_activos(kanas_activos);
 }
@@ -91,7 +88,6 @@ void Controlador_grupos::loop(Input_base& input, float delta)
 
 void Controlador_grupos::dibujar(DLibV::Pantalla& pantalla)
 {
-	componer_vista_listado();
 	escena.volcar(pantalla);
 	rep_listado.volcar(pantalla);
 }
@@ -104,12 +100,12 @@ std::vector<std::string> Controlador_grupos::obtener_grupos_seleccionados() cons
 	return res;
 }
 
-size_t Controlador_grupos::cantidad_seleccionados() const
+bool Controlador_grupos::es_posible_abandonar_estado() const
 {
 	size_t res=0;
 	for(const auto &g : grupos)
 		if(g.seleccionado) ++res;
-	return res;
+	return res > 0;
 }
 
 std::string Controlador_grupos::producir_cadena_kanas_activos() const
@@ -163,10 +159,13 @@ void Controlador_grupos::establecer_kanas_activos(const std::string& k)
 
 void Controlador_grupos::despertar()
 {
-	//TODO: Montar todo.
+	escena.parsear("data/recursos/layout_grupos.dnot", "layout");
+	componer_vista_listado();
 }
 
 void Controlador_grupos::dormir()
 {
-	//TODO: Desmontar todo.
+	escena.vaciar_vista();
+	listado.clear();
+	rep_listado.vaciar_grupo();
 }

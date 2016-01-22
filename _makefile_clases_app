@@ -39,6 +39,7 @@ $(DIR_CLASES_APP)kana.cpp
 ################################################################################
 
 $(DIR_O)interprete_eventos.o:\
+$(DIR_CLASES_APP)configuracion_ejercicio.h \
 $(DIR_CLASES_EVENTOS)cambio_fondo.h \
 $(DIR_CLASES_EVENTOS)cambio_idioma.h \
 $(DIR_CLASES_EVENTOS)cambio_kanas.h \

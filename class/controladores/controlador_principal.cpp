@@ -2,31 +2,29 @@
 #include <class/generador_numeros.h>
 #include "../app/recursos.h"
 
-Controlador_principal::Controlador_principal(const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk)
-	:ttf_romaji(fr), ttf_kanas(fk), resuelto(false), tipo_kana(App::tipos_kana::hiragana),
-	direccion(App::direcciones_traduccion::romaji_kana), copia_longitud(0)
+Controlador_principal::Controlador_principal(const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk, const App::Configuracion_ejercicio& config_ej)
+	:configuracion_ejercicio(config_ej), ttf_romaji(fr), ttf_kanas(fk), resuelto(false)
+
 {
 	escena.mapear_fuente("kana", &ttf_kanas);
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
-	escena.parsear("data/recursos/layout_principal.dnot", "layout");
 }
 
-void Controlador_principal::generar_cadena_kanas(size_t longitud_cadena)
+void Controlador_principal::generar_cadena_kanas()
 {
 	if(!kanas.size())
 	{
 		throw std::runtime_error("No se han seleccionado kanas: imposible generar cadena");
 	}
 
-	copia_longitud=longitud_cadena;
-
 	using namespace Herramientas_proyecto;
 	Generador_int gen(0, kanas.size()-1);
 
-	std::string str_kana, str_romaji;
+	auto tipo_kana=configuracion_ejercicio.acc_tipo_kana();
 	size_t i=0;
-	while(i < longitud_cadena)
+
+	while(i < configuracion_ejercicio.acc_longitud())
 	{
 		int pos=gen();
 		str_kana+=tipo_kana==App::tipos_kana::hiragana ? kanas[pos].acc_hiragana() : kanas[pos].acc_katakana();
@@ -35,17 +33,19 @@ void Controlador_principal::generar_cadena_kanas(size_t longitud_cadena)
 	}
 
 	str_romaji.pop_back();
+}
 
+void Controlador_principal::reiniciar_visibilidad_cadenas()
+{
 	using namespace DLibV;
 
 	Representacion_TTF * rep_ttf_romaji=static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_romaji"));
 	Representacion_TTF * rep_ttf_kana=static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_kana"));
 
-
 	rep_ttf_romaji->asignar(str_romaji);
 	rep_ttf_kana->asignar(str_kana);
 
-	switch(direccion)
+	switch(configuracion_ejercicio.acc_direccion_traduccion())
 	{
 		case App::direcciones_traduccion::romaji_kana:
 			rep_ttf_romaji->hacer_visible();
@@ -56,7 +56,6 @@ void Controlador_principal::generar_cadena_kanas(size_t longitud_cadena)
 	}
 
 	//Aún no podemos centrarlos porque no sabemos cuanto miden (sólo se "materializan" al dibujar)...
-	resuelto=false;
 }
 
 void Controlador_principal::loop(Input_base& input, float delta)
@@ -73,22 +72,23 @@ void Controlador_principal::loop(Input_base& input, float delta)
 		}
 		else if(input.es_input_down(Input::I_ACEPTAR))
 		{
+			std::string id_txt;
+			switch(configuracion_ejercicio.acc_direccion_traduccion())
+			{
+				case App::direcciones_traduccion::romaji_kana: id_txt="txt_kana"; break;
+				case App::direcciones_traduccion::kana_romaji: id_txt="txt_romaji"; break;
+			}
+
 			if(!resuelto)
 			{
 				resuelto=true;
-				std::string id_txt;
-
-				switch(direccion)
-				{
-					case App::direcciones_traduccion::romaji_kana: id_txt="txt_kana"; break;
-					case App::direcciones_traduccion::kana_romaji: id_txt="txt_romaji"; break;
-				}
-				
 				escena.obtener_por_id(id_txt)->hacer_visible();
 			}
 			else
 			{
-				generar_cadena_kanas(copia_longitud);
+				escena.obtener_por_id(id_txt)->hacer_invisible();
+				generar_cadena_kanas();
+				reiniciar_visibilidad_cadenas();
 			}
 		}
 	}
@@ -112,11 +112,14 @@ void Controlador_principal::dibujar(DLibV::Pantalla& pantalla)
 
 void Controlador_principal::despertar()
 {
-	//TODO: Va a ser un poco más complicado, probablemente "generar_cadena_kanas" explote.
-//	escena.parsear("data/recursos/layout_principal.dnot", "layout");
+	str_kana="";
+	str_romaji="";
+	escena.parsear("data/recursos/layout_principal.dnot", "layout");
+	generar_cadena_kanas();
+	reiniciar_visibilidad_cadenas();
 }
 
 void Controlador_principal::dormir()
 {
-//	escena.vaciar_vista();
+	escena.vaciar_vista();
 }

@@ -12,6 +12,8 @@ class Director_estados:
 	Director_estados()
 		:Base_director_estados(t_estados::MENU, std::function<bool(int)>([](int v){return v >= MENU && v < MAX_ESTADOS;}))
 	{}
+
+	virtual void				preparar_cambio_estado();
 };
 
 #endif

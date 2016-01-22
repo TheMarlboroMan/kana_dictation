@@ -11,8 +11,8 @@ extern DLibH::Log_base LOG;
 
 using namespace App::Eventos;
 
-Interprete_eventos::Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config):
-	pantalla(pantalla), config(config)
+Interprete_eventos::Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config, App::Configuracion_ejercicio& config_ej):
+	pantalla(pantalla), config(config), config_ejercicio(config_ej)
 {
 
 }
@@ -63,6 +63,7 @@ void Interprete_eventos::interpretar_evento(const Evento_cambio_ventana& ev)
 void Interprete_eventos::interpretar_evento(const Evento_cambio_kanas& ev)
 {
 	LOG<<"Recibido evento de cambio de kanas"<<std::endl;
+	config_ejercicio.mut_tipo_kana(ev.tipo_kana);
 	config.mut_silabario(App::tipo_kana_to_string(ev.tipo_kana));
 	config.grabar();
 }
@@ -70,6 +71,7 @@ void Interprete_eventos::interpretar_evento(const Evento_cambio_kanas& ev)
 void Interprete_eventos::interpretar_evento(const Evento_cambio_longitud& ev)
 {
 	LOG<<"Recibido evento de cambio de longitud "<<ev.longitud<<std::endl;
+	config_ejercicio.mut_longitud(ev.longitud);
 	config.mut_longitud(ev.longitud);
 	config.grabar();
 }
@@ -84,6 +86,7 @@ void Interprete_eventos::interpretar_evento(const Evento_cambio_grupos& ev)
 void Interprete_eventos::interpretar_evento(const Evento_cambio_direccion& ev)
 {
 	LOG<<"Recibido evento de cambio de direccion"<<std::endl;
+	config_ejercicio.mut_direccion_traduccion(ev.direccion);
 	config.mut_direccion(App::direccion_traduccion_to_string(ev.direccion));
 	config.grabar();
 }

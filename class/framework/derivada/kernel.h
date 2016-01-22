@@ -35,7 +35,7 @@ class Kernel_app:public Kernel_base
 	virtual Input_base& acc_input() {return input;}
 	virtual Configuracion& acc_configuracion() {return configuracion;}
 	virtual Cargador_recursos_base& acc_cargador_recursos() {return cargador_recursos;}
-	virtual unsigned int acc_recurso_fps() const {return 0; } //App::Recursos_graficos::RS_FUENTE_BASE;}
+	virtual unsigned int acc_recurso_fps() const {return 0;}
 };
 
 #endif

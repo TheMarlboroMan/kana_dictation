@@ -6,6 +6,7 @@
 #include "../../framework/derivada/configuracion.h"
 #include <video/pantalla/pantalla.h>
 
+#include "../configuracion_ejercicio.h"
 #include "cambio_fondo.h"
 #include "cambio_idioma.h"
 #include "cambio_kanas.h"
@@ -24,13 +25,14 @@ class Interprete_eventos:
 {
 	public:
 
-	Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config);
+	Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config, App::Configuracion_ejercicio& config_ej);
 	virtual void		interpretar_evento(const Evento_director_estados_base&);
 
 	private:
 
-	DLibV::Pantalla&	pantalla;
-	Configuracion&		config;
+	DLibV::Pantalla&		pantalla;
+	Configuracion&			config;
+	App::Configuracion_ejercicio&	config_ejercicio;
 
 	void			interpretar_evento(const Evento_cambio_fondo&);
 	void			interpretar_evento(const Evento_cambio_idioma&);

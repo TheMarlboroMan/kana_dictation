@@ -7,6 +7,7 @@
 #include "../class/app/lector_kana.h"
 #include "../class/app/lista_kanas.h"
 #include "../class/app/eventos/interprete_eventos.h"
+#include "../class/app/configuracion_ejercicio.h"
 
 using namespace App;
 
@@ -43,66 +44,53 @@ void App::loop_aplicacion(Kernel_app& kernel)
 	Localizador localizador=Localizador("data/localizacion/strings");
 	localizador.inicializar(config.acc_idioma());
 
+	//Creación del objeto de datos de ejercicio.
+	App::Configuracion_ejercicio	configuracion_ejercicio(config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
+
 	//Control de eventos.
-	App::Eventos::Interprete_eventos IE(pantalla, config);
+	App::Eventos::Interprete_eventos IE(pantalla, config, configuracion_ejercicio);
+
 	//Establecer el fondo según valores de configuración.
 	//TODO: Disparar un evento, mejor.
 	DLibV::Imagen img(config.acc_fondo().c_str(), pantalla.acc_ventana());
 	DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND)->reemplazar(img);
 
-	
 	//Controladores e interfaces.
-	Controlador_menu 		C_M(akashi, localizador, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
+	Controlador_menu 		C_M(akashi, localizador, configuracion_ejercicio);
 	Controlador_opciones 		C_O(akashi, localizador, pantalla, config);
 	Controlador_grupos 		C_G(akashi, localizador, lista_kanas.obtener_grupos(), config.acc_kanas_activos());
-	Controlador_principal 		C_P(akashi, kanas);
+	Controlador_principal 		C_P(akashi, kanas, configuracion_ejercicio);
 
-	//Registrar los controladores con el director de estados.
-	Director_estados 		DI;
-	DI.registrar_controlador(t_estados::MENU, C_M);
-	DI.registrar_controlador(t_estados::PRINCIPAL, C_P);
-	DI.registrar_controlador(t_estados::OPCIONES, C_O);
-	DI.registrar_controlador(t_estados::GRUPOS, C_G);
+	//Registrar componentes...
+		//TODO: Crearlo con referencias a config y lista kanas.
+		//TODO: Actualizar makefile!!!.
+		//Trastear el método de cambio de estado para que cargue la info.
+		//TODO: WARNING... El director de estados NO SABE el tipo del controlador que tiene!!!. Aunque los
+		//tenga registrados no podría llamar a los métodos de turno sin un static cast. Todo
+		//lo que el director sabe es que son Interface_controlador...
 
-	//TODO: Quizás para despertar al primer controlador podamos tener un método "DI->despertar()";
-	//Despertar el primer controlador.
+	Director_estados 		DE();
+	kernel.establecer_director_estados(DE);
+	kernel.establecer_interprete_eventos(IE);
+	kernel.registrar_controlador(t_estados::MENU, C_M);
+	kernel.registrar_controlador(t_estados::PRINCIPAL, C_P);
+	kernel.registrar_controlador(t_estados::OPCIONES, C_O);
+	kernel.registrar_controlador(t_estados::GRUPOS, C_G);
+	kernel.preparar_loop();
 
-	Interface_controlador * 	IC=&C_M;
-	IC->despertar();		//TODO: Ugly.
+	//TODO... Ahora que tenemos al "director de estados" dentro del kernel
+	//podemos infiltrarlo con un método virtual "on_state_change" y hacer
+	//este tipo de operaciones. Tendríamos que registrar la lista de kanas
+	//y la configuración con el director, pero ya tendríamos menos mierda
+	//en el bootstrap.
 
-	//TODO: En todos los "despertar" y "dormir" vamos a poner ahora también el montaje y desmontaje de la 
-	//escena. Probablemente tengamos que tocar la escena en si.
+	preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
 
 	//Loop principal.
-	while(kernel.loop(*IC))
-	{
-		if(DI.es_cambio_estado())
-		{
-			bool confirmar=true;
-			switch(DI.acc_estado_actual())
-			{
-				case t_estados::GRUPOS: 
-					//Comprobar que hay algún grupo seleccionado.
-					confirmar=C_G.cantidad_seleccionados();
-				break;
-			}
-
-			switch(DI.acc_estado_deseado())
-			{	
-				case t_estados::PRINCIPAL: 
-					confirmar=preparar_kanas_principal(C_P, C_G, lista_kanas, config.acc_longitud(), App::string_to_tipo_kana(config.acc_silabario()), App::string_to_direccion_traduccion(config.acc_direccion()));
-				break;
-			}
-
-			if(confirmar) DI.confirmar_cambio_estado(IC);
-			else DI.cancelar_cambio_estado();
-		}
-		
-		DI.procesar_cola_eventos(IE);
-	};
+	while(kernel.loop());
 }
 
-bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador_grupos& C_G, const Lista_kanas& lista_kanas, int longitud, App::tipos_kana t, App::direcciones_traduccion dir)
+void App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador_grupos& C_G, const Lista_kanas& lista_kanas, int longitud, App::tipos_kana t, App::direcciones_traduccion dir)
 {
 	std::vector<Kana> kanas_temporales;
 	const auto grupos=C_G.obtener_grupos_seleccionados();
@@ -116,13 +104,9 @@ bool App::preparar_kanas_principal(Controlador_principal& C_P, const Controlador
 	//TODO: Comprobar esto trasteando con el fichero de config.
 	if(!kanas_temporales.size())
 	{
-		return false;
+		throw std::runtime_error("No hay kanas seleccionados: imposible preparar");
 	}
 
 	C_P.establecer_kanas(kanas_temporales);
-	C_P.establecer_direccion(dir);
-	C_P.establecer_tipo_kana(t);
-	C_P.generar_cadena_kanas(longitud);
-
-	return true;
+	C_P.generar_cadena_kanas();
 }

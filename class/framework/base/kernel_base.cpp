@@ -7,7 +7,10 @@ Kernel_base::Kernel_base(Herramientas_proyecto::Controlador_argumentos& carg)
 	paso_delta(0.01),
 	controlador_argumentos(carg),
 	controlador_fps(),
-	pantalla() //
+	pantalla(), 
+	IC(nullptr),
+	DE(nullptr),
+	IE(nullptr)
 {
 
 }
@@ -90,46 +93,107 @@ void Kernel_base::configurar_entorno_audio()
 	Audio::establecer_volumen_musica(configuracion.acc_volumen_musica());
 }
 
-bool Kernel_base::loop(Interface_controlador& IC)
+bool Kernel_base::loop()
 {
 	//Aquí se mide el tiempo desde el último paso por este loop...
 	controlador_fps.iniciar_paso_loop();
 	Input_base& input=acc_input();
 
 	preloop();
-	IC.preloop(input, paso_delta);
+	IC->preloop(input, paso_delta);
 
 	//Aquí se consume el tiempo desde el último paso en bloques de "paso_delta".
 	while(controlador_fps.consumir_loop(paso_delta) )
 	{
-		paso();		
+		paso();
 		
 		input.turno();
 
-		IC.loop(input, paso_delta);
+		IC->loop(input, paso_delta);
 
 		Audio::procesar_cola_sonido();
 
-		if(IC.es_romper_loop()) break;
+		if(IC->es_romper_loop()) 
+		{
+			break;
+		}
+
+		if(DE->es_cambio_estado()) 
+		{
+			if(!IC->es_posible_abandonar_estado())
+			{
+				DE->cancelar_cambio_estado();
+			}
+			else
+			{
+				DE->preparar_cambio_estado();
+				if(IE!=nullptr) DE->procesar_cola_eventos(*IE);
+				break;
+			}
+		}
+	
+		if(IE!=nullptr) DE->procesar_cola_eventos(*IE);
 	}
 
-	postloop();
-	IC.postloop(input, paso_delta);
-
-	controlador_fps.turno();
-
-	IC.dibujar(pantalla);
-
-	if(mostrar_fps)
+	if(DE->es_cambio_estado())
 	{
-		std::string fps="FPS:"+std::to_string(controlador_fps.acc_frames_contados())+"\n"+IC.acc_debug();
-		DLibV::Representacion_texto_auto txt(DLibV::Gestor_superficies::obtener(acc_recurso_fps()), fps);
-		txt.hacer_estatica();
-		txt.establecer_posicion(pantalla.acc_w()-128, 6);
-		txt.volcar(pantalla);
-	}	
+		DE->confirmar_cambio_estado(IC);
+	}
+	else
+	{
+		postloop();
+		IC->postloop(input, paso_delta);
 
-	pantalla.actualizar();
+		controlador_fps.turno();
 
-	return !IC.es_abandonar_aplicacion();
+		IC->dibujar(pantalla);
+
+		if(mostrar_fps)
+		{
+			std::string fps="FPS:"+std::to_string(controlador_fps.acc_frames_contados())+"\n"+IC->acc_debug();
+			DLibV::Representacion_texto_auto txt(DLibV::Gestor_superficies::obtener(acc_recurso_fps()), fps);
+			txt.hacer_estatica();
+			txt.establecer_posicion(pantalla.acc_w()-128, 6);
+			txt.volcar(pantalla);
+		}	
+
+		pantalla.actualizar();
+	}
+
+	return !IC->es_abandonar_aplicacion();
+}
+
+void Kernel_base::establecer_director_estados(Base_director_estados& BDE)
+{
+	if(DE!=nullptr)
+	{
+		throw Kernel_exception("El director de estados ya ha sido registrado");
+	}
+	
+	DE=&BDE;
+}
+
+void Kernel_base::registrar_controlador(int clave, Interface_controlador& I)
+{
+	if(DE==nullptr)
+	{
+		throw Kernel_exception("El director de estados no ha sido registrado para registrar controlador");
+	}
+
+	DE->registrar_controlador(clave, I);
+}
+
+void Kernel_base::preparar_loop()
+{
+	DE->despertar_controlador_inicial(IC);
+}
+
+void Kernel_base::establecer_interprete_eventos(Interface_interprete_eventos& E)
+{
+	if(IE!=nullptr)
+	{
+		throw Kernel_exception("El intérprete de eventos ya ha sido registrado");
+	}
+	
+	IE=&E;
 }

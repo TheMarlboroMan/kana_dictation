@@ -23,6 +23,7 @@ class Controlador_opciones:public Controlador_base
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	virtual void 			despertar();
 	virtual void 			dormir();
+	virtual bool			es_posible_abandonar_estado() const {return true;}
 	
 	void				generar_menu(const Configuracion&);
 	void				generar_representacion_menu();

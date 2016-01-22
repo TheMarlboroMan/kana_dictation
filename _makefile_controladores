@@ -8,10 +8,10 @@ DIR_FRAMEWORK=./class/framework/
 #Controladores...
 
 $(DIR_O)director_estados.o :\
-$(DIR_CONTROLADORES)director_estados.h \
 $(DIR_FRAMEWORK)base_director_estados.h \
 $(DIR_FRAMEWORK)eventos.h \
 $(DIR_FRAMEWORK)estados.h \
+$(DIR_CONTROLADORES)director_estados.h \
 $(DIR_CONTROLADORES)director_estados.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)director_estados.cpp -o $(DIR_O)director_estados.o 
 

@@ -5,17 +5,15 @@
 #include <vector>
 #include <class/compositor_vista.h>
 #include "../app/kana.h"
-#include "../app/definiciones.h"
+#include "../app/configuracion_ejercicio.h"
 
 class Controlador_principal:public Controlador_base
 {
 	public:
 
-					Controlador_principal(const DLibV::Fuente_TTF&, const DLibV::Fuente_TTF&);
+					Controlador_principal(const DLibV::Fuente_TTF&, const DLibV::Fuente_TTF&, const App::Configuracion_ejercicio&);
 	void				establecer_kanas(const std::vector<App::Kana>& k) {kanas=k;}
-	void				generar_cadena_kanas(size_t);
-	void				establecer_tipo_kana(App::tipos_kana t) {tipo_kana=t;}
-	void				establecer_direccion(App::direcciones_traduccion d) {direccion=d;}
+	void				generar_cadena_kanas();
 
 	private:
 
@@ -25,23 +23,20 @@ class Controlador_principal:public Controlador_base
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	virtual void 			despertar();
 	virtual void 			dormir();
+	virtual bool			es_posible_abandonar_estado() const {return true;}
+
+	void				reiniciar_visibilidad_cadenas();
 
 	Herramientas_proyecto::Compositor_vista		escena;
 	std::vector<App::Kana>				kanas;
+	std::string					str_kana,
+							str_romaji;
 
+	const App::Configuracion_ejercicio&		configuracion_ejercicio;
 	const DLibV::Fuente_TTF& 			ttf_romaji;
 	const DLibV::Fuente_TTF& 			ttf_kanas;
 
 	bool 						resuelto;
-
-	//TODO: Realmente no me gusta... son copias!.
-
-	App::tipos_kana					tipo_kana;
-	App::direcciones_traduccion			direccion;
-	size_t						copia_longitud;
-
-	
-
 };
 
 #endif
