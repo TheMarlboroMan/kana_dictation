@@ -23,6 +23,9 @@ void Controlador_principal::generar_cadena_kanas()
 	using namespace Herramientas_proyecto;
 	Generador_int gen(0, kanas.size()-1);
 
+	str_kana="";
+	str_romaji="";
+
 	auto tipo_kana=configuracion_ejercicio.acc_tipo_kana();
 	size_t i=0;
 
@@ -51,9 +54,11 @@ void Controlador_principal::reiniciar_visibilidad_cadenas()
 	{
 		case App::direcciones_traduccion::romaji_kana:
 			rep_ttf_romaji->hacer_visible();
+			rep_ttf_kana->hacer_invisible();
 		break;
 		case App::direcciones_traduccion::kana_romaji:
 			rep_ttf_kana->hacer_visible();
+			rep_ttf_romaji->hacer_invisible();
 		break;
 	}
 
@@ -74,24 +79,25 @@ void Controlador_principal::loop(DFramework::Input& input, float delta)
 		}
 		else if(input.es_input_down(Input::I_ACEPTAR))
 		{
-			std::string id_txt;
-			switch(configuracion_ejercicio.acc_direccion_traduccion())
-			{
-				case App::direcciones_traduccion::romaji_kana: id_txt="txt_kana"; break;
-				case App::direcciones_traduccion::kana_romaji: id_txt="txt_romaji"; break;
-			}
-
 			if(!resuelto)
 			{
-				resuelto=true;
+				std::string id_txt;
+				switch(configuracion_ejercicio.acc_direccion_traduccion())
+				{
+					case App::direcciones_traduccion::romaji_kana: id_txt="txt_kana"; break;
+					case App::direcciones_traduccion::kana_romaji: id_txt="txt_romaji"; break;
+				}
+
 				escena.obtener_por_id(id_txt)->hacer_visible();
 			}
 			else
 			{
-				escena.obtener_por_id(id_txt)->hacer_invisible();
+
 				generar_cadena_kanas();
 				reiniciar_visibilidad_cadenas();
 			}
+
+			resuelto=!resuelto;
 		}
 	}
 }
@@ -114,8 +120,6 @@ void Controlador_principal::dibujar(DLibV::Pantalla& pantalla)
 
 void Controlador_principal::despertar()
 {
-	str_kana="";
-	str_romaji="";
 	escena.parsear("data/recursos/layout_principal.dnot", "layout");
 	generar_cadena_kanas();
 	reiniciar_visibilidad_cadenas();

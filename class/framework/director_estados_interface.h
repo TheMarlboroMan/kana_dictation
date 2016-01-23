@@ -31,7 +31,8 @@ class Director_estados_interface
 
 	//Este método se ejecutará justo antes de confirmar un cambio de estado. Se 
 	//puede usar para intercambiar información entre controladores justo antes
-	//de despertar a uno nuevo.
+	//de despertar a uno nuevo. Se ejecuta antes de poner a dormir el estado
+	//original y despertar el nuevo.
 
 	virtual void				preparar_cambio_estado(int deseado, int actual)=0;
 	void					iniciar(DFramework::Kernel& kernel);

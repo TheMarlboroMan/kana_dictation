@@ -16,7 +16,8 @@ class Recursos_graficos
 	};
 
 	enum texturas{
-		RGT_BACKGROUND=1
+		RGT_BACKGROUND=1,
+		RGT_LOGO=2
 	};
 };
 

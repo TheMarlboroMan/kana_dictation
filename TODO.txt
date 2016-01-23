@@ -1,5 +1,3 @@
 De momento tenemos que:
 
-	Bug en controlador principal al generar más de una frase.
-
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.

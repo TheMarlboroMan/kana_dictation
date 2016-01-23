@@ -13,6 +13,7 @@ Controlador_menu::Controlador_menu(const DLibV::Fuente_TTF& fr, const Herramient
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
 	escena.mapear_textura("background", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_BACKGROUND));
+	escena.mapear_textura("logo", DLibV::Gestor_texturas::obtener(App::Recursos_graficos::RGT_LOGO));
 }
 
 void Controlador_menu::traducir_interface()

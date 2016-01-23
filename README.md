@@ -18,11 +18,7 @@ Features:
 - Save user preferences with respect to kanas to practice into configuration files.
 - Configurable backgrounds (up to five preinstalled) for a more pleasant visual experience.
 
-Planned features:
-
-- A title logo somewhere :P.
-
-Maybe, in the future:
+None of these features are planned, but maybe we could:
 
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
 - Support to practice both hiragana and katakana at the same time.
@@ -32,3 +28,5 @@ Thanks to:
 
 Ed Merritt for the Akashi font.
 Kagura Zakayuzu for the Yuzu Pop A font.
+Astigmatic One Eye Typographic Institute, their Shojumaru font was used to create the logo.
+

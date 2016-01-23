@@ -34,6 +34,7 @@ class Director_estados:
 	private:
 
 	void						registrar_controladores(const App::App_config& config);
+	void						preparar_kanas();
 
 	App::Configuracion_ejercicio			configuracion_ejercicio;
 	App::Eventos::Interprete_eventos 		IE;

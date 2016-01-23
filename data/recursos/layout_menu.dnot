@@ -11,6 +11,12 @@ layout:
 	},
 
 	{
+		tipo:"bitmap",
+		pos:[300, 20, 481, 79], rec:[0, 0, 481, 79],
+		textura:"logo"
+	},
+
+	{
 		tipo:"caja",
 		pos:[0, 120, 400, 32], rgb:[255, 255, 255], orden:10,
 		id:"menu_1"

@@ -53,11 +53,36 @@ void Director_estados::registrar_controladores(const App::App_config& config)
 	registrar_controlador(t_estados::OPCIONES, *CO.get());
 	registrar_controlador(t_estados::GRUPOS, *CG.get());
 	registrar_controlador(t_estados::PRINCIPAL, *CP.get());
+}
+
+void Director_estados::preparar_kanas()
+{
+	LOG<<"PREPARANDO KANAS"<<std::endl;
+	std::vector<Kana> kanas_temporales;
+	const auto grupos=CG->obtener_grupos_seleccionados();
+		
+	for(const auto& nombre : grupos)
+	{
+		const auto& v=lista_kanas.acc_grupo(nombre);
+		kanas_temporales.insert(std::end(kanas_temporales), std::begin(v), std::end(v));
+	}
+
+	//TODO: Comprobar esto trasteando con el fichero de config.
+	if(!kanas_temporales.size())
+	{
+		throw std::runtime_error("No hay kanas seleccionados: imposible preparar");
+	}
 
 
+	CP->establecer_kanas(kanas_temporales);
+//TODO There would be no need for this...
+//	CP->generar_cadena_kanas();
 }
 
 void Director_estados::preparar_cambio_estado(int deseado, int actual)
 {
-
+	if(deseado==t_estados::PRINCIPAL)
+	{
+		preparar_kanas();
+	}
 }
