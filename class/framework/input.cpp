@@ -1,11 +1,13 @@
-#include "input_base.h"
+#include "input.h"
 
-void Input_base::turno()
+using namespace DFramework;
+
+void Input::turno()
 {
 	controles_sdl.recoger();
 }
 
-Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
+Input::Resultado_lookup Input::obtener(unsigned int i) const
 {
 	//TODO: Esto puede dar problemas en el futuro si queremos usar el mismo
 	//input para dos cosas distintas.
@@ -45,12 +47,12 @@ Input_base::Resultado_lookup Input_base::obtener(unsigned int i) const
 	}
 }
 
-bool Input_base::es_senal_salida() const
+bool Input::es_senal_salida() const
 {
 	return controles_sdl.es_senal_salida();
 }
 
-bool Input_base::es_input_down(unsigned int i) const
+bool Input::es_input_down(unsigned int i) const
 {
 	Resultado_lookup rl=obtener(i);
 	switch(rl.mapa)
@@ -69,7 +71,7 @@ bool Input_base::es_input_down(unsigned int i) const
 	return false;
 }
 
-bool Input_base::es_input_up(unsigned int i) const
+bool Input::es_input_up(unsigned int i) const
 {
 	Resultado_lookup rl=obtener(i);
 	switch(rl.mapa)
@@ -88,7 +90,7 @@ bool Input_base::es_input_up(unsigned int i) const
 	return false;
 }
 
-bool Input_base::es_input_pulsado(unsigned int i) const
+bool Input::es_input_pulsado(unsigned int i) const
 {
 	Resultado_lookup rl=obtener(i);
 	switch(rl.mapa)
@@ -107,12 +109,19 @@ bool Input_base::es_input_pulsado(unsigned int i) const
 	return false;
 }
 
-void Input_base::configurar_teclado(int clave, int valor)
+void Input::configurar(const std::vector<Par_input>& v)
 {
-	mapa_teclado.insert(std::make_pair(clave, valor));
-}
+	for(const auto& i : v)
+	{
+		switch(i.tipo)
+		{
+			case Par_input::tipos::teclado:
+				mapa_teclado.insert(std::make_pair(i.clave, i.sdl_clave));			
+			break;
 
-void Input_base::configurar_raton(int clave, int valor)
-{
-	mapa_raton.insert(std::make_pair(clave, valor));
+			case Par_input::tipos::raton:
+				mapa_raton.insert(std::make_pair(i.clave, i.sdl_clave));
+			break;
+		}
+	}
 }

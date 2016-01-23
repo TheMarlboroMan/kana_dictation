@@ -3,7 +3,7 @@
 
 #include "definiciones.h"
 #include "../../framework/eventos.h"
-#include "../../framework/derivada/configuracion.h"
+#include "../framework_impl/app_config.h"
 #include <video/pantalla/pantalla.h>
 
 #include "../configuracion_ejercicio.h"
@@ -21,17 +21,17 @@ namespace Eventos
 {
 
 class Interprete_eventos:
-	public Interface_interprete_eventos
+	public DFramework::Interprete_eventos_interface
 {
 	public:
 
-	Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config, App::Configuracion_ejercicio& config_ej);
-	virtual void		interpretar_evento(const Evento_director_estados_base&);
+	Interprete_eventos(DLibV::Pantalla& pantalla, App::App_config& config, App::Configuracion_ejercicio& config_ej);
+	virtual void		interpretar_evento(const DFramework::Evento_framework_interface&);
 
 	private:
 
 	DLibV::Pantalla&		pantalla;
-	Configuracion&			config;
+	App::App_config&		config;
 	App::Configuracion_ejercicio&	config_ejercicio;
 
 	void			interpretar_evento(const Evento_cambio_fondo&);

@@ -2,7 +2,24 @@
 #Definciones
 
 DIR_CLASES_APP=./class/app/
+DIR_CLASES_IMPLEMENTACION_FRAMEWORK=./class/app/framework_impl/
 DIR_CLASES_EVENTOS=./class/app/eventos/
+
+################################################################################
+#Implementación framework...
+################################################################################
+
+$(DIR_O)app_kernel_config.o:\
+$(DIR_O)fw_kernel_driver_interface.o\
+$(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_kernel_config.h \
+$(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_kernel_config.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_kernel_config.cpp -o $(DIR_O)app_kernel_config.o
+
+$(DIR_O)app_config.o:\
+$(DIR_O)fw_configuracion_base.o\
+$(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_config.h \
+$(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_config.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_IMPLEMENTACION_FRAMEWORK)app_config.cpp -o $(DIR_O)app_config.o
 
 ################################################################################
 #Definiciones...
@@ -33,6 +50,11 @@ $(DIR_O)kana.o:\
 $(DIR_CLASES_APP)kana.h \
 $(DIR_CLASES_APP)kana.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)kana.cpp -o $(DIR_O)kana.o
+
+$(DIR_O)localizador.o:\
+$(DIR_CLASES_APP)localizador.h \
+$(DIR_CLASES_APP)localizador.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CLASES_APP)localizador.cpp -o $(DIR_O)localizador.o
 
 ################################################################################
 #Eventos...

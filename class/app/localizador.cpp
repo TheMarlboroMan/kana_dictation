@@ -1,5 +1,7 @@
 #include "localizador.h"
 
+using namespace App;
+
 Localizador::Localizador(unsigned short int p_idioma)
 	:Herramientas_proyecto::Localizador_base(p_idioma), ruta(""),
 	c_no_cargado("ERROR 00"), c_no_encontrado("ERROR 01")

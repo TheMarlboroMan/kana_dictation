@@ -2,14 +2,17 @@
 #define PROYECTO_SDL2_BASE_CONFIGURACION_H
 
 /*
-Esta clase lee y escribe en un archivo los datos de configuración de la 
-aplicación. Al leer los datos de configuración los almacena entre sus 
-propiedades. Podemos (y debemos) extenderla para la configuración de cada
-proyecto implementando todos los métodos virtuales puros que tiene.
+* Esta clase lee y escribe en un archivo los datos de configuración de la 
+* aplicación. Al leer los datos de configuración los almacena entre sus 
+* propiedades. Podemos (y debemos) extenderla para la configuración de cada
+* proyecto implementando todos los métodos virtuales puros que tiene.
 */
 
 #include <class/fichero_pares.h>
 #include <iostream>
+
+namespace DFramework
+{
 
 class Configuracion_base_no_fichero_exception
 	:public std::runtime_error
@@ -100,4 +103,5 @@ class Configuracion_base
 	Herramientas_proyecto::Fichero_pares		pares;
 };
 
+}
 #endif

@@ -6,8 +6,15 @@
 #include <class/compositor_vista.h>
 #include "../app/kana.h"
 #include "../app/configuracion_ejercicio.h"
+#include <video/representacion/representacion_agrupada/representacion_agrupada.h>
+#include <video/gestores/gestor_texturas.h>
+#include "../app/framework_impl/input.h"
 
-class Controlador_principal:public Controlador_base
+namespace App
+{
+
+class Controlador_principal
+	:public Controlador_base
 {
 	public:
 
@@ -17,9 +24,9 @@ class Controlador_principal:public Controlador_base
 
 	private:
 
-	virtual void 			preloop(Input_base& input, float delta) {}
-	virtual void 			postloop(Input_base& input, float delta) {}
-	virtual void 			loop(Input_base& input, float delta);
+	virtual void 			preloop(DFramework::Input& input, float delta) {}
+	virtual void 			postloop(DFramework::Input& input, float delta) {}
+	virtual void 			loop(DFramework::Input& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	virtual void 			despertar();
 	virtual void 			dormir();
@@ -39,4 +46,5 @@ class Controlador_principal:public Controlador_base
 	bool 						resuelto;
 };
 
+}
 #endif

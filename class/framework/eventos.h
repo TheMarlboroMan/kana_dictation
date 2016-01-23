@@ -4,6 +4,9 @@
 #include <vector>
 #include <memory>
 
+namespace DFramework
+{
+
 /**
 * Un sistema de mensajería (no necesariamente eventos, pero es un buen nombre)
 * para que los diferentes controladores puedan comunicarse con una central,
@@ -15,7 +18,7 @@
 */
 
 //F-f-f-f-forward :D!.
-class Interface_interprete_eventos;
+class Interprete_eventos_interface;
 
 /**
 * Base para un evento. Un evento es una estructura que tendrá sus propios 
@@ -24,7 +27,7 @@ class Interface_interprete_eventos;
 * intérprete "desmontar" cada evento para convertirlo en el tipo deseado.
 */
 
-struct Evento_director_estados_base
+struct Evento_framework_interface
 {
 	virtual	int		tipo_evento() const=0;
 };
@@ -38,11 +41,11 @@ struct Evento_director_estados_base
 * llegando.
 */
 
-class Interface_interprete_eventos
+class Interprete_eventos_interface
 {
 	public:
 
-	virtual void		interpretar_evento(const Evento_director_estados_base& ev)=0;
+	virtual void		interpretar_evento(const Evento_framework_interface& ev)=0;
 };
 
 /**
@@ -54,12 +57,14 @@ class Cola_eventos
 {
 	public:
 
-	void			encolar_evento(Evento_director_estados_base * ev)
+	size_t			size() const {return cola_eventos.size();}
+
+	void			encolar_evento(Evento_framework_interface * ev)
 	{
-		cola_eventos.push_back(std::unique_ptr<Evento_director_estados_base>(ev));
+		cola_eventos.push_back(std::unique_ptr<Evento_framework_interface>(ev));
 	}
 
-	void			procesar_cola_completa(Interface_interprete_eventos& i)
+	void			procesar_cola_completa(Interprete_eventos_interface& i)
 	{
 		for(auto& ev : cola_eventos) i.interpretar_evento(*ev);
 		cola_eventos.clear();
@@ -67,8 +72,9 @@ class Cola_eventos
 
 	private:
 
-	std::vector<std::unique_ptr<Evento_director_estados_base>>	cola_eventos;
+	std::vector<std::unique_ptr<Evento_framework_interface>>	cola_eventos;
 	
 };
 
+}
 #endif

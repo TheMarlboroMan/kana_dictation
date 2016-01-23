@@ -11,13 +11,13 @@ extern DLibH::Log_base LOG;
 
 using namespace App::Eventos;
 
-Interprete_eventos::Interprete_eventos(DLibV::Pantalla& pantalla, Configuracion& config, App::Configuracion_ejercicio& config_ej):
+Interprete_eventos::Interprete_eventos(DLibV::Pantalla& pantalla, App::App_config& config, App::Configuracion_ejercicio& config_ej):
 	pantalla(pantalla), config(config), config_ejercicio(config_ej)
 {
 
 }
 
-void Interprete_eventos::interpretar_evento(const Evento_director_estados_base& ev)
+void Interprete_eventos::interpretar_evento(const DFramework::Evento_framework_interface& ev)
 {
 	switch(ev.tipo_evento())
 	{

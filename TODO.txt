@@ -1,9 +1,10 @@
 De momento tenemos que:
 
-	Finalizar el cambio en el bootstrap.
 
 	Bug en controlador principal al generar más de una frase.
 
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.
 
+	Documentar, aprovechar ahora para cambiar nombres de clases si es 
+	necesario.
 

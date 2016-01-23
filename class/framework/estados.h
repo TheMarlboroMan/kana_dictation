@@ -5,6 +5,16 @@
 #include <iostream>
 #include <functional>
 
+/*
+* Pequeña clase de control de estados: básicamente controla con un entero el
+* estado actual y el estado al que se desea cambiar. Su única finalidad es
+* eliminar dependencias cíclicas: tanto el director como los controladores
+* dependen de esta clase.
+*/
+
+namespace DFramework
+{
+
 class Control_estados
 {
 	public:
@@ -16,7 +26,7 @@ class Control_estados
 
 	void				validar_y_cambiar_estado(int v)
 	{
-		if(!validar_estado(v)) throw std::runtime_error("Base_director_estados recibe estado erróneo");
+		if(!validar_estado(v)) throw std::runtime_error("Control_estados recibe estado erróneo");
 		deseado=v;
 	}
 	
@@ -33,4 +43,5 @@ class Control_estados
 						deseado;
 };
 
+}
 #endif

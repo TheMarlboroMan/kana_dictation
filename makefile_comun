@@ -19,13 +19,11 @@ $(DIR_O)dummy:
 
 $(EJECUTABLE): \
 $(DEP_CLASES_APP) \
-$(DEP_FRAMEWORK_BASE) \
-$(DEP_FRAMEWORK_DERIVADA) \
+$(DEP_FRAMEWORK) \
 $(DEP_CONTROLADORES) \
 $(DEP_HERRAMIENTAS_PROYECTO) \
-$(DIR_O)bootstrap_aplicacion.o \
 main.cpp
-	$(CC) $(CFLAGS_TARGET_FINAL) $(INCLUDES) main.cpp $(DIR_O)bootstrap_aplicacion.o $(DEP_FRAMEWORK_BASE) $(DEP_FRAMEWORK_DERIVADA) $(DEP_CLASES_APP) $(DEP_CONTROLADORES) $(DEP_HERRAMIENTAS_PROYECTO) -o $(EJECUTABLE) $(LIBRERIAS) $(LINKER)
+	$(CC) $(CFLAGS_TARGET_FINAL) $(INCLUDES) main.cpp $(DEP_FRAMEWORK) $(DEP_CLASES_APP) $(DEP_CONTROLADORES) $(DEP_HERRAMIENTAS_PROYECTO) -o $(EJECUTABLE) $(LIBRERIAS) $(LINKER)
 
 clean:
 	$(LIMPIAR)
@@ -33,11 +31,3 @@ clean:
 include _makefile_controladores
 include _makefile_clases_app
 include _makefile_framework
-
-$(DIR_O)bootstrap_aplicacion.o :\
-$(DIR_BOOTSTRAP)bootstrap_aplicacion.cpp \
-$(DIR_BOOTSTRAP)bootstrap_aplicacion.h \
-$(DEP_CONTROLADORES) \
-$(DEP_CLASES_APP) \
-$(DEP_FRAMEWORK_DERIVADA)
-	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_BOOTSTRAP)bootstrap_aplicacion.cpp -o $(DIR_O)bootstrap_aplicacion.o 

@@ -5,6 +5,8 @@
 #include "../app/eventos/cambio_kanas.h"
 #include "../app/eventos/cambio_direccion.h"
 
+using namespace App;
+
 Controlador_menu::Controlador_menu(const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const App::Configuracion_ejercicio&	configuracion_ejercicio)
 	:localizador(loc), configuracion_ejercicio(configuracion_ejercicio), ttf_romaji(fr), seleccion_actual(0), refrescar(false)
 {
@@ -27,7 +29,7 @@ void Controlador_menu::traducir_interface()
 	actualizar_menu();
 }
 
-void Controlador_menu::loop(Input_base& input, float delta)
+void Controlador_menu::loop(DFramework::Input& input, float delta)
 {
 	if(input.es_senal_salida() || input.es_input_down(Input::I_ESCAPE))
 	{
@@ -62,7 +64,7 @@ void Controlador_menu::loop(Input_base& input, float delta)
 	}
 }
 
-void Controlador_menu::postloop(Input_base& input, float delta)
+void Controlador_menu::postloop(DFramework::Input& input, float delta)
 {
 	if(refrescar)
 	{

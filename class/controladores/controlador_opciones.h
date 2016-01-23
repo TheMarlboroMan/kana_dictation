@@ -8,24 +8,31 @@
 #include "../app/definiciones.h"
 #include <class/menu_opciones.h>
 #include <class/listado_vertical.h>
-#include "../framework/derivada/configuracion.h"
+#include <video/representacion/representacion_agrupada/representacion_agrupada.h>
+#include <video/gestores/gestor_texturas.h>
+#include "../app/framework_impl/app_config.h"
+#include "../app/framework_impl/input.h"
 
-class Controlador_opciones:public Controlador_base
+namespace App
+{
+
+class Controlador_opciones
+	:public Controlador_base
 {
 	public:
 
-					Controlador_opciones(const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, DLibV::Pantalla&, const Configuracion& c);
+					Controlador_opciones(const DLibV::Fuente_TTF&, Herramientas_proyecto::Localizador_base&, const App_config& c);
 	private:
 
-	virtual void 			preloop(Input_base& input, float delta) {}
-	virtual void 			postloop(Input_base& input, float delta) {}
-	virtual void 			loop(Input_base& input, float delta);
+	virtual void 			preloop(DFramework::Input& input, float delta) {}
+	virtual void 			postloop(DFramework::Input& input, float delta) {}
+	virtual void 			loop(DFramework::Input& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	virtual void 			despertar();
 	virtual void 			dormir();
 	virtual bool			es_posible_abandonar_estado() const {return true;}
 	
-	void				generar_menu(const Configuracion&);
+	void				generar_menu(const App_config&);
 	void				generar_representacion_menu();
 	void				traducir_interface();
 
@@ -34,7 +41,6 @@ class Controlador_opciones:public Controlador_base
 		std::string clave, nombre;
 	};
 
-	DLibV::Pantalla&				pantalla;
 	Herramientas_proyecto::Localizador_base&	localizador;	//No es constante, desde aquí puede cambiar.
 	const DLibV::Fuente_TTF& 			ttf_romaji;
 
@@ -59,4 +65,5 @@ class Controlador_opciones:public Controlador_base
 							k_fondo;
 };
 
+}
 #endif

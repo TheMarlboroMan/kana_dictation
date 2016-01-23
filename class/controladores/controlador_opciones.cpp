@@ -7,12 +7,14 @@
 #include "../app/eventos/cambio_idioma.h"
 #include "../app/eventos/cambio_ventana.h"
 
+using namespace App;
+
 const std::string Controlador_opciones::k_tam_pantalla="01_K_TAM_VENTANA";
 const std::string Controlador_opciones::k_idioma="02_K_IDIOMA";
 const std::string Controlador_opciones::k_fondo="03_K_FONDO";
 
-Controlador_opciones::Controlador_opciones(const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, DLibV::Pantalla& p, const Configuracion& config)
-	:Controlador_base(), pantalla(p), localizador(loc), ttf_romaji(fr), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO)
+Controlador_opciones::Controlador_opciones(const DLibV::Fuente_TTF& fr, Herramientas_proyecto::Localizador_base& loc, const App_config& config)
+	:Controlador_base(), localizador(loc), ttf_romaji(fr), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
@@ -41,7 +43,7 @@ void Controlador_opciones::traducir_interface()
 * Parte del proceso de constructor.
 */
 
-void Controlador_opciones::generar_menu(const Configuracion& config)
+void Controlador_opciones::generar_menu(const App_config& config)
 {
 	if(opciones_menu.size()) return;
 
@@ -102,7 +104,7 @@ void Controlador_opciones::generar_representacion_menu()
 	*/
 }
 
-void Controlador_opciones::loop(Input_base& input, float delta)
+void Controlador_opciones::loop(DFramework::Input& input, float delta)
 {
 	if(input.es_senal_salida())
 	{

@@ -8,6 +8,8 @@ defecto (métodos virtuales) así que no podremos intentar acceder a ningún
 valor hasta haber cargado la configuración.
 */
 
+using namespace DFramework;
+
 Configuracion_base::Configuracion_base(const std::string& ruta, char separador, char comentario)
 try
 	:pares(ruta, separador, comentario)

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <source/string_utilidades.h>
 
+using namespace App;
 
 //Este valor es conocido también por la configuración en su propia definición. Realmente está repetido.
 const std::string Controlador_grupos::WILDCARD_TODOS_KANAS="*";
@@ -58,7 +59,7 @@ void Controlador_grupos::componer_vista_listado()
 	rep_listado.insertar_representacion(caja);
 }
 
-void Controlador_grupos::loop(Input_base& input, float delta)
+void Controlador_grupos::loop(DFramework::Input& input, float delta)
 {	
 	if(input.es_senal_salida())
 	{

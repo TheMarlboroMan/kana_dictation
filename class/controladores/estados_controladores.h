@@ -3,5 +3,4 @@
 
 enum t_estados {MENU, PRINCIPAL, GRUPOS, OPCIONES, MAX_ESTADOS};
 
-
 #endif

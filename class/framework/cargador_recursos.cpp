@@ -1,17 +1,9 @@
-#include "cargador_recursos_base.h"
+#include "cargador_recursos.h"
+#include "kernel_driver_interface.h"
 
-Cargador_recursos_base::Cargador_recursos_base()
-	:pantalla(nullptr)
-{
+using namespace DFramework;
 
-}
-
-Cargador_recursos_base::~Cargador_recursos_base() 
-{
-
-}
-
-void Cargador_recursos_base::procesar(const std::vector<std::string>& entradas, void (Cargador_recursos_base::*procesar_valores)(const std::vector<std::string>&))
+void Cargador_recursos::procesar(const std::vector<std::string>& entradas, void (Cargador_recursos::*procesar_valores)(const std::vector<std::string>&))
 {
 	const char separador='\t';
 	for(auto& linea : entradas)
@@ -20,14 +12,13 @@ void Cargador_recursos_base::procesar(const std::vector<std::string>& entradas, 
 	}
 }
 
-void Cargador_recursos_base::generar_recursos_texturas(DLibV::Pantalla &p)
+void Cargador_recursos::generar_recursos_texturas(const std::vector<std::string>& recursos, DLibV::Pantalla &p)
 {
 	DLibV::Gestor_texturas::vaciar();
 	pantalla=&p;
 	try
 	{
-
-		procesar(obtener_entradas_texturas(), &Cargador_recursos_base::procesar_entrada_textura);
+		procesar(recursos, &Cargador_recursos::procesar_entrada_textura);
 	}
 	catch(Excepcion_carga_recursos& e)
 	{
@@ -36,13 +27,13 @@ void Cargador_recursos_base::generar_recursos_texturas(DLibV::Pantalla &p)
 	pantalla=nullptr;
 }
 
-void Cargador_recursos_base::generar_recursos_superficies(DLibV::Pantalla &p)
+void Cargador_recursos::generar_recursos_superficies(const std::vector<std::string>& recursos, DLibV::Pantalla &p)
 {
 	pantalla=&p;
 	DLibV::Gestor_superficies::vaciar();
 	try
 	{
-		procesar(obtener_entradas_superficies(), &Cargador_recursos_base::procesar_entrada_superficie);
+		procesar(recursos, &Cargador_recursos::procesar_entrada_superficie);
 	}
 	catch(Excepcion_carga_recursos& e)
 	{
@@ -50,13 +41,13 @@ void Cargador_recursos_base::generar_recursos_superficies(DLibV::Pantalla &p)
 	}
 }
 
-void Cargador_recursos_base::generar_recursos_audio()
+void Cargador_recursos::generar_recursos_audio(const std::vector<std::string>& recursos)
 {
 	//OJO: Vacia sonido y música.
 	DLibA::Gestor_recursos_audio::liberar();
 	try
 	{
-		procesar(obtener_entradas_audio(), &Cargador_recursos_base::procesar_entrada_audio);
+		procesar(recursos, &Cargador_recursos::procesar_entrada_audio);
 	}
 	catch(Excepcion_carga_recursos& e)
 	{
@@ -65,11 +56,11 @@ void Cargador_recursos_base::generar_recursos_audio()
 	pantalla=nullptr;
 }
 
-void Cargador_recursos_base::generar_recursos_musica()
+void Cargador_recursos::generar_recursos_musica(const std::vector<std::string>& recursos)
 {
 	try
 	{
-		procesar(obtener_entradas_musica(), &Cargador_recursos_base::procesar_entrada_musica);
+		procesar(recursos, &Cargador_recursos::procesar_entrada_musica);
 	}
 	catch(Excepcion_carga_recursos& e)
 	{
@@ -77,7 +68,7 @@ void Cargador_recursos_base::generar_recursos_musica()
 	}
 }
 
-void Cargador_recursos_base::procesar_entrada_textura(const std::vector<std::string>& valores)
+void Cargador_recursos::procesar_entrada_textura(const std::vector<std::string>& valores)
 {
 	if(valores.size()!=6) LOG<<"ERROR: No hay 6 parametros para recursos textura, en su lugar "<<valores.size()<<std::endl;
 	else 
@@ -113,7 +104,7 @@ void Cargador_recursos_base::procesar_entrada_textura(const std::vector<std::str
 	}			
 }
 
-void Cargador_recursos_base::procesar_entrada_superficie(const std::vector<std::string>& valores)
+void Cargador_recursos::procesar_entrada_superficie(const std::vector<std::string>& valores)
 {
 	if(valores.size()!=6) LOG<<"ERROR: No hay 6 parametros para recursos superficie, en su lugar "<<valores.size()<<std::endl;
 	else 
@@ -151,7 +142,7 @@ void Cargador_recursos_base::procesar_entrada_superficie(const std::vector<std::
 }
 
 
-void Cargador_recursos_base::procesar_entrada_audio(const std::vector<std::string>& valores)
+void Cargador_recursos::procesar_entrada_audio(const std::vector<std::string>& valores)
 {
 	if(valores.size()!=2) LOG<<"ERROR: No hay 2 parametros para recursos audio, en su lugar "<<valores.size()<<std::endl;
 	else 
@@ -166,7 +157,7 @@ void Cargador_recursos_base::procesar_entrada_audio(const std::vector<std::strin
 	}			
 }
 
-void Cargador_recursos_base::procesar_entrada_musica(const std::vector<std::string>& valores)
+void Cargador_recursos::procesar_entrada_musica(const std::vector<std::string>& valores)
 {
 	if(valores.size()!=2) LOG<<"ERROR: No hay 2 parametros para recursos musica, en su lugar "<<valores.size()<<std::endl;
 	else 
@@ -179,24 +170,4 @@ void Cargador_recursos_base::procesar_entrada_musica(const std::vector<std::stri
 			LOG<<"ERROR: No se ha podido insertar recurso musica "<<indice<<" en "<<ruta<<std::endl;
 		}	
 	}			
-}
-
-std::vector<std::string> Cargador_recursos_base::obtener_entradas_desde_ruta(const std::string& ruta) const
-{	
-	Herramientas_proyecto::Lector_txt L(ruta, '#');
-	std::vector<std::string> resultado;
-
-	if(!L)
-	{
-		throw Excepcion_carga_recursos();
-	}
-
-	while(true)
-	{
-		std::string linea=L.leer_linea();
-		if(!L) break;
-		resultado.push_back(linea);
-	}
-
-	return resultado;
 }

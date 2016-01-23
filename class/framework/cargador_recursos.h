@@ -1,5 +1,5 @@
-#ifndef CARGADOR_RECURSOS_BASE_H
-#define CARGADOR_RECURSOS_BASE_H
+#ifndef Cargador_recursos_H
+#define Cargador_recursos_H
 
 /*Un cargador de recursos gráficos y de audio. Para cargar los recursos usa
 ficheros en disco, localizados en las rutas de turno. Tiene un rollo autoload,
@@ -40,24 +40,17 @@ obtenemos siempre mediante los gestores de turno.
 
 extern DLibH::Log_base LOG;
 
-class Cargador_recursos_base
+namespace DFramework
 {
-	private:
 
-	DLibV::Pantalla * pantalla;
-
-	protected:
-
-	struct Excepcion_carga_recursos
-	{
-		Excepcion_carga_recursos() {}
-	};
-
-	virtual std::vector<std::string> obtener_entradas_audio() const=0;
-	virtual std::vector<std::string> obtener_entradas_musica() const=0;
-	virtual std::vector<std::string> obtener_entradas_texturas() const=0;
-	virtual std::vector<std::string> obtener_entradas_superficies() const=0;
-	std::vector<std::string> obtener_entradas_desde_ruta(const std::string& ruta) const;
+class Cargador_recursos
+{
+	public:
+	
+	void generar_recursos_texturas(const std::vector<std::string>&, DLibV::Pantalla &pantalla);
+	void generar_recursos_superficies(const std::vector<std::string>&, DLibV::Pantalla &pantalla);
+	void generar_recursos_audio(const std::vector<std::string>&);
+	void generar_recursos_musica(const std::vector<std::string>&);
 
 	private:
 
@@ -65,17 +58,10 @@ class Cargador_recursos_base
 	void procesar_entrada_audio(const std::vector<std::string>&);
 	void procesar_entrada_textura(const std::vector<std::string>&);
 	void procesar_entrada_superficie(const std::vector<std::string>&);
-	void procesar(const std::vector<std::string>& entradas, void (Cargador_recursos_base::*)(const std::vector<std::string>&));
+	void procesar(const std::vector<std::string>& entradas, void (Cargador_recursos::*)(const std::vector<std::string>&));
 
-	public:
-	
-	Cargador_recursos_base();
-	~Cargador_recursos_base();
-
-	void generar_recursos_texturas(DLibV::Pantalla &pantalla);
-	void generar_recursos_superficies(DLibV::Pantalla &pantalla);
-	void generar_recursos_audio();
-	void generar_recursos_musica();
+	DLibV::Pantalla * pantalla;	//Un hack para poder usar métodos más genéricos en "procesar".
 };
 
+}
 #endif

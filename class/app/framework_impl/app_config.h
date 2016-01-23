@@ -1,9 +1,13 @@
-#ifndef PROYECTO_SDL2_DERIVADA_CONFIGURACION_H
-#define PROYECTO_SDL2_DERIVADA_CONFIGURACION_H
+#ifndef APP_CONFIGURACION_H
+#define APP_CONFIGURACION_H
 
-#include "../base/configuracion_base.h"
+#include "../../framework/configuracion_base.h"
 
-class Configuracion: public Configuracion_base
+namespace App
+{
+
+class App_config:
+	public DFramework::Configuracion_base
 {
 	////////////////////////////////
 	// Interface pública.
@@ -33,7 +37,7 @@ class Configuracion: public Configuracion_base
 	void mut_silabario(const std::string& p_valor) {configurar(CLAVE_SILABARIO, p_valor);}
 	void mut_direccion(const std::string& p_valor) {configurar(CLAVE_DIRECCION, p_valor);}
 
-	Configuracion();
+	App_config();
 
 	private:
 	
@@ -100,4 +104,5 @@ class Configuracion: public Configuracion_base
 	char obtener_comentario_archivo() const {return '#';}
 };
 
+}
 #endif

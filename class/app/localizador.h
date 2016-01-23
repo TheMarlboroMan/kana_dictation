@@ -27,7 +27,11 @@ devolverá la cadena definida como c_no_cargado.
 
 #include <base/localizador_base.h>
 
-class Localizador:public Herramientas_proyecto::Localizador_base
+namespace App
+{
+
+class Localizador
+	:public Herramientas_proyecto::Localizador_base
 {
 	private:
 	Herramientas_proyecto::t_cadena ruta;
@@ -46,4 +50,5 @@ class Localizador:public Herramientas_proyecto::Localizador_base
 	Localizador(unsigned short int p_idioma=0);
 	Localizador(const Herramientas_proyecto::t_cadena& p_ruta, unsigned short int p_idioma=0);
 };
+}
 #endif

@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <input/controles_sdl/controles_sdl.h>
+#include "kernel_driver_interface.h"
 
 /*Abstrae los sistemas de input usando la clase Controles_SDL. Cada input del
 enum de turno se puede asignar a uno o más valores SDLK_xxx, según lo mismo
@@ -13,7 +14,10 @@ de la instancia de controles_SDL.
 //TODO TODO TODO: Ahora mismo no hay soporte de Joystick ni de ratón!!!.
 */
 
-class Input_base
+namespace DFramework
+{
+
+class Input
 {
 	////////////////////////
 	//Definiciones....
@@ -45,9 +49,6 @@ class Input_base
 	tipo_mapa mapa_teclado;
 	tipo_mapa mapa_raton;
 
-	void configurar_teclado(int, int);
-	void configurar_raton(int, int);
-
 	////////////////////////
 	//Métodos
 
@@ -57,8 +58,7 @@ class Input_base
 
 	public:
 
-	//Este es el método que tendremos que extender.
-	virtual void configurar()=0;
+	void configurar(const std::vector<Par_input>&);
 
 	/* Todas estas vamos a imaginar que son finales, ok?... */
 
@@ -83,7 +83,8 @@ class Input_base
 
 	DLibI::Controles_SDL& acc_controles_sdl() {return controles_sdl;}
 
-	Input_base() {}
+	Input() {}
 };
 
+}
 #endif

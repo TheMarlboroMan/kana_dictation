@@ -6,6 +6,9 @@ tema de pausar y despausar sonidos.*/
 
 #include <libDan2.h>
 
+namespace DFramework
+{
+
 struct Excepcion_audio
 {
 	std::string mensaje;
@@ -23,11 +26,11 @@ struct Excepcion_audio
 	}
 };
 
-class Audio_base
+class Audio
 {
 	private:
 
-	Audio_base();
+	Audio();
 
 	static DLibA::Controlador_audio_SDL * controlador_audio;
 	static DLibA::Cola_sonido cola_sonido;
@@ -57,4 +60,5 @@ class Audio_base
 	}
 };
 
+}
 #endif

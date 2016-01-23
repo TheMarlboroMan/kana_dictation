@@ -1,10 +1,12 @@
-#include "audio_base.h"
+#include "audio.h"
 
-DLibA::Controlador_audio_SDL * Audio_base::controlador_audio=NULL;
-DLibA::Cola_sonido Audio_base::cola_sonido;
-std::vector<unsigned int> Audio_base::canales_detenidos;
+using namespace DFramework;
 
-bool Audio_base::inicializar_entorno_audio(int pratio, int psalidas, int pbuffers, int pcanales)
+DLibA::Controlador_audio_SDL * Audio::controlador_audio=NULL;
+DLibA::Cola_sonido Audio::cola_sonido;
+std::vector<unsigned int> Audio::canales_detenidos;
+
+bool Audio::inicializar_entorno_audio(int pratio, int psalidas, int pbuffers, int pcanales)
 {
 	DLibA::Controlador_audio_SDL::configurar_ratio(pratio);
 	DLibA::Controlador_audio_SDL::configurar_salidas(psalidas);
@@ -24,7 +26,7 @@ bool Audio_base::inicializar_entorno_audio(int pratio, int psalidas, int pbuffer
 	}
 }
 
-DLibA::Canal_audio Audio_base::obtener_canal_libre()
+DLibA::Canal_audio Audio::obtener_canal_libre()
 {	
 	if(!controlador_audio)
 	{
@@ -38,7 +40,7 @@ DLibA::Canal_audio Audio_base::obtener_canal_libre()
 
 /*Pausa todos los canales.*/
 
-void Audio_base::pausar()
+void Audio::pausar()
 {
 	if(!controlador_audio)
 	{
@@ -53,7 +55,7 @@ void Audio_base::pausar()
 /*Pausa sólo aquellos canales que ahora mismo no estén libres. Guarda los 
 índices de los canales para poderlos recuperar más adelante.*/
 
-void Audio_base::pausar_canales_activos()
+void Audio::pausar_canales_activos()
 {
 	if(!controlador_audio)
 	{
@@ -79,7 +81,7 @@ void Audio_base::pausar_canales_activos()
 
 /*Todos los sonidos vuelven a reproducirse...*/
 
-void Audio_base::despausar()
+void Audio::despausar()
 {
 	if(!controlador_audio)
 	{
@@ -96,7 +98,7 @@ void Audio_base::despausar()
 /*Los sonidos en los canales activos que se pausaron vuelven a reproducirse. El
 buffer de canales guardados se vacía para permitir usar el sistema de nuevo.*/
 
-void Audio_base::despausar_canales_activos()
+void Audio::despausar_canales_activos()
 {
 	if(!controlador_audio)
 	{
@@ -116,7 +118,7 @@ void Audio_base::despausar_canales_activos()
 
 /*Reanuda los sonidos pausados que no fueran guardados mediante pausar_activos.*/
 
-void Audio_base::despausar_excepto_activos()
+void Audio::despausar_excepto_activos()
 {
 	if(!controlador_audio)
 	{

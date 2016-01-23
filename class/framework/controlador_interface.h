@@ -1,24 +1,29 @@
-#ifndef INTERFACE_CONTROLADOR_H
-#define INTERFACE_CONTROLADOR_H
+#ifndef FW_CONTROLADOR_INTERFACE_H
+#define FW_CONTROLADOR_INTERFACE_H
 
-//TODO: Estos dos de la derivada estan mal colocados. Aquí no se usan pero
-//se requiren en el kernel_base, que tampoco debería conocer NADA de la derivada.
-//Arreglar.
-
-#include "derivada/input.h"
-#include "derivada/audio.h"
 #include "eventos.h"
 #include "estados.h"
+#include "input.h"
+#include <video/pantalla/pantalla.h>
 
-class Interface_controlador
+/**
+* Interface para un controlador. Los controladores deben ser registrados en
+* el director de estados para que los cambios de estado sean posibles y 
+* pueda inyectarse la cola de eventos.
+*/
+
+namespace DFramework
+{
+
+class Controlador_interface
 {
 	public:
 
-	Interface_controlador()
+	Controlador_interface()
 		:cola_eventos(nullptr), estados(nullptr), abandonar(false), romper(false) 
 	{}
 
-	virtual ~Interface_controlador() 
+	virtual ~Controlador_interface() 
 	{}
 
 	void 				mut_debug(const std::string& c) {debug=c;}
@@ -33,12 +38,14 @@ class Interface_controlador
 	void				inyectar_cola_eventos(Cola_eventos& c) {cola_eventos=&c;}
 	void				inyectar_control_estados(Control_estados& c) {estados=&c;}
 
-	void				encolar_evento(Evento_director_estados_base * ev) {cola_eventos->encolar_evento(ev);}
+	void				encolar_evento(Evento_framework_interface * ev) {cola_eventos->encolar_evento(ev);}
+
+	//TODO: Esto es terrible. 
 	void				solicitar_cambio_estado(int v) {estados->validar_y_cambiar_estado(v);}
 
-	virtual void 			preloop(Input_base& input, float delta)=0;
-	virtual void 			loop(Input_base& input, float delta)=0;
-	virtual void 			postloop(Input_base& input, float delta)=0;
+	virtual void 			preloop(Input& input, float delta)=0;
+	virtual void 			loop(Input& input, float delta)=0;
+	virtual void 			postloop(Input& input, float delta)=0;
 	virtual void 			dibujar(DLibV::Pantalla& pantalla)=0;
 	virtual void 			despertar()=0;
 	virtual void 			dormir()=0;
@@ -53,5 +60,5 @@ class Interface_controlador
 					romper;
 };
 
-
+}
 #endif

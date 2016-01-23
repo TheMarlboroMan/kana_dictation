@@ -1,7 +1,9 @@
 #include <libDan2.h>
 #include <defDanSDL.h>
-#include "class/framework/derivada/kernel.h"
-#include "bootstrap/bootstrap_aplicacion.h"
+#include "class/framework/kernel.h"
+#include "class/app/framework_impl/app_kernel_config.h"
+#include "class/app/framework_impl/app_config.h"
+#include "class/controladores/director_estados.h"
 #include <class/menu_opciones.h>
 
 //Declaración del log del motor en espacio global.
@@ -22,12 +24,15 @@ int main(int argc, char ** argv)
 
 		try
 		{
-			Kernel_app kernel(CARG);
-			kernel.inicializar();
+			App::App_kernel_config AKC;
 
-			//Función en el espacio de nombres "App", definida en "include_controladores.h"
-			using namespace App;
-			loop_aplicacion(kernel);
+			App::App_config config;
+			config.cargar();
+
+			DFramework::Kernel kernel(CARG, AKC, config);
+
+			App::Director_estados APP(kernel, config);
+			APP.iniciar(kernel);
 		}
 		catch(std::exception &e)
 		{

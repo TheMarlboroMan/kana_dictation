@@ -8,9 +8,11 @@ DIR_FRAMEWORK=./class/framework/
 #Controladores...
 
 $(DIR_O)director_estados.o :\
-$(DIR_FRAMEWORK)base_director_estados.h \
-$(DIR_FRAMEWORK)eventos.h \
-$(DIR_FRAMEWORK)estados.h \
+$(DIR_O)controlador_opciones.o \
+$(DIR_O)controlador_grupos.o \
+$(DIR_O)controlador_menu.o \
+$(DIR_O)controlador_principal.o \
+$(DIR_O)controlador_base.o \
 $(DIR_CONTROLADORES)director_estados.h \
 $(DIR_CONTROLADORES)director_estados.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)director_estados.cpp -o $(DIR_O)director_estados.o 
@@ -40,8 +42,7 @@ $(DIR_CONTROLADORES)controlador_principal.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_principal.cpp -o $(DIR_O)controlador_principal.o
 
 $(DIR_O)controlador_base.o :\
-$(DIR_O)director_estados.o \
-$(DIR_FRAMEWORK)interface_controlador.h \
+$(DIR_FRAMEWORK)controlador_interface.h \
 $(DIR_CONTROLADORES)controlador_base.h \
 $(DIR_CONTROLADORES)controlador_base.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $(DIR_CONTROLADORES)controlador_base.cpp -o $(DIR_O)controlador_base.o  

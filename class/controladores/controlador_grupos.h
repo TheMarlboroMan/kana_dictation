@@ -7,6 +7,9 @@
 #include <class/compositor_vista.h>
 #include <base/localizador_base.h>
 #include <class/listado_vertical.h>
+#include <video/representacion/representacion_agrupada/representacion_agrupada.h>
+#include <video/gestores/gestor_texturas.h>
+#include "../app/framework_impl/input.h"
 
 /**
 El controlador para seleccionar los grupos de kanas activos. Guardará un vector
@@ -14,7 +17,11 @@ con el nombre de los grupos y si está o no seleccionado. A partir de los nombre
 de los grupos seleccionados se podrá sacar el conjunto de los kanas deseados.
 */
 
-class Controlador_grupos:public Controlador_base
+namespace App
+{
+
+class Controlador_grupos
+	:public Controlador_base
 {
 	public:
 
@@ -32,9 +39,9 @@ class Controlador_grupos:public Controlador_base
 		bool			operator<(const grupo& o) {return nombre < o.nombre;}
 	};
 
-	virtual void 			preloop(Input_base& input, float delta) {}
-	virtual void 			postloop(Input_base& input, float delta) {}
-	virtual void 			loop(Input_base& input, float delta);
+	virtual void 			preloop(DFramework::Input& input, float delta) {}
+	virtual void 			postloop(DFramework::Input& input, float delta) {}
+	virtual void 			loop(DFramework::Input& input, float delta);
 	virtual void 			dibujar(DLibV::Pantalla& pantalla);
 	virtual void 			despertar();
 	virtual void 			dormir();
@@ -63,4 +70,5 @@ class Controlador_grupos:public Controlador_base
 	static const std::string			WILDCARD_TODOS_KANAS;
 };
 
+}
 #endif

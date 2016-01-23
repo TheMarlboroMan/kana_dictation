@@ -1,5 +1,5 @@
-#ifndef LOCALIZACION_H
-#define LOCALIZACION_H
+#ifndef LOCALIZADOR_APP_H
+#define LOCALIZADOR_APP_H
 
 namespace App
 {
@@ -18,7 +18,7 @@ class Localizacion
 		configuracion=7,
 		reinicio_ventana=8,
 		direccion_romaji_kana=40,
-		direccion_kana_romaji=41		
+		direccion_kana_romaji=41
 	};
 
 	private:

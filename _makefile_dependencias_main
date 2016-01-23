@@ -10,11 +10,14 @@ $(DIR_O_HERRAMIENTAS_PROYECTO)fichero_pares.o\
 $(DIR_O_HERRAMIENTAS_PROYECTO)estructura_paginacion.o\
 $(DIR_O_HERRAMIENTAS_PROYECTO)listado_vertical.o\
 
-DEP_CLASES_APP=$(DIR_O)kana.o \
+DEP_CLASES_APP=$(DIR_O)app_kernel_config.o\
+$(DIR_O)app_config.o\
+$(DIR_O)kana.o \
 $(DIR_O)lector_kana.o \
 $(DIR_O)lista_kanas.o \
 $(DIR_O)interprete_eventos.o \
 $(DIR_O)definiciones.o \
+$(DIR_O)localizador.o \
 
 DEP_CONTROLADORES=$(DIR_O)controlador_base.o \
 $(DIR_O)controlador_principal.o \
@@ -23,16 +26,13 @@ $(DIR_O)controlador_grupos.o \
 $(DIR_O)controlador_opciones.o \
 $(DIR_O)director_estados.o \
 
-DEP_FRAMEWORK_BASE=$(DIR_O)input_base.o \
-$(DIR_O)configuracion_base.o \
-$(DIR_O)audio_base.o \
-$(DIR_O)cargador_recursos_base.o \
-$(DIR_O)kernel_base.o \
-
-DEP_FRAMEWORK_DERIVADA=$(DIR_O)input.o \
-$(DIR_O)configuracion.o \
-$(DIR_O)localizador.o \
-$(DIR_O)audio.o \
-$(DIR_O)cargador_recursos.o \
-$(DIR_O)kernel.o \
-
+DEP_FRAMEWORK=$(DIR_O)fw_kernel.o \
+$(DIR_O)fw_input.o \
+$(DIR_O)fw_director_estados_interface.o \
+$(DIR_O)fw_estados.o \
+$(DIR_O)fw_controlador_interface.o \
+$(DIR_O)fw_eventos.o \
+$(DIR_O)fw_audio.o \
+$(DIR_O)fw_cargador_recursos.o \
+$(DIR_O)fw_kernel_driver_interface.o \
+$(DIR_O)fw_configuracion_base.o \

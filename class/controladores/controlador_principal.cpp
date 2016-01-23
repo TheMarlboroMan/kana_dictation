@@ -2,6 +2,8 @@
 #include <class/generador_numeros.h>
 #include "../app/recursos.h"
 
+using namespace App;
+
 Controlador_principal::Controlador_principal(const DLibV::Fuente_TTF& fr, const DLibV::Fuente_TTF& fk, const App::Configuracion_ejercicio& config_ej)
 	:configuracion_ejercicio(config_ej), ttf_romaji(fr), ttf_kanas(fk), resuelto(false)
 
@@ -58,7 +60,7 @@ void Controlador_principal::reiniciar_visibilidad_cadenas()
 	//Aún no podemos centrarlos porque no sabemos cuanto miden (sólo se "materializan" al dibujar)...
 }
 
-void Controlador_principal::loop(Input_base& input, float delta)
+void Controlador_principal::loop(DFramework::Input& input, float delta)
 {
 	if(input.es_senal_salida())
 	{

@@ -12,7 +12,7 @@ namespace Eventos
 {
 
 struct Evento_cambio_kanas:
-	public Evento_director_estados_base
+	public DFramework::Evento_framework_interface
 {
 	virtual int		tipo_evento() const {return cambio_kanas;}
 	App::tipos_kana		tipo_kana;
