@@ -26,6 +26,7 @@ Maybe, in the future:
 
 - Quick translation from the command line (input the romaji sillables to get the kana on the console or screen).
 - Support to practice both hiragana and katakana at the same time.
+- Recorded samples of the sillables, so you can listen as well as write.
 
 Thanks to:
 

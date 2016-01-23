@@ -7,7 +7,7 @@ FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
 CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CFLAGS_TARGET_FINAL=$(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)
 CC=g++
-EJECUTABLE=a.out
+EJECUTABLE=kanafun
 LIMPIAR=rm objects/*; rmdir objects; rm $(EJECUTABLE);
 
 DIR_HOME=/home/dani/programacion/c++/
