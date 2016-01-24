@@ -1,6 +1,11 @@
 #ifndef PROYECTO_SDL2_BASE_CONFIGURACION_H
 #define PROYECTO_SDL2_BASE_CONFIGURACION_H
 
+#ifdef WINCOMPIL
+/* Localización del parche mingw32... Esto debería estar en otro lado, supongo. */
+#include <herramientas/herramientas/herramientas.h>
+#endif
+
 /*
 * Esta clase lee y escribe en un archivo los datos de configuración de la 
 * aplicación. Al leer los datos de configuración los almacena entre sus 
@@ -42,16 +47,16 @@ class Configuracion_base
 	int acc_audio_canales() const		{return std::atoi(pares[obtener_clave_audio_canales()].c_str());}
 	int acc_version_archivo() const		{return std::atoi(pares[obtener_clave_version_archivo()].c_str());}
 
-	void mut_modo_pantalla(int p_valor) 	{pares[obtener_clave_modo_pantalla()]=std::to_string(p_valor);}
-	void mut_modo_hardware(int p_valor)		{pares[obtener_clave_modo_hardware()]=std::to_string(p_valor);}
-	void mut_pantalla_doble_buffer(int p_valor)	{pares[obtener_clave_pantalla_doble_buffer()]=std::to_string(p_valor);}
-	void mut_pantalla_anyformat(int p_valor)	{pares[obtener_clave_pantalla_anyformat()]=std::to_string(p_valor);}
-	void mut_volumen_audio(int p_valor)		{pares[obtener_clave_volumen_audio()]=std::to_string(p_valor);}
-	void mut_volumen_musica(int p_valor)		{pares[obtener_clave_volumen_musica()]=std::to_string(p_valor);}
-	void mut_audio_ratio(int p_valor)		{pares[obtener_clave_audio_ratio()]=std::to_string(p_valor);}
-	void mut_audio_salidas(int p_valor)		{pares[obtener_clave_audio_salidas()]=std::to_string(p_valor);}
-	void mut_audio_buffers(int p_valor)		{pares[obtener_clave_audio_buffers()]=std::to_string(p_valor);}
-	void mut_audio_canales(int p_valor)		{pares[obtener_clave_audio_canales()]=std::to_string(p_valor);}
+	void mut_modo_pantalla(int p_valor) 		{configurar(obtener_clave_modo_pantalla(), p_valor);}
+	void mut_modo_hardware(int p_valor)		{configurar(obtener_clave_modo_hardware(), p_valor);}
+	void mut_pantalla_doble_buffer(int p_valor)	{configurar(obtener_clave_pantalla_doble_buffer(), p_valor);}
+	void mut_pantalla_anyformat(int p_valor)	{configurar(obtener_clave_pantalla_anyformat(), p_valor);}
+	void mut_volumen_audio(int p_valor)		{configurar(obtener_clave_volumen_audio(), p_valor);}
+	void mut_volumen_musica(int p_valor)		{configurar(obtener_clave_volumen_musica(), p_valor);}
+	void mut_audio_ratio(int p_valor)		{configurar(obtener_clave_audio_ratio(), p_valor);}
+	void mut_audio_salidas(int p_valor)		{configurar(obtener_clave_audio_salidas(), p_valor);}
+	void mut_audio_buffers(int p_valor)		{configurar(obtener_clave_audio_buffers(), p_valor);}
+	void mut_audio_canales(int p_valor)		{configurar(obtener_clave_audio_canales(), p_valor);}
 
 	void cargar();
 	void grabar();
@@ -61,8 +66,21 @@ class Configuracion_base
 	protected: 
 
 	//Añade la posibilidad de que clases derivadas guarden sus valores.
-	void	configurar(const std::string& clave, const std::string& valor) {pares[clave]=valor;}
+//	void	configurar(const std::string& clave, const std::string& valor) {pares[clave]=valor;}
 	const std::string& valor_configuracion(const std::string& clave) const {return pares[clave];}
+
+	//Conversor de lo que sea a string...
+	template <typename T>
+	void 						configurar(const std::string& clave, T v)
+	{
+#ifdef WINCOMPIL
+	using namespace parche_mingw;
+#else
+	using namespace std;
+#endif
+
+		pares[clave]=to_string(v);
+	};
 
 	////////////////////////////////////
 	// A implementar por clases que la extiendan...
@@ -96,7 +114,7 @@ class Configuracion_base
 	///////////////////////////////////
 	// Propiedades.
 
-	private:
+	private:	
 
 	void 						asignar_valores_por_defecto();
 

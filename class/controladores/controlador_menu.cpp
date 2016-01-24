@@ -5,6 +5,11 @@
 #include "../app/eventos/cambio_kanas.h"
 #include "../app/eventos/cambio_direccion.h"
 
+#ifdef WINCOMPIL
+/* Localización del parche mingw32... Esto debería estar en otro lado, supongo. */
+#include <herramientas/herramientas/herramientas.h>
+#endif
+
 using namespace App;
 
 Controlador_menu::Controlador_menu(const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const App::Configuracion_ejercicio&	configuracion_ejercicio)
@@ -78,11 +83,18 @@ void Controlador_menu::actualizar_menu()
 {
 	using namespace App;
 
+#ifdef WINCOMPIL
+	using namespace parche_mingw;
+#else
+	using namespace std;
+#endif
+
+
 	int indice_silabario=configuracion_ejercicio.acc_tipo_kana()==App::tipos_kana::hiragana ? Localizacion::cadenas::hiragana : Localizacion::cadenas::katakana;
 	int indice_direccion=configuracion_ejercicio.acc_direccion_traduccion()==App::direcciones_traduccion::romaji_kana ? Localizacion::cadenas::direccion_romaji_kana : Localizacion::cadenas::direccion_kana_romaji;
 
 	std::string str_silabario=localizador.obtener(Localizacion::cadenas::silabario)+localizador.obtener(indice_silabario);
-	std::string str_longitud=localizador.obtener(Localizacion::cadenas::longitud)+std::to_string(configuracion_ejercicio.acc_longitud());
+	std::string str_longitud=localizador.obtener(Localizacion::cadenas::longitud)+to_string(configuracion_ejercicio.acc_longitud());
 	std::string str_direccion=localizador.obtener(indice_direccion);
 
 	static_cast<DLibV::Representacion_TTF *>(escena.obtener_por_id("txt_menu_2"))->asignar(str_longitud);

@@ -7,6 +7,11 @@
 #include "../app/eventos/cambio_idioma.h"
 #include "../app/eventos/cambio_ventana.h"
 
+#ifdef WINCOMPIL
+/* Localización del parche mingw32... Esto debería estar en otro lado, supongo. */
+#include <herramientas/herramientas/herramientas.h>
+#endif
+
 using namespace App;
 
 const std::string Controlador_opciones::k_tam_pantalla="01_K_TAM_VENTANA";
@@ -67,10 +72,16 @@ void Controlador_opciones::generar_menu(const App_config& config)
 		}
 	}
 
+#ifdef WINCOMPIL
+	using namespace parche_mingw;
+#else
+	using namespace std;
+#endif
+
 	//Escoger las opciones adecuadas según la configuración del usuario.
-	const std::string val_tam_pantalla=std::to_string(config.acc_w_fisica_pantalla())+"x"+std::to_string(config.acc_h_fisica_pantalla());
+	const std::string val_tam_pantalla=to_string(config.acc_w_fisica_pantalla())+"x"+to_string(config.acc_h_fisica_pantalla());
 	opciones_menu.seleccionar_opcion_por_valor(k_tam_pantalla, val_tam_pantalla);
-	opciones_menu.seleccionar_opcion_por_valor(k_idioma, std::to_string(config.acc_idioma()));
+	opciones_menu.seleccionar_opcion_por_valor(k_idioma, to_string(config.acc_idioma()));
 	opciones_menu.seleccionar_opcion_por_valor(k_fondo, config.acc_fondo());
 }
 
