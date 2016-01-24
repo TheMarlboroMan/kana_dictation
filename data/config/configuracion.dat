@@ -4,12 +4,12 @@ audio_ratio:44100
 audio_salidas:0
 direccion:a_romaji
 doble_buffer:1
-fondo:data/graficos/background_02.jpg
+fondo:data/graficos/background_03.jpg
 h_fisica_ventana:500
 h_logica_ventana:500
-idioma:0
+idioma:1
 kanas_activos:01 : A I U E O,02 : KA KI KU KE KO,03 : SA SHI SU SE SO,04 : TI CHI TSU TE TO,05 : NA NI NU NE NO,06 : HA HI FU HE HO,07 : MA MI MU ME MO,11 : N
-longitud:9
+longitud:12
 modo_hardware:1
 modo_pantalla:0
 pantalla_anyformat:1

@@ -69,6 +69,11 @@ class Configuracion_base
 //	void	configurar(const std::string& clave, const std::string& valor) {pares[clave]=valor;}
 	const std::string& valor_configuracion(const std::string& clave) const {return pares[clave];}
 
+	void 						configurar(const std::string& clave, const std::string& valor)
+	{
+		pares[clave]=valor;
+	}
+
 	//Conversor de lo que sea a string...
 	template <typename T>
 	void 						configurar(const std::string& clave, T v)
@@ -80,7 +85,7 @@ class Configuracion_base
 #endif
 
 		pares[clave]=to_string(v);
-	};
+	}
 
 	////////////////////////////////////
 	// A implementar por clases que la extiendan...
