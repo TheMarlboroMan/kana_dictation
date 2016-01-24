@@ -16,7 +16,7 @@ CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++
 CC=g++
 EJECUTABLE=kanafun.exe
 LIMPIAR=rmdir objects /s /q; del $(EJECUTABLE);
-PREPARAR_DIR_OBJECTS=mkdir -p objects & copy nul objects/dummy > nul
+PREPARAR_DIR_OBJECTS=mkdir objects & copy nul objects/dummy > nul
 
 LINKER=-L. -lDanSDL2 -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
 INCLUDES=-I$(DIR_SDL2) -I$(DIR_LIBDAN2) -I$(DIR_HERRAMIENTAS_PROYECTO) -I$(MINGW32_INCLUDE) 
