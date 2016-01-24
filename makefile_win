@@ -1,17 +1,24 @@
 #Definiciones.
-LINKARQUITECTURA=-lmingw32
-UNIDAD_DISCO=C
-MINGW32_INCLUDE=/mingw_dev/include
-MINGW32_LIB=/mingw_dev/lib
 
-CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
-CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -I$(UNIDAD_DISCO):$(MINGW32_INCLUDE) -L$(UNIDAD_DISCO):$(MINGW32_LIB)
+#OPTIMIZACION=-O3
+SIMBOLOS_DEBUG=-g
+UNIDAD_DISCO=C
+MINGW32_INCLUDE=$(UNIDAD_DISCO):/mingw_dev/include
+MINGW32_LIB=$(UNIDAD_DISCO):/mingw_dev/lib
+DIR_SDL2=$(UNIDAD_DISCO):/SDLDev/include
+DIR_HOME=$(UNIDAD_DISCO):/Devel/
+DIR_LIBDAN2=$(DIR_HOME)libdansdl2-master
+DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/
+DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/objects/
+
+CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -L$(MINGW32_LIB)
+CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -L$(MINGW32_LIB)
 CC=g++
-EJECUTABLE=familiar_temple.exe
-LIMPIAR=del objects\*; del libdan2\objects\*; del libDanSDL2.a; del $(EJECUTABLE);
-COMANDO_MOVER=move libdan2\libDanSDL2.a libDanSDL2.a; 
-NOMBRE_MAKE_MOTOR=makefile_win
-LINKER=-L. -lDanSDL2 $(LINKARQUITECTURA) -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -static-libgcc -static-libstdc++
-#-mwindows
+EJECUTABLE=kanafun.exe
+LIMPIAR=rmdir objects /s /q; del $(EJECUTABLE);
+PREPARAR_DIR_OBJECTS=mkdir -p objects & copy nul objects/dummy > nul
+
+LINKER=-L. -lDanSDL2 -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
+INCLUDES=-I$(DIR_SDL2) -I$(DIR_LIBDAN2) -I$(DIR_HERRAMIENTAS_PROYECTO) -I$(MINGW32_INCLUDE) 
 
 include makefile_comun
