@@ -26,7 +26,7 @@ None of these features are planned, but maybe we could:
 
 Thanks to:
 
-Ed Merritt for the Akashi font.
-Kagura Zakayuzu for the Yuzu Pop A font.
-Astigmatic One Eye Typographic Institute, their Shojumaru font was used to create the logo.
+- Ed Merritt for the Akashi font.
+- Kagura Zakayuzu for the Yuzu Pop A font.
+- Astigmatic One Eye Typographic Institute, their Shojumaru font was used to create the logo.
 
