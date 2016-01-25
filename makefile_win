@@ -3,23 +3,24 @@
 OPTIMIZACION=-O3
 #SIMBOLOS_DEBUG=-g
 UNIDAD_DISCO=C
-MINGW32_INCLUDE=$(UNIDAD_DISCO):/mingw_dev/include
-MINGW32_LIB=$(UNIDAD_DISCO):/mingw_dev/lib
+MINGW32_INCLUDE=$(UNIDAD_DISCO):/mingw/include
+MINGW32_LIB=$(UNIDAD_DISCO):/mingw/lib
+SDL2_LIB=$(UNIDAD_DISCO):/SDLDev/lib
 DIR_SDL2=$(UNIDAD_DISCO):/SDLDev/include
 DIR_HOME=$(UNIDAD_DISCO):/Devel/
 DIR_LIBDAN2=$(DIR_HOME)libdansdl2-master
 DIR_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/
 DIR_O_HERRAMIENTAS_PROYECTO=$(DIR_HOME)herramientas_proyecto-master/objects/
 
-CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -L$(MINGW32_LIB)
-CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11 -L$(MINGW32_LIB)
+CFLAGS= -DWINCOMPIL=1 -c -Wno-deprecated -Wall -ansi -pedantic -std=c++11
+CFLAGS_TARGET_FINAL=-DWINCOMPIL=1 -Wno-deprecated -Wall -ansi -pedantic -std=c++11
 CC=g++
 EJECUTABLE=kanafun.exe
 LIMPIAR=rmdir objects /s /q; del $(EJECUTABLE);
-PREPARAR_DIR_OBJECTS=mkdir objects & copy nul objects/dummy > nul
+PREPARAR_DIR_OBJECTS=if not exist objects mkdir objects & copy nul objects/dummy > nul
 
 
-LINKER=-L$(DIR_LIBDAN2) -lDanSDL2 -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
+LINKER=-L$(MINGW32_LIB) -L$(SDL2_LIB) -L$(DIR_LIBDAN2) -lDanSDL2 -lmingw32 -lSDL2main -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -static-libgcc -static-libstdc++
 INCLUDES=-I$(DIR_SDL2) -I$(DIR_LIBDAN2) -I$(DIR_HERRAMIENTAS_PROYECTO) -I$(MINGW32_INCLUDE) 
 
 include makefile_comun
