@@ -79,16 +79,20 @@ grupos:[
 		]
 	},
 	{
-		nombre: "10 : WA WI WE WO",
+		nombre: "10 : WA WO",
 		kanas : [{silaba:"WA", hiragana:"わ", katakana:"ワ"},
-			{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
-			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"},
 			{silaba:"WO", hiragana:"を", katakana:"ヲ"}
 		]
 	},
 	{
 		nombre: "11 : N",
 		kanas : [{silaba:"N", hiragana:"ん", katakana:"ン"}
+		]
+	},
+	{
+		nombre: "12 : WI WE",
+		kanas : [{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
+			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"}
 		]
 	}
 ]
