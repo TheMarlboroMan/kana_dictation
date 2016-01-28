@@ -64,6 +64,7 @@ class Controlador_grupos
 							X_SELECCION=270,
 							ALTO_ITEM_LISTADO=20,
 							ANCHO_LISTADO=300,
+							ALTO_LISTADO=260,
 							MARGEN_Y=16;
 
 	static const char				SEPARADOR_KANAS_ACTIVOS=',';

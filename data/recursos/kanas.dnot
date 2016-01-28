@@ -79,10 +79,8 @@ grupos:[
 		]
 	},
 	{
-		nombre: "10 : WA WI WE WO",
+		nombre: "10 : WA WO",
 		kanas : [{silaba:"WA", hiragana:"わ", katakana:"ワ"},
-			{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
-			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"},
 			{silaba:"WO", hiragana:"を", katakana:"ヲ"}
 		]
 	},
@@ -90,5 +88,57 @@ grupos:[
 		nombre: "11 : N",
 		kanas : [{silaba:"N", hiragana:"ん", katakana:"ン"}
 		]
+	},
+	{
+		nombre: "12 : GA GI GU GE GO",
+		kanas : [{silaba:"GA", hiragana:"が", katakana:"ガ"},
+			{silaba:"GI", hiragana:"ぎ", katakana:"ギ"},
+			{silaba:"GU", hiragana:"ぐ", katakana:"グ"},
+			{silaba:"GE", hiragana:"げ", katakana:"ゲ"},
+			{silaba:"GO", hiragana:"ご", katakana:"ゴ"}
+		]
+	},
+	{
+		nombre: "13 : ZA Z(JI) ZU ZE ZO",
+		kanas : [{silaba:"ZA", hiragana:"ざ", katakana:"ザ"},
+			{silaba:"Z(JI)", hiragana:"じ", katakana:"ジ"},
+			{silaba:"ZU", hiragana:"ず", katakana:"ズ"},
+			{silaba:"ZE", hiragana:"ぜ", katakana:"ゼ"},
+			{silaba:"ZO", hiragana:"ぞ", katakana:"ゾ"}
+		]
+	},
+	{
+		nombre: "14 : DA D(JI) D(ZU) DE DO",
+		kanas : [{silaba:"DA", hiragana:"だ",  katakana:"ダ"},
+			{silaba:"D(JI)", hiragana:"ぢ", katakana:"ヂ"},
+			{silaba:"D(ZU)", hiragana:"づ", katakana:"ヅ"},
+			{silaba:"DE", hiragana:"で", katakana:"デ"},
+			{silaba:"DO", hiragana:"ど", katakana:"ド"}
+		]
+	},
+	{
+		nombre: "15 : BA BI BU BE BO",
+		kanas : [{silaba:"BA", hiragana:"ば", katakana:"バ"},
+			{silaba:"BI", hiragana:"び", katakana:"ビ"},
+			{silaba:"BU", hiragana:"ぶ", katakana:"ブ"},
+			{silaba:"BE", hiragana:"べ", katakana:"ベ"},
+			{silaba:"BO", hiragana:"ぼ", katakana:"ボ"}
+		]
+	},
+	{
+		nombre: "16 : PA PI PU PE PO",
+		kanas : [{silaba:"PA", hiragana:"ぱ", katakana:"パ"},
+			{silaba:"PI", hiragana:"ぴ", katakana:"ピ"},
+			{silaba:"PU", hiragana:"ぷ", katakana:"プ"},
+			{silaba:"PE", hiragana:"ぺ", katakana:"ペ"},
+			{silaba:"PO", hiragana:"ぽ", katakana:"ポ"}
+		]
+	},
+	{
+		nombre: "17 : WI WE",
+		kanas : [{silaba:"WI", hiragana:"ゐ", katakana:"ヰ"},
+			{silaba:"WE", hiragana:"ゑ", katakana:"ヱ"}
+		]
 	}
+	
 ]

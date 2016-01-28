@@ -11,7 +11,7 @@ using namespace App;
 const std::string Controlador_grupos::WILDCARD_TODOS_KANAS="*";
 
 Controlador_grupos::Controlador_grupos(const DLibV::Fuente_TTF& fr, const Herramientas_proyecto::Localizador_base& loc, const std::vector<std::string>& gr, const std::string& kanas_activos)
-	:Controlador_base(), rep_listado(true), listado(ANCHO_LISTADO, ALTO_ITEM_LISTADO), localizador(loc), ttf_romaji(fr)
+	:Controlador_base(), rep_listado(true), listado(ALTO_LISTADO, ALTO_ITEM_LISTADO), localizador(loc), ttf_romaji(fr)
 {
 	//Preparar la escena.
 	escena.mapear_fuente("romaji", &ttf_romaji);
