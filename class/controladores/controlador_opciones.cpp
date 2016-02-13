@@ -52,25 +52,9 @@ void Controlador_opciones::generar_menu(const App_config& config)
 {
 	if(opciones_menu.size()) return;
 
-	//Leer del fichero y rellenar tanto el menú como el mapa de traducción.
+
 	using namespace Herramientas_proyecto;
-	const auto parser=parsear_dnot("data/recursos/menu.dnot");
-	const auto opciones=parser["menu"].acc_lista();
-
-	for(const auto& opcion : opciones)
-	{
-		const std::string k_opcion=opcion["clave"];
-		mapa_traducciones[k_opcion]=opcion["trans"];
-		opciones_menu.insertar_opcion_templated<std::string>(k_opcion, "--");
-
-		const auto& selecciones=opcion["opciones"].acc_lista();
-		for(const auto& seleccion : selecciones)
-		{
-			const std::string k_seleccion=seleccion["clave"];
-			mapa_traducciones[k_seleccion]=seleccion["trans"];
-			opciones_menu.insertar_seleccion_templated<std::string>(k_opcion, k_seleccion, "--", seleccion["valor"]);
-		}
-	}
+	menu_opciones_desde_dnot<std::string>("data/recursos/menu.dnot", "menu", opciones_menu, mapa_traducciones, "---");
 
 #ifdef WINCOMPIL
 	using namespace parche_mingw;
