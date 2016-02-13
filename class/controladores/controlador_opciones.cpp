@@ -61,14 +61,14 @@ void Controlador_opciones::generar_menu(const App_config& config)
 	{
 		const std::string k_opcion=opcion["clave"];
 		mapa_traducciones[k_opcion]=opcion["trans"];
-		opciones_menu.insertar_opcion_string(k_opcion, "--");
+		opciones_menu.insertar_opcion_templated<std::string>(k_opcion, "--");
 
 		const auto& selecciones=opcion["opciones"].acc_lista();
 		for(const auto& seleccion : selecciones)
 		{
 			const std::string k_seleccion=seleccion["clave"];
 			mapa_traducciones[k_seleccion]=seleccion["trans"];
-			opciones_menu.insertar_seleccion_string(k_opcion, k_seleccion, "--", seleccion["valor"]);
+			opciones_menu.insertar_seleccion_templated<std::string>(k_opcion, k_seleccion, "--", seleccion["valor"]);
 		}
 	}
 
@@ -80,9 +80,9 @@ void Controlador_opciones::generar_menu(const App_config& config)
 
 	//Escoger las opciones adecuadas según la configuración del usuario.
 	const std::string val_tam_pantalla=to_string(config.acc_w_fisica_pantalla())+"x"+to_string(config.acc_h_fisica_pantalla());
-	opciones_menu.asignar_por_valor(k_tam_pantalla, val_tam_pantalla);
-	opciones_menu.asignar_por_valor(k_idioma, to_string(config.acc_idioma()));
-	opciones_menu.asignar_por_valor(k_fondo, config.acc_fondo());
+	opciones_menu.asignar_por_valor_templated<std::string>(k_tam_pantalla, val_tam_pantalla);
+	opciones_menu.asignar_por_valor_templated<std::string>(k_idioma, to_string(config.acc_idioma()));
+	opciones_menu.asignar_por_valor_templated<std::string>(k_fondo, config.acc_fondo());
 }
 
 void Controlador_opciones::generar_representacion_menu()
@@ -107,12 +107,6 @@ void Controlador_opciones::generar_representacion_menu()
 	caja->establecer_alpha(128);
 
 	rep_listado.insertar_representacion(caja);
-
-	//TODO: Revisar, bug en la librería????
-	/*auto * advertencia=new Representacion_TTF(ttf_romaji, {255, 0, 0, 255}, "CAMBIOS DE RESOLUCION SOLO AL REINICIAR");
-	advertencia->establecer_posicion(300, 300);
-	rep_listado.insertar_representacion(advertencia);	
-	*/
 }
 
 void Controlador_opciones::loop(DFramework::Input& input, float delta)
@@ -137,22 +131,22 @@ void Controlador_opciones::loop(DFramework::Input& input, float delta)
 			size_t indice=listado.acc_indice_actual();
 			const auto clave=listado[indice].clave;
 			opciones_menu.rotar_opcion(clave, input.es_input_down(Input::I_IZQUIERDA) ? -1 : 1);
-
+			
 			if(clave==k_idioma)
 			{
-				int id_idioma=std::atoi(opciones_menu.valor_string(k_idioma).c_str());
+				int id_idioma=std::atoi(opciones_menu.valor_templated<std::string>(k_idioma).c_str());
 				localizador.cambiar_idioma(id_idioma);
 				traducir_interface();
 				encolar_evento(new App::Eventos::Evento_cambio_idioma(id_idioma));
 			}
 			else if(clave==k_fondo)
 			{
-				const std::string fondo=opciones_menu.valor_string(k_fondo);
+				const std::string fondo=opciones_menu.valor_templated<std::string>(k_fondo);
 				encolar_evento(new App::Eventos::Evento_cambio_fondo(fondo));
 			}
 			else if(clave==k_tam_pantalla)
 			{
-				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_string(k_tam_pantalla), 'x');
+				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_templated<std::string>(k_tam_pantalla), 'x');
 				int w=std::atoi(partes[0].c_str());
 				int h=std::atoi(partes[1].c_str());
 

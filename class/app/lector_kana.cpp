@@ -5,8 +5,7 @@ using namespace App;
 
 void Lector_kana::procesar_fichero(const std::string& ruta, Receptor_kana& receptor)
 {
-	const auto tok=Herramientas_proyecto::parsear_dnot(ruta);
-
+	auto tok=Herramientas_proyecto::parsear_dnot("data/recursos/kanas.dnot");
 	const auto grupos=tok["grupos"].acc_lista();
 
 	for(const auto& grupo : grupos)
