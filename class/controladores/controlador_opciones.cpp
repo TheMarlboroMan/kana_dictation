@@ -34,7 +34,7 @@ void Controlador_opciones::traducir_interface()
 {
 	using namespace App;
 	using namespace Herramientas_proyecto;
-	using traduccion=Menu_opciones<std::string, std::string>::struct_traduccion;
+	using traduccion=Menu_opciones<std::string>::struct_traduccion;
 
 	std::vector<traduccion> trad={};
 	for(const auto& par : mapa_traducciones)
@@ -61,14 +61,14 @@ void Controlador_opciones::generar_menu(const App_config& config)
 	{
 		const std::string k_opcion=opcion["clave"];
 		mapa_traducciones[k_opcion]=opcion["trans"];
-		opciones_menu.insertar_opcion(k_opcion, "--");
+		opciones_menu.insertar_opcion_string(k_opcion, "--");
 
 		const auto& selecciones=opcion["opciones"].acc_lista();
 		for(const auto& seleccion : selecciones)
 		{
 			const std::string k_seleccion=seleccion["clave"];
 			mapa_traducciones[k_seleccion]=seleccion["trans"];
-			opciones_menu.insertar_seleccion_en_opcion(k_opcion, k_seleccion, "--", seleccion["valor"]);
+			opciones_menu.insertar_seleccion_string(k_opcion, k_seleccion, "--", seleccion["valor"]);
 		}
 	}
 
@@ -80,9 +80,9 @@ void Controlador_opciones::generar_menu(const App_config& config)
 
 	//Escoger las opciones adecuadas según la configuración del usuario.
 	const std::string val_tam_pantalla=to_string(config.acc_w_fisica_pantalla())+"x"+to_string(config.acc_h_fisica_pantalla());
-	opciones_menu.seleccionar_opcion_por_valor(k_tam_pantalla, val_tam_pantalla);
-	opciones_menu.seleccionar_opcion_por_valor(k_idioma, to_string(config.acc_idioma()));
-	opciones_menu.seleccionar_opcion_por_valor(k_fondo, config.acc_fondo());
+	opciones_menu.asignar_por_valor(k_tam_pantalla, val_tam_pantalla);
+	opciones_menu.asignar_por_valor(k_idioma, to_string(config.acc_idioma()));
+	opciones_menu.asignar_por_valor(k_fondo, config.acc_fondo());
 }
 
 void Controlador_opciones::generar_representacion_menu()
@@ -140,19 +140,19 @@ void Controlador_opciones::loop(DFramework::Input& input, float delta)
 
 			if(clave==k_idioma)
 			{
-				int id_idioma=std::atoi(opciones_menu.valor_opcion(k_idioma).c_str());
+				int id_idioma=std::atoi(opciones_menu.valor_string(k_idioma).c_str());
 				localizador.cambiar_idioma(id_idioma);
 				traducir_interface();
 				encolar_evento(new App::Eventos::Evento_cambio_idioma(id_idioma));
 			}
 			else if(clave==k_fondo)
 			{
-				const std::string fondo=opciones_menu.valor_opcion(k_fondo);
+				const std::string fondo=opciones_menu.valor_string(k_fondo);
 				encolar_evento(new App::Eventos::Evento_cambio_fondo(fondo));
 			}
 			else if(clave==k_tam_pantalla)
 			{
-				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_opcion(k_tam_pantalla), 'x');
+				const auto partes=Herramientas_proyecto::explotar(opciones_menu.valor_string(k_tam_pantalla), 'x');
 				int w=std::atoi(partes[0].c_str());
 				int h=std::atoi(partes[1].c_str());
 
