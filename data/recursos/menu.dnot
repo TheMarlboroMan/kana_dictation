@@ -1,32 +1,38 @@
 menu:[
 	{
-		clave:"01_K_TAM_VENTANA",
-		trans:10,
-		opciones:[
-			{clave:"01_K_TAM_VENTANA_O01", valor: "800x500", trans:11},
-			{clave:"01_K_TAM_VENTANA_O02", valor: "960x600", trans:12},
-			{clave:"01_K_TAM_VENTANA_O03", valor: "1120x700", trans:13},
-			{clave:"01_K_TAM_VENTANA_O04", valor: "1440x900", trans:14},
-			{clave:"01_K_TAM_VENTANA_O05", valor: "1600x1000", trans:15}
+		c:"01_K_TAM_VENTANA",
+		t:10,
+		m:"templated",
+		mt:"string",
+		o:[
+			{c:"01_K_TAM_VENTANA_O01", v: "800x500", t:11},
+			{c:"01_K_TAM_VENTANA_O02", v: "960x600", t:12},
+			{c:"01_K_TAM_VENTANA_O03", v: "1120x700", t:13},
+			{c:"01_K_TAM_VENTANA_O04", v: "1440x900", t:14},
+			{c:"01_K_TAM_VENTANA_O05", v: "1600x1000", t:15}
 		]
 	},
 	{
-		clave:"02_K_IDIOMA",
-		trans:20,
-		opciones:[
-			{clave:"02_K_IDIOMA_O01", valor: "0", trans:21},
-			{clave:"02_K_IDIOMA_O02", valor: "1", trans:22}
+		c:"02_K_IDIOMA",
+		t:20,
+		m:"templated",
+		mt:"string",
+		o:[
+			{c:"02_K_IDIOMA_O01", v: "0", t:21},
+			{c:"02_K_IDIOMA_O02", v: "1", t:22}
 		]
 	},
 	{
-		clave:"03_K_FONDO",
-		trans:30,
-		opciones:[
-			{clave:"03_K_FONDO_O01", valor: "data/graficos/background_01.jpg", trans:31},
-			{clave:"03_K_FONDO_O02", valor: "data/graficos/background_02.jpg", trans:32},
-			{clave:"03_K_FONDO_O03", valor: "data/graficos/background_03.jpg", trans:33},
-			{clave:"03_K_FONDO_O04", valor: "data/graficos/background_04.jpg", trans:34},
-			{clave:"03_K_FONDO_O05", valor: "data/graficos/background_05.jpg", trans:35}
+		c:"03_K_FONDO",
+		t:30,
+		m:"templated",
+		mt:"string",
+		o:[
+			{c:"03_K_FONDO_O01", v: "data/graficos/background_01.jpg", t:31},
+			{c:"03_K_FONDO_O02", v: "data/graficos/background_02.jpg", t:32},
+			{c:"03_K_FONDO_O03", v: "data/graficos/background_03.jpg", t:33},
+			{c:"03_K_FONDO_O04", v: "data/graficos/background_04.jpg", t:34},
+			{c:"03_K_FONDO_O05", v: "data/graficos/background_05.jpg", t:35}
 		]
 	}
 ]

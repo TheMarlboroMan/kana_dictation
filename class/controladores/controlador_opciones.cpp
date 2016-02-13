@@ -54,7 +54,7 @@ void Controlador_opciones::generar_menu(const App_config& config)
 
 
 	using namespace Herramientas_proyecto;
-	menu_opciones_desde_dnot<std::string>("data/recursos/menu.dnot", "menu", opciones_menu, mapa_traducciones, "---");
+	menu_opciones_desde_dnot<std::string>("data/recursos/menu.dnot", "menu", opciones_menu, mapa_traducciones);
 
 #ifdef WINCOMPIL
 	using namespace parche_mingw;
@@ -64,6 +64,7 @@ void Controlador_opciones::generar_menu(const App_config& config)
 
 	//Escoger las opciones adecuadas según la configuración del usuario.
 	const std::string val_tam_pantalla=to_string(config.acc_w_fisica_pantalla())+"x"+to_string(config.acc_h_fisica_pantalla());
+
 	opciones_menu.asignar_por_valor_templated<std::string>(k_tam_pantalla, val_tam_pantalla);
 	opciones_menu.asignar_por_valor_templated<std::string>(k_idioma, to_string(config.acc_idioma()));
 	opciones_menu.asignar_por_valor_templated<std::string>(k_fondo, config.acc_fondo());
