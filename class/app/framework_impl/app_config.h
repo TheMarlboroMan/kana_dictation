@@ -26,14 +26,14 @@ class App_config:
 	const std::string& acc_direccion() const {return valor_configuracion(CLAVE_DIRECCION);}
 
 
-	void mut_idioma(int p_valor) {configurar(CLAVE_IDIOMA, std::to_string(p_valor));}
-	void mut_w_logica_pantalla(int p_valor) {configurar(CLAVE_W_LOGICA_PANTALLA, std::to_string(p_valor));}
-	void mut_h_logica_pantalla(int p_valor) {configurar(CLAVE_H_LOGICA_PANTALLA, std::to_string(p_valor));}
-	void mut_w_fisica_pantalla(int p_valor) {configurar(CLAVE_W_FISICA_PANTALLA, std::to_string(p_valor));}
-	void mut_h_fisica_pantalla(int p_valor) {configurar(CLAVE_H_FISICA_PANTALLA, std::to_string(p_valor));}
+	void mut_idioma(int p_valor) {configurar(CLAVE_IDIOMA, p_valor);}
+	void mut_w_logica_pantalla(int p_valor) {configurar(CLAVE_W_LOGICA_PANTALLA, p_valor);}
+	void mut_h_logica_pantalla(int p_valor) {configurar(CLAVE_H_LOGICA_PANTALLA, p_valor);}
+	void mut_w_fisica_pantalla(int p_valor) {configurar(CLAVE_W_FISICA_PANTALLA, p_valor);}
+	void mut_h_fisica_pantalla(int p_valor) {configurar(CLAVE_H_FISICA_PANTALLA, p_valor);}
 	void mut_kanas_activos(const std::string& p_valor) {configurar(CLAVE_KANAS_ACTIVOS, p_valor);}
 	void mut_fondo(const std::string& p_valor) {configurar(CLAVE_FONDO, p_valor);}
-	void mut_longitud(int p_valor) {configurar(CLAVE_LONGITUD, std::to_string(p_valor));}
+	void mut_longitud(int p_valor) {configurar(CLAVE_LONGITUD, p_valor);}
 	void mut_silabario(const std::string& p_valor) {configurar(CLAVE_SILABARIO, p_valor);}
 	void mut_direccion(const std::string& p_valor) {configurar(CLAVE_DIRECCION, p_valor);}
 

@@ -1,4 +1,4 @@
-# kana_dictation
+# KanaFun
 Japanese Kana training application: generates random romaji sillables for you to translate into the japanese sillabaries. Then shows the hiragana or katakana for them. Written entirely in SDL2 and C++ so it can be ported to a variety of systems.
 
 You are supposed to write the kana with pen and paper. This is supposed to be an educative tool, not a game.
@@ -26,7 +26,7 @@ None of these features are planned, but maybe we could:
 
 Thanks to:
 
-Ed Merritt for the Akashi font.
-Kagura Zakayuzu for the Yuzu Pop A font.
-Astigmatic One Eye Typographic Institute, their Shojumaru font was used to create the logo.
+- Ed Merritt for the Akashi font.
+- Kagura Zakayuzu for the Yuzu Pop A font.
+- Astigmatic One Eye Typographic Institute, their Shojumaru font was used to create the logo.
 

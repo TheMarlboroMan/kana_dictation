@@ -46,7 +46,7 @@ class Controlador_opciones
 
 	DLibV::Representacion_agrupada		 	rep_listado;
 	Herramientas_proyecto::Compositor_vista		escena;
-	Herramientas_proyecto::Menu_opciones<std::string, std::string>	opciones_menu;
+	Herramientas_proyecto::Menu_opciones<std::string>	opciones_menu;
 	Herramientas_proyecto::Listado_vertical<t_listado>	listado;
 	std::map<std::string, int>			mapa_traducciones;	//Mapa de traducción del menú: la clave X se corresponderá con el indice Y del localizador.
 

@@ -1,7 +1,7 @@
 #Definiciones.
 
-#OPTIMIZACION=-O3
-SIMBOLOS_DEBUG=-g
+OPTIMIZACION=-O3
+#SIMBOLOS_DEBUG=-g
 FLAGS_BASE=-Wno-deprecated -Wall -ansi -pedantic -std=c++11
 
 CFLAGS=-c $(SIMBOLOS_DEBUG) $(OPTIMIZACION) $(FLAGS_BASE)

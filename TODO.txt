@@ -1,3 +1,4 @@
 De momento tenemos que:
 
+	Revisar el consumo de memoria... Me parece muy alto.
 	Pasar todas las cosas nuevas al proyecto de prueba, con algún ejemplo.
