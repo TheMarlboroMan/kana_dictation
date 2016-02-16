@@ -28,7 +28,7 @@ std::vector<std::string> App_kernel_config::obtener_entradas_superficies() const
 //Información para ventana.
 DFramework::Info_ventana App_kernel_config::obtener_info_ventana() const
 {
-	return DFramework::Info_ventana{800, 600, 800, 600, "KanaFun", false};
+	return DFramework::Info_ventana{800, 600, 800, 600, "KanaFun", true};
 }
 
 std::vector<DFramework::Par_input> App_kernel_config::obtener_pares_input() const
