@@ -29,8 +29,8 @@ layout:
 		tipo:"ttf",
 		pos:[16, 128],
 		texto:"MENU I",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
-		id:"txt_menu_1"
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
+		id:"txt_menu_1", alpha: 255
 	},
 
 	{
@@ -45,8 +45,8 @@ layout:
 		tipo:"ttf",
 		pos:[16, 188],
 		texto:"MENU II",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
-		id:"txt_menu_2"
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
+		id:"txt_menu_2", alpha: 255
 	},
 
 	{
@@ -61,7 +61,7 @@ layout:
 		tipo:"ttf",
 		pos:[16, 248],
 		texto:"MENU III",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
 		id:"txt_menu_3"
 	},
 
@@ -77,7 +77,7 @@ layout:
 		tipo:"ttf",
 		pos:[16, 308],
 		texto:"MENU IV",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
 		id:"txt_menu_4"
 	},
 
@@ -93,7 +93,7 @@ layout:
 		tipo:"ttf",
 		pos:[16, 368],
 		texto:"MENU V",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
 		id:"txt_menu_5"
 	},
 
@@ -109,7 +109,7 @@ layout:
 		tipo:"ttf",
 		pos:[16, 428],
 		texto:"MENU VI",
-		fuente:"romaji", rgba:[255, 255, 255, 255], orden:20,
+		fuente:"romaji", rgba:[255, 255, 255, 255], orden:25,
 		id:"txt_menu_6"
 	},
 
@@ -118,6 +118,6 @@ layout:
 		pos:[0, 120, 398, 32], 
 		rgb:[128, 128, 128], 
 		id:"seleccion_menu", 
-		orden:20
+		orden:30
 	}
 ]
